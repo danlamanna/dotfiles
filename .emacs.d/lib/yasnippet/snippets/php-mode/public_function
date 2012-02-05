@@ -1,0 +1,8 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : public function foobar()
+#key : pf
+# --
+
+public function $1($2) {
+   $0
+}
