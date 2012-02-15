@@ -1,6 +1,6 @@
 ;; Making buffers open side by side rather than horizontal terribleness.
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+;(setq split-height-threshold nil)
+;(setq split-width-threshold 0)
 
 ;; Disables backup files, annoying.
 (setq backup-inhibited t)

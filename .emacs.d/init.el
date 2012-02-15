@@ -4,6 +4,9 @@
 ; How else will I know the time
 (display-time)
 
+;; This really needs to happen now
+(global-unset-key (kbd "C-x C-z"))
+
 (load "~/.emacs.d/lib/keymaps.el")
 (load "~/.emacs.d/lib/font-stuff.el")
 (load "~/.emacs.d/lib/personal-terminal.el")
@@ -15,3 +18,7 @@
 (load "~/.emacs.d/lib/line-num.el")
 (load "~/.emacs.d/lib/misc.el")
 (load "~/.emacs.d/lib/modes.el")
+
+
+(require 'tramp)
+(setq tramp-default-method "scp")

@@ -12,8 +12,11 @@ alias grep="grep -R "
 # Quick finding of files by grepping name
 alias f="find . | grep -v svn | grep "
 
+# SVN Stuff!
 alias up="svn up"
 alias st="svn st"
+
+alias phing="phing -f  .build/build/build.xml"
 
 # Extract tar, gz, zip, etc
 function extract()
