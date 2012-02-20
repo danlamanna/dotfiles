@@ -1,13 +1,6 @@
 ;; Making buffers open side by side rather than horizontal terribleness.
-;(setq split-height-threshold nil)
-;(setq split-width-threshold 0)
-
-;; Disables backup files, annoying.
-(setq backup-inhibited t)
-
-;; Disables autosave, ideally autosaves shouldn't be disabled,
-;; but stored in another directory.
-(setq auto-save-default nil)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 
 ;; Get rid of prompting you to kill
 (defun my-kill-emacs ()

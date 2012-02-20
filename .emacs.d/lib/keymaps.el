@@ -40,3 +40,5 @@
 (global-set-key [(meta down)] 'windmove-down)
 (global-set-key [(meta left)] 'windmove-left)
 (global-set-key [(meta right)] 'windmove-right)
+
+(global-set-key "\C-cs" 'shell)

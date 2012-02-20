@@ -12,7 +12,7 @@
 (load "~/.emacs.d/lib/personal-terminal.el")
 (load "~/.emacs.d/lib/gist.el")
 (load "~/.emacs.d/lib/csv-mode.el")
-(load "~/.emacs.d/lib/burst.el")
+;(load "~/.emacs.d/lib/burst.el")
 (load "~/.emacs.d/lib/geben.el")
 (load "~/.emacs.d/lib/gist-init.el")
 (load "~/.emacs.d/lib/line-num.el")
@@ -22,3 +22,12 @@
 
 (require 'tramp)
 (setq tramp-default-method "scp")
+
+(defun get-magento-file-from-class ()
+  "Gets the proper Magento file from the class name."
+  (interactive)
+  (let (mageclass)
+    (setq mageclass (thing-at-point 'symbol))
+    (setq mageclass (replace-regexp-in-string "_" "/" mageclass))
+    (message "%s.php" mageclass)
+))
