@@ -32,7 +32,7 @@
 
 (define-key global-map (kbd "C-b")       'find-file-other-window)
 
-(define-key global-map (kbd "C-c C-v") 'phing-update-db)
+(define-key global-map (kbd "C-c C-v") 'update-db)
 
 (global-set-key (kbd "<f8>") 'gist-region-or-buffer)
 
