@@ -3,6 +3,13 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
+# I don't play any games.
+alias e="emacs"
+alias ed="emacs"
+alias nano="emacs"
+alias vim="emacs"
+alias vi="emacs"
+
 # cd to the root httpdocs folder
 alias cdh="source ~/bin/cdh"
 
@@ -15,8 +22,19 @@ alias f="find . | grep -v svn | grep "
 # SVN Stuff!
 alias up="svn up"
 alias st="svn st"
+alias sa="svn st | grep ^? | tr -d ' ' | sed 's/\?//' | xargs svn add"
+alias sd="svn st | grep ^! | tr -d ' ' | sed 's/\!//' | xargs svn delete"
+
+# Collective git diff of modified files
+alias gd="git status -s | grep ^\ M | sed 's/\ M\ //' | xargs git diff"
+
+alias mysql="mysql --pager=\"less -S\""
 
 alias phing="phing -f  .build/build/build.xml"
+
+function tmpmv() {
+   mv $1 _$1
+}
 
 # Extract tar, gz, zip, etc
 function extract()

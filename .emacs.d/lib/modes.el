@@ -20,7 +20,7 @@
           (lambda () (run-hooks 'abg-code-modes-hook)))
 
 ;;; YaSnippet (misplaced?)
-(add-to-list 'load-path
-              "~/.emacs.d/lib/yasnippet")
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas/global-mode 1)
+;;(add-to-list 'load-path
+  ;;            "~/.emacs.d/lib/yasnippet")
+;;(require 'yasnippet) ;; not yasnippet-bundle
+;;(yas/global-mode 1)
