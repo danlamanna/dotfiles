@@ -17,5 +17,11 @@
 (load "~/.emacs.d/lib/uniquify.el")
 (load "~/.emacs.d/lib/gtalk.el")
 
+;; SVN 1.7 doesn't work in emacs 23 - Need to use lib
+(load "~/.emacs.d/lib/vc-svn17.el")
+(require 'vc-svn17)
+
 (add-to-list 'load-path "~/.emacs.d/lib/jabber/")
 (load "~/.emacs.d/lib/jabber/jabber.el")
+
+(setq read-file-name-completion-ignore-case nil)
