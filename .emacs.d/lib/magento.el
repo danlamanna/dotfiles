@@ -1,0 +1,11 @@
+(defun get-magento-file-from-class ()
+  "Gets the proper Magento file from the class name."
+  (interactive)
+  (let (mageclass)
+    (setq mageclass (thing-at-point 'symbol))
+    (setq mageclass (replace-regexp-in-string "_" "/" mageclass))
+    (split-window-horizontally)
+    (setq w (next-window))
+    (select-window w)
+    (find-file (format "%shttpdocs/app/code/core/%s.php" (get-absolute-project-path) mageclass))
+))

@@ -14,7 +14,8 @@
 
 ;; Add line numbers to php mode
 (add-hook 'abg-code-modes-hook
-          (lambda () (linum-mode 1)))
+          (lambda () 
+	    (flymake-mode 1)))
 
 (add-hook 'php-mode-hook
           (lambda () (run-hooks 'abg-code-modes-hook)))

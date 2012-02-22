@@ -1,7 +1,9 @@
- (defun switch-to-previous-buffer ()
+(defun switch-to-previous-buffer ()
       (interactive)
       (switch-to-buffer (other-buffer (current-buffer) 1)))
 
+(global-unset-key (kbd "C-x C-z"))
+(global-unset-key (kbd "C-z"))
 (define-key global-map (kbd "M-g")         'goto-line)
 (define-key global-map (kbd "M-'")         'expand-abbrev)
 (define-key global-map (kbd "M-Q")         'unfill-paragraph)
@@ -32,8 +34,6 @@
 
 (define-key global-map (kbd "C-b")       'find-file-other-window)
 
-(define-key global-map (kbd "C-c C-v") 'update-db)
-
 (global-set-key (kbd "<f8>") 'gist-region-or-buffer)
 
 (global-set-key [(meta up)] 'windmove-up)
@@ -42,3 +42,9 @@
 (global-set-key [(meta right)] 'windmove-right)
 
 (global-set-key "\C-cs" 'shell)
+(global-set-key "\C-cq" 'project-sql)
+
+(define-key global-map (kbd "C-c C-p") 'phing-task)
+(define-key global-map (kbd "C-c C-v") 'update-db)
+
+;(global-set-key "\C-cm" 'get-magento-file-from-class)

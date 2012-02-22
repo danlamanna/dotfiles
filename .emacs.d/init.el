@@ -1,11 +1,5 @@
 (defvar shared-lisp-dir (expand-file-name "~/.emacs.d/lib")
-"Directory containing Emacs libraries required for personal setup.")
-
-; How else will I know the time
-(display-time)
-
-;; This really needs to happen now
-(global-unset-key (kbd "C-x C-z"))
+  "Directory containing Emacs libraries required for personal setup.")
 
 (load "~/.emacs.d/lib/keymaps.el")
 (load "~/.emacs.d/lib/font-stuff.el")
@@ -18,25 +12,10 @@
 (load "~/.emacs.d/lib/line-num.el")
 (load "~/.emacs.d/lib/misc.el")
 (load "~/.emacs.d/lib/modes.el")
+(load "~/.emacs.d/lib/magento.el")
+(load "~/.emacs.d/lib/tramp.el")
+(load "~/.emacs.d/lib/uniquify.el")
+(load "~/.emacs.d/lib/gtalk.el")
 
-
-(require 'tramp)
-(setq tramp-default-method "scp")
-
-(defun get-magento-file-from-class ()
-  "Gets the proper Magento file from the class name."
-  (interactive)
-  (let (mageclass)
-    (setq mageclass (thing-at-point 'symbol))
-    (setq mageclass (replace-regexp-in-string "_" "/" mageclass))
-    (split-window-horizontally)
-    (setq w (next-window))
-    (select-window w)
-    (find-file (format "%shttpdocs/app/code/core/%s.php" (get-absolute-project-path) mageclass))
-))
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-(setq uniquify-separator " - ")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
+(add-to-list 'load-path "~/.emacs.d/lib/jabber/")
+(load "~/.emacs.d/lib/jabber/jabber.el")

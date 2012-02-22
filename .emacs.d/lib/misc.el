@@ -59,3 +59,10 @@
        (setq list (cdr list))
        (setq buffer (car list))))
   (message "Refreshing open files"))
+
+(display-time)
+
+(setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+(setq ido-file-extensions-order '(".php" ".phtml" ".xml" ".py" ".el"))
