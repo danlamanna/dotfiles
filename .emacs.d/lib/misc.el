@@ -1,3 +1,18 @@
+(setq read-file-name-completion-ignore-case nil)
+
+(require 'key-chord)
+(key-chord-mode 1)
+(key-chord-define-global ";;" "\C-e;")
+
+(require 'inline-string-rectangle)
+(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+
+(require 'mark-more-like-this)
+(global-set-key (kbd "M-,") 'mark-previous-like-this)
+(global-set-key (kbd "M-.") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this)
+
+
 ;; Making buffers open side by side rather than horizontal terribleness.
 (setq split-height-threshold nil)
 (setq split-width-threshold 500)
