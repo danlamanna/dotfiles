@@ -1,3 +1,0 @@
-[submodule ".emacs.d/lib/mark-multiple"]
-	path = .emacs.d/lib/mark-multiple
-	url = https://github.com/magnars/mark-multiple.el.git
