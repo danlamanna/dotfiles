@@ -42,7 +42,7 @@
 (load "tramp.el")
 
 ;; If on work server, load the work-specific files.
-(if (string-equal system-name "imladris.intellisites")
-    ((add-to-list 'load-path "~/.emacs.d/lib/work-specific")
-    (load "burst.el")
-    (load "geben.el")))
+(unless (not (string-equal system-name "imladris.intellisites"))
+    (add-to-list 'load-path "~/.emacs.d/lib/work-specific")
+    (load "geben.el")
+    (load "burst.el"))
