@@ -3,8 +3,10 @@
 (add-to-list 'load-path shared-lisp-dir)
 
 ;; Load Aesthetics 
-(load "aesthetics/font-stuff.el")
-(load "aesthetics/personal-terminal.el")
+(add-to-list 'load-path "~/.emacs.d/lib/aesthetics/color-theme")
+(load "color-theme.el")
+(load "themes/color-theme-almost-monokai.el")
+(color-theme-almost-monokai)
 
 ;; VC - Gists on github, VC for SVN 1.7
 (load "gist-init.el")
