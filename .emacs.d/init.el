@@ -36,6 +36,8 @@
 (yas/global-mode 1)
 
 ;; Miscellaneous
+(add-to-list 'load-path "~/.emacs.d/lib/expand-region")
+(load "expand-region.el")
 (load "magento.el")
 (load "uniquify.el")
 (load "misc.el")

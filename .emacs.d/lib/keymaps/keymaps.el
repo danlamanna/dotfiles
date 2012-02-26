@@ -49,4 +49,8 @@
 (define-key global-map (kbd "C-c C-p") 'phing-task)
 (define-key global-map (kbd "C-c C-v") 'update-db)
 
+(define-key global-map (kbd "C-q") 'er/expand-region)
+
+
+
 ;(global-set-key "\C-cm" 'get-magento-file-from-class)
