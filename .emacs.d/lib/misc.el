@@ -1,6 +1,6 @@
 ;; Making buffers open side by side rather than horizontal terribleness.
 (setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(setq split-width-threshold 500)
 
 ;; Get rid of prompting you to kill
 (defun my-kill-emacs ()
@@ -62,7 +62,12 @@
 
 (display-time)
 
-(setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
-  (ido-mode 1)
-(setq ido-file-extensions-order '(".php" ".phtml" ".xml" ".py" ".el"))
+;; One of the many .el files (I think modes) is causing glitchy chars
+;; to be entered on load SOMETIMES, this will take care of it for now.
+(add-hook 'write-file-hooks 'remove-glitchy-chars)
+(defun remove-glitchy-chars()
+  (interactive)
+  (unless (equal (buffer-name) "geben.el") t
+	  (save-excursion
+	    (beginning-of-buffer)
+	    (replace-string "B1;2802;0c" ""))))

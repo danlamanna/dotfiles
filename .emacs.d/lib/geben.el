@@ -8,7 +8,6 @@
 ;; annoying, let's fix that.
 (add-hook 'geben-mode-hook 'kill-proxy)
 (defun kill-proxy()
-    (add-hook 'kill-emacs-hook
-        (lambda ()
-                (interactive "P")               
-                (call-interactively 'geben-proxy-end))))
+  (interactive "P")               
+  (call-interactively 'geben-proxy-end))
+

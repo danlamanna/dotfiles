@@ -2,10 +2,12 @@
       (interactive)
       (switch-to-buffer (other-buffer (current-buffer) 1)))
 
+(define-key global-map (kbd "C-A")      'back-to-indentation)
 (global-unset-key (kbd "C-x C-z"))
 (global-unset-key (kbd "C-z"))
 (define-key global-map (kbd "M-g")         'goto-line)
 (define-key global-map (kbd "M-'")         'expand-abbrev)
+(define-key global-map (kbd "M-m")         'iy-go-to-char)
 (define-key global-map (kbd "M-Q")         'unfill-paragraph)
 (define-key global-map (kbd "C-c w")       'delete-trailing-whitespace)
 (define-key global-map (kbd "C-c \\")      'toggle-truncate-lines)

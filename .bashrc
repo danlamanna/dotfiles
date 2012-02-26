@@ -4,7 +4,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # I don't play any games.
-alias e="emacs"
+alias e="emacsclient"
 alias ed="emacs"
 alias nano="emacs"
 alias vim="emacs"

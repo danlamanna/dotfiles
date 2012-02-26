@@ -1,0 +1,10 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : class foo {}
+#key : cls
+# --
+class $1 {
+   
+   public function __construct($2) {
+       $0	   
+   }
+}
