@@ -7,3 +7,6 @@
 [submodule ".emacs.d/lib/jquery-doc"]
 	path = .emacs.d/lib/jquery-doc
 	url = https://github.com/ananthakumaran/jquery-doc.el.git
+[submodule ".emacs.d/lib/modes/php/magento"]
+	path = .emacs.d/lib/modes/php/magento
+	url = git@github.com:asdasDan/mage.el.git
