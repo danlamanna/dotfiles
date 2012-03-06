@@ -4,3 +4,6 @@
 [submodule ".emacs.d/lib/expand-region"]
 	path = .emacs.d/lib/expand-region
 	url = https://github.com/magnars/expand-region.el.git
+[submodule ".emacs.d/lib/jquery-doc"]
+	path = .emacs.d/lib/jquery-doc
+	url = https://github.com/ananthakumaran/jquery-doc.el.git

@@ -1,0 +1,7 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : if ($foo) {}
+#key : if
+# --
+if ($1) {
+   $0
+}

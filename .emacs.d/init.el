@@ -1,3 +1,8 @@
+;; Load work specific files, if applicable
+(if (equal (system-name) "imladris.intellisites")
+    (load "~/.emacs.d/lib/work-specific/custom-geben.el")
+    (load "~/.emacs.d/lib/work-specific/burst.el"))
+
 (defvar shared-lisp-dir (expand-file-name "~/.emacs.d/lib")
  "Directory containing Emacs libraries required for personal setup.")
 (add-to-list 'load-path shared-lisp-dir)
@@ -18,8 +23,9 @@
 (load "keymaps/key-chord.el")
 (load "keymaps/keymaps.el")
 (load "iy-go-to-char.el")
+(load "anything.el")
 
-; Mark multiple
+;; Mark multiple
 (load "mark-multiple/mark-multiple.el")
 (load "mark-multiple/inline-string-rectangle.el")
 (load "mark-multiple/mark-more-like-this.el")
@@ -30,6 +36,11 @@
 (load "gtalk.el")
 
 ;; Modes
+;; Auto-Complete
+(add-to-list 'load-path "~/.emacs.d/lib/auto-complete")
+(load "auto-complete-config.el")
+(load "auto-complete.el")
+(add-to-list 'load-path "~/.emacs.d/lib/jquery-doc")
 (load "modes.el")
 
 ;; Snippets
@@ -40,13 +51,7 @@
 ;; Miscellaneous
 (add-to-list 'load-path "~/.emacs.d/lib/expand-region")
 (load "expand-region.el")
-(load "magento.el")
+(load "modes/php/magento.el")
 (load "uniquify.el")
 (load "misc.el")
 (load "tramp.el")
-
-;; If on work server, load the work-specific files.
-(unless (not (string-equal system-name "imladris.intellisites"))
-    (add-to-list 'load-path "~/.emacs.d/lib/work-specific")
-    (load "geben.el")
-    (load "burst.el"))

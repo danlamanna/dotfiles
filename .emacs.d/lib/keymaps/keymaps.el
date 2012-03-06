@@ -51,6 +51,6 @@
 
 (define-key global-map (kbd "C-q") 'er/expand-region)
 
-
-
-;(global-set-key "\C-cm" 'get-magento-file-from-class)
+(require 'iy-go-to-char)
+(global-set-key (kbd "C-c C-f") 'iy-go-to-char)
+(global-set-key (kbd "C-c C-b") 'iy-go-to-char-backward)

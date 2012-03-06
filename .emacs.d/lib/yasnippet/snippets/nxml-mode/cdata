@@ -1,0 +1,5 @@
+# contributor: Dan LaManna <dan.lamanna@gmail.com>
+# name: <![CDATA[...]]>
+# key: cdata
+# --
+<![CDATA[$1]]>$0

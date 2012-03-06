@@ -409,9 +409,9 @@ for \\[find-tag] (which see)."
   (browse-url php-manual-url))
 
 ;; Define shortcut
-(define-key php-mode-map
-  "\C-c\C-f"
-  'php-search-documentation)
+;(define-key php-mode-map
+ ; "\C-c\C-f"
+ ; 'php-search-documentation)
 
 ;; Define shortcut
 (define-key php-mode-map

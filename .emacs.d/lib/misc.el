@@ -3,6 +3,7 @@
 (require 'key-chord)
 (key-chord-mode 1)
 (key-chord-define-global ";;" "\C-e;")
+(key-chord-define-global "//" "\C-a//")
 
 (require 'inline-string-rectangle)
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
@@ -75,14 +76,23 @@
        (setq buffer (car list))))
   (message "Refreshing open files"))
 
+;; Need to know the time!
 (display-time)
 
-;; One of the many .el files (I think modes) is causing glitchy chars
-;; to be entered on load SOMETIMES, this will take care of it for now.
-(add-hook 'write-file-hooks 'remove-glitchy-chars)
-(defun remove-glitchy-chars()
-  (interactive)
-  (unless (equal (buffer-name) "geben.el") t
-	  (save-excursion
-	    (beginning-of-buffer)
-	    (replace-string "B1;2802;0c" ""))))
+;; Gets rid of Filename<2> and specifies the first different
+;; folder up. 
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator " - ")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
+
+;; None of that M-x make-directory nonsense 
+(add-hook 'before-save-hook
+          '(lambda ()
+             (or (file-exists-p (file-name-directory buffer-file-name))
+                 (make-directory (file-name-directory buffer-file-name) t))))
+
+;; Disable backup/autosave files
+(setq backup-inhibited t)
+(setq auto-save-default nil)

@@ -60,3 +60,12 @@ function extract()
 }
 
 clear
+
+export TERM;
+TERM=xterm-256color
+
+export EDITOR;
+EDITOR=$(which emacs)
+
+export VISUAL_EDITOR;
+VISUAL_EDITOR=$(which emacs)
