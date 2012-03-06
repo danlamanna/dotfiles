@@ -51,7 +51,6 @@
 ;; Miscellaneous
 (add-to-list 'load-path "~/.emacs.d/lib/expand-region")
 (load "expand-region.el")
-(load "modes/php/magento.el")
 (load "uniquify.el")
 (load "misc.el")
 (load "tramp.el")
