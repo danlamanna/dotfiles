@@ -33,9 +33,6 @@
 (define-key global-map (kbd "ESC <f7>")  'replace-string)
 
 (define-key global-map (kbd "ESC <f8>")  'replace-regexp)
-
-(define-key global-map (kbd "C-b")       'find-file-other-window)
-
 (global-set-key (kbd "<f8>") 'gist-region-or-buffer)
 
 (global-set-key [(meta up)] 'windmove-up)

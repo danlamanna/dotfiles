@@ -1,9 +1,9 @@
 (setq read-file-name-completion-ignore-case nil)
 
+;; @bec - Figure out mode-specific key-chords.
 (require 'key-chord)
 (key-chord-mode 1)
 (key-chord-define-global ";;" "\C-e;")
-(key-chord-define-global "//" "\C-a//")
 
 (require 'inline-string-rectangle)
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
@@ -32,9 +32,6 @@
 ;; Turn on paren matching
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
-
-;; Add column number to bottom bar
-(column-number-mode 1)
 
 ;; Swaps 2 windows with each other
 (defun swap-windows ()
@@ -75,9 +72,6 @@
        (setq list (cdr list))
        (setq buffer (car list))))
   (message "Refreshing open files"))
-
-;; Need to know the time!
-(display-time)
 
 ;; Gets rid of Filename<2> and specifies the first different
 ;; folder up. 

@@ -10,6 +10,8 @@ alias nano="emacs"
 alias vim="emacs"
 alias vi="emacs"
 
+alias s="ls"
+
 # cd to the root httpdocs folder
 alias cdh="source ~/bin/cdh"
 

@@ -1,0 +1,5 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : array_key_exists
+#key : array_key_exists
+# --
+array_key_exists(${key}, ${array})$0
