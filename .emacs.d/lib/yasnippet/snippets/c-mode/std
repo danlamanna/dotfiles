@@ -1,0 +1,5 @@
+# contributor: dan lamanna <dan.lamanna@gmail.com>
+# name: include stdio.h
+# key: std
+# --
+#include <stdio.h>

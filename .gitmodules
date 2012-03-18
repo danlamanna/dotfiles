@@ -10,3 +10,6 @@
 [submodule ".emacs.d/lib/modes/php/magento"]
 	path = .emacs.d/lib/modes/php/magento
 	url = git@github.com:asdasDan/mage.el.git
+[submodule ".emacs.d/lib/modes/restclient"]
+	path = .emacs.d/lib/modes/restclient
+	url = https://github.com/pashky/restclient.el.git
