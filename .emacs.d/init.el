@@ -1,7 +1,4 @@
 ;; Load work specific files, if applicable
-;(defun on-imladris()
- ; (equal (system-name) "imladris.intellisites"))
-
 (when (equal (system-name) "imladris.intellisites")
   (load "~/.emacs.d/lib/work-specific/custom-geben.el")
   (load "~/.emacs.d/lib/work-specific/burst.el"))
@@ -63,7 +60,6 @@
 (load "~/.emacs.d/lib/modes/php/magento/mage.el")
 (load "misc.el")
 (load "tramp.el")
-(load "~/.emacs.d/lib/custom-geben.el")
 
 ;; Wrap selected text in quotes, or just insert empty pair
 (global-set-key (kbd "M-'") 'insert-pair)
