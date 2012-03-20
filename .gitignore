@@ -1,0 +1,6 @@
+*
+!.gitignore
+!.bashrc
+!.emacs.d
+!geben-0.26
+!README
