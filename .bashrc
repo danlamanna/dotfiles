@@ -21,6 +21,14 @@ alias grep="grep -R "
 # Quick finding of files by grepping name
 alias f="find . | grep -v svn | grep "
 
+# To make CLI scripts trigger xdebug
+# xdebug dan - Sets idekey to dan
+# xdebug - Sets idekey to nothing
+function xdebug() {
+    export XDEBUG_CONFIG="idekey=$1"
+    echo $XDEBUG_CONFIG
+}
+
 # SVN Stuff!
 alias up="svn up"
 alias st="svn st"
