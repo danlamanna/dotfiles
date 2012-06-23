@@ -8,6 +8,13 @@
 (autoload 'php-mode "php-mode" "Major mode for PHP files." t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
+;;; Django!
+(autoload 'django-html-mumamo-mode "~/.emacs.d/nxhtml/autostart.el")
+(setq auto-mode-alist
+      (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
+
 ;;; JS2 Mode
 ;(autoload 'js2-mode "js2" nil t)
 ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
