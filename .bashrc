@@ -1,7 +1,12 @@
-export WORKON_HOME=~/.envs
-source /usr/local/bin/virtualenvwrapper.sh
+# virtualenvwrapper stuff
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=~/.envs
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
-alias ls="ls --color"
+if [ -f ~/.env_specific_bashrc ]; then
+    . ~/.env_specific_bashrc
+fi
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -15,6 +20,7 @@ alias nano="emacs"
 alias vim="emacs"
 alias vi="emacs"
 
+alias ls="ls --color"
 alias s="ls"
 
 # cd to the root httpdocs folder
@@ -24,7 +30,9 @@ alias cdh="source ~/bin/cdh"
 alias grep="grep -R "
 
 # Quick finding of files by grepping name
-alias f="find . | grep -v svn | grep "
+function ff() {
+    find . | grep $1
+}
 
 # To make CLI scripts trigger xdebug
 # xdebug dan - Sets idekey to dan
@@ -44,8 +52,6 @@ alias sd="svn st | grep ^! | tr -d ' ' | sed 's/\!//' | xargs svn delete"
 alias gd="git status -s | grep ^\ M | sed 's/\ M\ //' | xargs git diff"
 
 alias mysql="mysql --pager=\"less -S\""
-
-alias phing="phing -f  .build/build/build.xml"
 
 function tmpmv() {
    mv $1 _$1
