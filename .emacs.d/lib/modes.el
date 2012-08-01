@@ -20,9 +20,6 @@
 ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;; Mode-specific Hooks
-(require 'jquery-doc)
-(add-hook 'js2-mode-hook 'jquery-doc-setup)
-
 (add-hook 'php-mode-hook '(lambda() 
 			    (load "modes/php/php-completion.el")))
 
@@ -106,3 +103,5 @@
   (message "My JS2 hook"))
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+(provide 'modes)
