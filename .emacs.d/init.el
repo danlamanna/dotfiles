@@ -5,8 +5,10 @@
 (add-to-list 'load-path "~/.emacs.d/lib/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/lib/expand-region")
 (add-to-list 'load-path "~/.emacs.d/lib/jabber")
+(add-to-list 'load-path "~/.emacs.d/lib/magit")
 
 (require 'gist)
+(require 'magit)
 (require 'vc-svn17)
 (require 'key-chord)
 (require 'iy-go-to-char)
