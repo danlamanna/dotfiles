@@ -19,6 +19,7 @@
 (require 'inline-string-rectangle)
 (require 'mark-more-like-this)
 (require 'jabber)
+(require 'twittering-mode)
 (require 'modes)
 (require 'restclient)
 (require 'json-reformat)
@@ -33,3 +34,4 @@
 (require 'uniquify-config)
 (require 'ido-config)
 (require 'misc-config)
+(require 'twittering-mode-config)
