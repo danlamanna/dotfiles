@@ -5,51 +5,42 @@
 
 (defvar shared-lisp-dir (expand-file-name "~/.emacs.d/lib")
 "Directory containing Emacs libraries required for personal setup.")
+
 (add-to-list 'load-path shared-lisp-dir)
+(add-to-list 'load-path "~/.emacs.d/lib/yasnippet")
+(add-to-list 'load-path "~/.emacs.d/lib/jabber")
+(add-to-list 'load-path "~/.emacs.d/lib/aesthetics/color-theme")
+
 
 ;; Load Aesthetics
-(add-to-list 'load-path "~/.emacs.d/lib/aesthetics/color-theme")
-(load "color-theme.el")
-(load "themes/color-theme-almost-monokai.el")
+(require 'color-theme)
+(load "~/.emacs.d/lib/aesthetics/color-theme/themes/color-theme-almost-monokai.el")
 (color-theme-almost-monokai)
 
 ;;; VC - Gists on github, VC for SVN 1.7
-(load "gist-init.el")
-(load "gist.el")
-(load "vc-svn17.el")
+(require 'gist)
 (require 'vc-svn17)
 
 ;; Keymappings, bindings, etc
-(load "keymaps/key-chord.el")
-(load "keymaps/keymaps.el")
-(load "iy-go-to-char.el")
+(require 'key-chord)
+(require 'iy-go-to-char)
 (require 'ace-jump-mode)
-(define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
+(require 'keymaps)
 
 ;; Mark multiple
-(load "mark-multiple/mark-multiple.el")
-(load "mark-multiple/inline-string-rectangle.el")
-(load "mark-multiple/mark-more-like-this.el")
+(require 'mark-multiple)
+(require 'inline-string-rectangle)
+(require 'mark-more-like-this)
 
 ;; Jabber
-(add-to-list 'load-path "~/.emacs.d/lib/jabber")
-(load "jabber.el")
-(load "gtalk.el")
+(require 'jabber)
 
 ;; Modes
-;; Auto-Complete
-(add-to-list 'load-path "~/.emacs.d/lib/auto-complete")
-(load "auto-complete-config.el")
-(load "auto-complete.el")
-(add-to-list 'load-path "~/.emacs.d/lib/jquery-doc")
-(load "modes.el")
-
-;; RestClient
-(add-to-list 'load-path "~/.emacs.d/lib/modes/restclient")
+(require 'modes)
 (require 'restclient)
+(require 'json-reformat)
 
 ;; Snippets
-(add-to-list 'load-path "~/.emacs.d/lib/yasnippet")
 (require 'yasnippet)
 (yas/global-mode 1)
 
@@ -81,9 +72,9 @@
 	    '(:eval (propertize (format-time-string "%l:%M%p")))
 	    " %-"))
 
-(load "browse-kill-ring.el")
-(when (require 'browse-kill-ring nil 'noerror)
-  (browse-kill-ring-default-keybindings))
+;(load "browse-kill-ring.el")
+;(when (require 'browse-kill-ring nil 'noerror)
+  ;(browse-kill-ring-default-keybindings))
 
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
