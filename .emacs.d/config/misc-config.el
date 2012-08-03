@@ -1,5 +1,13 @@
 (setq read-file-name-completion-ignore-case nil)
 
+(require 'winner)
+(setq winner-dont-bind-my-keys t)
+(define-key global-map (kbd "C-c C-x") 'winner-undo)
+(define-key global-map (kbd "C-c C-c") 'winner-redo)
+(winner-mode t)
+
+(defvar hipchat-jabber-id "170_26771@chat.hipchat.com")
+
 (require 'inline-string-rectangle)
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
