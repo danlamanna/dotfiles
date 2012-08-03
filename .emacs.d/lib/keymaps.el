@@ -20,9 +20,9 @@
 (define-key global-map (kbd "C-x g")       'uncomment-region)
 (define-key global-map (kbd "C-c g")       'comment-region)
 
-(define-key global-map (kbd "<f1>")      'switch-to-previous-buffer)
+(define-key global-map (kbd "C-c C-p")      'switch-to-previous-buffer)
 (define-key global-map (kbd "ESC <f1>")  'kill-buffer)
-(define-key global-map (kbd "<f2>")      'buffer-menu)
+(define-key global-map (kbd "C-c C-b")      'buffer-menu)
 (define-key global-map (kbd "<f3>")      'start-kbd-macro)
 (define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
 (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
@@ -42,9 +42,6 @@
 
 (global-set-key "\C-cs" 'shell)
 (global-set-key "\C-cq" 'project-sql)
-
-(define-key global-map (kbd "C-c C-p") 'phing-task)
-(define-key global-map (kbd "C-c C-v") 'update-db)
 
 (define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
 

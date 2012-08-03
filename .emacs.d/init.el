@@ -9,6 +9,7 @@
 
 (require 'gist)
 (require 'magit)
+(require 'magit-svn)
 (require 'vc-svn17)
 (require 'key-chord)
 (require 'iy-go-to-char)
@@ -19,6 +20,7 @@
 (require 'inline-string-rectangle)
 (require 'mark-more-like-this)
 (require 'jabber)
+(require 'spotify)
 (require 'twittering-mode)
 (require 'modes)
 (require 'restclient)
@@ -31,7 +33,10 @@
 (require 'aesthetics-config)
 (require 'modeline-config)
 (require 'saveplace-config)
+(require 'geben-config)
 (require 'uniquify-config)
 (require 'ido-config)
 (require 'misc-config)
 (require 'twittering-mode-config)
+
+(add-hook 'magit-mode-hook 'turn-on-magit-svn)
