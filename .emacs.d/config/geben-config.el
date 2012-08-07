@@ -1,4 +1,4 @@
-(if (file-exists-p "/usr/share/emacs/site-lisp/geben/geben.el") t
+(if (eq (file-exists-p "/usr/share/emacs/site-lisp/geben/geben.el") t)
   (load "/usr/share/emacs/site-lisp/geben/geben.el")
   (custom-set-variables
    '(geben-dbgp-feature-list (quote ((:set max_data 32768) (:set max_depth 1) (:set max_children 1024) (:get breakpoint_types geben-dbgp-breakpoint-store-types))))
