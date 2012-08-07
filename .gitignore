@@ -1,2 +1,4 @@
 .emacs.d/cache
 .emacs.d/auto-save-list
+/.emacs.d/geben/.storage
+/.emacs.d/saveplace
