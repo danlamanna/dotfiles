@@ -38,5 +38,3 @@
 (require 'ido-config)
 (require 'misc-config)
 (require 'twittering-mode-config)
-
-(add-hook 'magit-mode-hook 'turn-on-magit-svn)
