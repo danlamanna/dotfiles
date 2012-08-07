@@ -20,8 +20,8 @@
 ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;; Mode-specific Hooks
-(add-hook 'php-mode-hook '(lambda() 
-			    (load "modes/php/php-completion.el")))
+;(add-hook 'php-mode-hook '(lambda() 
+;			    (load "modes/php/php-completion.el")))
 
 (defun my-js2-indent-function ()
   (interactive)
