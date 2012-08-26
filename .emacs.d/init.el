@@ -6,6 +6,8 @@
 (add-to-list 'load-path "~/.emacs.d/lib/expand-region")
 (add-to-list 'load-path "~/.emacs.d/lib/jabber")
 (add-to-list 'load-path "~/.emacs.d/lib/magit")
+(add-to-list 'load-path "~/.emacs.d/lib/modes/js2-mode")
+(add-to-list 'load-path "~/.emacs.d/lib/js2-refactor.el")
 
 (require 'gist)
 (require 'magit)
@@ -16,6 +18,7 @@
 (require 'ace-jump-mode)
 (require 'browse-kill-ring)
 (require 'keymaps)
+(require 'js2-refactor)
 (require 'mark-multiple)
 (require 'inline-string-rectangle)
 (require 'mark-more-like-this)
@@ -38,3 +41,10 @@
 (require 'ido-config)
 (require 'misc-config)
 (require 'twittering-mode-config)
+(require 'workgroups)
+
+
+;; i DO want to kill it, i don't care if it has a running process :P
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
