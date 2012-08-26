@@ -55,4 +55,6 @@
 (global-set-key (kbd "C-c C-f") 'iy-go-to-char)
 (global-set-key (kbd "C-c C-b") 'iy-go-to-char-backward)
 
+(global-set-key (kbd "C-c C-s") 'magit-status)
+
 (provide 'keymaps)
