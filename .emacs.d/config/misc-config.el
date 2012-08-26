@@ -87,4 +87,10 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+;; Remove prompt of killing a buffer with a running process
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
+
 (provide 'misc-config)
+

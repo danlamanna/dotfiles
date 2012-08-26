@@ -8,7 +8,11 @@
 (add-to-list 'load-path "~/.emacs.d/lib/magit")
 (add-to-list 'load-path "~/.emacs.d/lib/modes/js2-mode")
 (add-to-list 'load-path "~/.emacs.d/lib/js2-refactor.el")
+(add-to-list 'load-path "~/.emacs.d/lib/cedet-1.1.1/common")
+(add-to-list 'load-path "~/.emacs.d/lib/auto-complete-1.3.1")
 
+(require 'cedet)
+(require 'auto-complete)
 (require 'gist)
 (require 'magit)
 (require 'magit-svn)
@@ -42,9 +46,3 @@
 (require 'misc-config)
 (require 'twittering-mode-config)
 (require 'workgroups)
-
-
-;; i DO want to kill it, i don't care if it has a running process :P
-(setq kill-buffer-query-functions
-  (remq 'process-kill-buffer-query-function
-         kill-buffer-query-functions))

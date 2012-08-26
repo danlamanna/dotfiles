@@ -8,6 +8,10 @@
 (autoload 'php-mode "php-mode" "Major mode for PHP files." t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
+;;; C Mode
+(add-hook 'c-mode-hook (lambda()
+			 (auto-complete-mode)))
+
 ;;; Django!
 (autoload 'django-html-mumamo-mode "~/.emacs.d/nxhtml/autostart.el")
 (setq auto-mode-alist
