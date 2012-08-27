@@ -46,3 +46,9 @@
 (require 'misc-config)
 (require 'twittering-mode-config)
 (require 'workgroups)
+
+(add-hook 'c-mode-hook (lambda()
+			 (set (make-local-variable 'compile-command)
+			      (concat "gcc -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name)))))
+
+(global-set-key "\M- " 'hippie-expand)
