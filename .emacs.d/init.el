@@ -12,7 +12,6 @@
 (add-to-list 'load-path "~/.emacs.d/lib/auto-complete-1.3.1")
 
 (require 'cedet)
-(require 'auto-complete)
 (require 'gist)
 (require 'magit)
 (require 'magit-svn)
@@ -51,4 +50,18 @@
 			 (set (make-local-variable 'compile-command)
 			      (concat "gcc -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name)))))
 
-(global-set-key "\M- " 'hippie-expand)
+(global-set-key "\M-/" 'hippie-expand)
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+(defun add-paren-before-semicolon()
+  "Adds a closing paren to the end of the current line, but before any semicolons, if present.
+   Note: Also saves excursion, so the point doesn't change visibly at all during this."
+  (interactive)
+  (save-excursion
+    (setq now-until-eol (substring (buffer-string) (point) (line-end-position)))
+    (whitespace-cleanup)
+    (move-end-of-line nil)
+    (insert ")")))
+
+(global-set-key "\C-\\" 'add-paren-before-semicolon)
