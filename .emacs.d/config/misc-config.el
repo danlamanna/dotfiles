@@ -1,9 +1,6 @@
 (setq read-file-name-completion-ignore-case nil)
 
 (require 'winner)
-(setq winner-dont-bind-my-keys t)
-(define-key global-map (kbd "C-c C-x") 'winner-undo)
-(define-key global-map (kbd "C-c C-c") 'winner-redo)
 (winner-mode t)
 
 (defvar hipchat-jabber-id "170_26771@chat.hipchat.com")
@@ -66,22 +63,22 @@
    "Refreshes all open buffers from their respective files"
    (interactive)
    (let* ((list (buffer-list))
-          (buffer (car list)))
+	  (buffer (car list)))
      (while buffer
        (when (buffer-file-name buffer)
-         (set-buffer buffer)
-         (revert-buffer t t t))
+	 (set-buffer buffer)
+	 (revert-buffer t t t))
        (setq list (cdr list))
        (setq buffer (car list))))
   (message "Refreshing open files"))
 
 
 
-;; None of that M-x make-directory nonsense 
+;; None of that M-x make-directory nonsense
 (add-hook 'before-save-hook
-          '(lambda ()
-             (or (file-exists-p (file-name-directory buffer-file-name))
-                 (make-directory (file-name-directory buffer-file-name) t))))
+	  '(lambda ()
+	     (or (file-exists-p (file-name-directory buffer-file-name))
+		 (make-directory (file-name-directory buffer-file-name) t))))
 
 ;; Disable backup/autosave files
 (setq backup-inhibited t)
@@ -90,7 +87,6 @@
 ;; Remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
   (remq 'process-kill-buffer-query-function
-         kill-buffer-query-functions))
+	 kill-buffer-query-functions))
 
 (provide 'misc-config)
-
