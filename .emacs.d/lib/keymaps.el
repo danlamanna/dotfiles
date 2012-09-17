@@ -43,7 +43,7 @@
 (global-set-key "\C-cs" 'shell)
 (global-set-key "\C-cq" 'project-sql)
 
-(define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 (define-key global-map (kbd "C-q") 'er/expand-region)
 
