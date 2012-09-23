@@ -78,3 +78,10 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
+;http://thoughtbus.com/customer_support/mozilla-thunderbird-setup
+;; only display line/col/distance in file buffers
+;; set modeline to ensure hte buffer is a FILE buffer
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
