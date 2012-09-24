@@ -13,6 +13,11 @@
 (global-set-key (kbd "M-.") 'mark-next-like-this)
 (global-set-key (kbd "C-M-m") 'mark-more-like-this)
 
+
+; Enable upcase-region and downcase-region
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
 ;; Making buffers open side by side rather than horizontal terribleness.
 (setq split-height-threshold nil)
 (setq split-width-threshold 500)
@@ -88,5 +93,15 @@
 (setq kill-buffer-query-functions
   (remq 'process-kill-buffer-query-function
 	 kill-buffer-query-functions))
+
+
+(custom-set-variables
+ '(zencoding-preview-default nil))
+
+
+(global-set-key "\M-/" 'hippie-expand)
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
 
 (provide 'misc-config)
