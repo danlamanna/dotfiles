@@ -45,6 +45,8 @@
 
 (define-key global-map (kbd "C-z") 'ace-jump-mode)
 
+(global-set-key (kbd "<C-tab>") 'bury-buffer)
+
 (define-key global-map (kbd "C-q") 'er/expand-region)
 
 ;; Wrap selected text in quotes, or just insert empty pair
