@@ -7,3 +7,6 @@
 [submodule ".emacs.d/lib/jquery-doc"]
 	path = .emacs.d/lib/jquery-doc
 	url = git://github.com/ananthakumaran/jquery-doc.el.git
+[submodule ".emacs.d/lib/modes/php-mode"]
+	path = .emacs.d/lib/modes/php-mode
+	url = git://github.com/ejmr/php-mode.git

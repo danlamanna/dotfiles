@@ -1,5 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : strpos
-#key : strpos
-# --
-strpos(${haystack}, ${needle})$0

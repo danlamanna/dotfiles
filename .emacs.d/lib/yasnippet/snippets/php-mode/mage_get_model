@@ -1,6 +1,0 @@
-B1;2802;0c#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : Mage::getModel()
-#key : mgm
-# --
-Mage::getModel('$1')$2;
-$0
