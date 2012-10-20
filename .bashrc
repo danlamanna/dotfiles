@@ -4,13 +4,13 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-if [ -f ~/.env_specific_bashrc ]; then
-    . ~/.env_specific_bashrc
-fi
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
+fi
+
+if [ -f ~/.env_specific_bashrc ]; then
+    . ~/.env_specific_bashrc
 fi
 
 # I don't play any games.
@@ -53,7 +53,7 @@ alias sd="svn st | grep ^! | tr -d ' ' | sed 's/\!//' | xargs svn delete"
 # Collective git diff of modified files
 alias gd="git status -s | grep ^\ M | sed 's/\ M\ //' | xargs git diff"
 
-alias mysql="mysql --pager=\"less -S\""
+alias mysql="mysql --pager='less -S'"
 
 function tmpmv() {
    mv $1 _$1
