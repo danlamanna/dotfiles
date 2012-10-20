@@ -40,6 +40,12 @@
 (global-set-key [(meta left)] 'windmove-left)
 (global-set-key [(meta right)] 'windmove-right)
 
+(global-set-key (kbd "M-e") 'windmove-up)
+(global-set-key (kbd "M-s") 'windmove-down)
+(global-set-key (kbd "M-a") 'windmove-left)
+(global-set-key (kbd "M-d") 'windmove-right)
+
+
 (global-set-key "\C-cs" 'shell)
 (global-set-key "\C-cq" 'project-sql)
 
@@ -49,9 +55,22 @@
 
 (define-key global-map (kbd "C-q") 'er/expand-region)
 
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 ;; Wrap selected text in quotes, or just insert empty pair
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-\"") 'insert-pair)
+
+(global-set-key "\C-\\" 'php-closing-paren)
+
+(global-set-key (kbd "\C-p") 'place-var-in-php-echo)
+
+(global-set-key (kbd "\C-c C-t i") 'timeclock-in)
+(global-set-key (kbd "\C-c C-t o") 'timeclock-out)
+
+;(global-set-key "\C-t" 'yas/expand)
 
 (require 'iy-go-to-char)
 (global-set-key (kbd "C-c C-f") 'iy-go-to-char)
