@@ -1,3 +1,6 @@
+(require 'flymake)
+(require 'zencoding-mode)
+
 ;;; CSV Mode
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
@@ -8,10 +11,21 @@
 (autoload 'php-mode "php-mode" "Major mode for PHP files." t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 (add-hook 'php-mode-hook (lambda()
-			   (flymake-mode)))
+			   (flymake-mode 1)
+			   (zencoding-mode)))
 
-(require 'zencoding-mode)
-(add-hook 'php-mode-hook 'zencoding-mode)
+;; takes array accessors and sets to objects i.e. ['foo'] to ->foo
+
+; brackets, no periods within it - either vars or quoted strings only
+(defvar php-array-accessor-regexp "\\[\\(.+\\)\\]"
+  "Regular Expression that matches array accessors in PHP, i.e. ['string']")
+
+(defun php-accessor-arr-to-obj()
+  (interactive)
+  (while (re-search-forward php-array-accessor-regexp nil t)
+    (replace-match "->\\1")))
+
+
 
 
 (defun php-closing-paren()
@@ -89,7 +103,7 @@
 
 (add-hook 'c-mode-hook (lambda()
 			 (set (make-local-variable 'compile-command)
-			      (concat "gcc -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name)))))
+			      (concat "gcc -g -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name)))))
 
 
 
