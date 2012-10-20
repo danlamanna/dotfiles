@@ -6,6 +6,8 @@
 	   ;; Displays ** bolded if the file has been modified (and it's not a readonly buffer)
 	   '(:eval (when (and (buffer-modified-p) (eq buffer-read-only nil) (not (eq (buffer-file-name) nil)))
 		     (propertize "**" 'face 'bold)))
+	   '(:eval (when (not (eq nil (car (cdr (cdr (split-string (locate-dominating-file (buffer-file-name) "httpdocs") "/"))))))
+		     (format " [%s]" (car (cdr (cdr (split-string (locate-dominating-file (buffer-file-name) "httpdocs") "/")))))))
 	   ;; Display percent from top, then line num, col num
 	   '(:eval (if (not (eq (buffer-file-name) nil))
 		       "  %p (L%l,C%c)"))
