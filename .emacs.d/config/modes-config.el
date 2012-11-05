@@ -1,7 +1,8 @@
 ; PHP
 (autoload 'php-mode "php-mode" "Major mode for PHP." t)
-(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(php\\|phtml\\)\\'" . php-mode))
+
+
 
 ; C
 (add-hook 'c-mode-hook (lambda()
