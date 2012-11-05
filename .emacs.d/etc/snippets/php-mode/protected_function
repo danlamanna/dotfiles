@@ -1,0 +1,7 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : protected function foobar()
+#key : prf
+# --
+protected function ${1:_}$2($3) {
+   $0
+}

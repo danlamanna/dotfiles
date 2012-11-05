@@ -1,0 +1,5 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : add_action($1, $2);
+#key : aa
+# --
+add_action('$1', '$2');

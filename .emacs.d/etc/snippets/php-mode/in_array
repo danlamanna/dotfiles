@@ -1,0 +1,5 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : in_array
+#key : in_array
+# --
+in_array(${needle}, ${haystack})$0

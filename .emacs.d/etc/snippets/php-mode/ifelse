@@ -1,0 +1,9 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : if ($foo) {} else {}
+#key : ifelse
+# --
+if ($1) {
+   $2
+} else {
+   $0
+}

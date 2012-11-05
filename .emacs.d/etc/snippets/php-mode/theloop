@@ -1,0 +1,12 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : The Loop!
+#key : theloop
+# --
+<?php if (have_posts()): ?>
+<?php while (have_posts()): the_post(); ?>
+$1
+<?php endwhile; ?>
+<?php else: ?>
+There are no posts to see here!
+<?php endif; ?>
+$0

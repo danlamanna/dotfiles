@@ -1,0 +1,10 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : class foo extends bar {}
+#key : clsext
+# --
+class $1 extends $2 {
+   
+   public function __construct($3) {
+       $0	   
+   }
+}
