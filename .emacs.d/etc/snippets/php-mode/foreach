@@ -1,5 +1,5 @@
 #contributor : danlamanna <dan.lamanna@gmail.com>
-#name : foreach () { }
+#name : foreach (arr as key => val) { }
 #key : foreach
 # --
 foreach (\$$1 as \$${2:key} => \$${3:val}) {
