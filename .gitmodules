@@ -1,0 +1,24 @@
+[submodule ".emacs.d/lib/restclient"]
+	path = .emacs.d/lib/restclient
+	url = git://github.com/pashky/restclient.el.git
+[submodule ".emacs.d/lib/yasnippet"]
+	path = .emacs.d/lib/yasnippet
+	url = git://github.com/capitaomorte/yasnippet.git
+[submodule ".emacs.d/lib/modes/php-mode"]
+	path = .emacs.d/lib/modes/php-mode
+	url = git://github.com/ejmr/php-mode.git
+[submodule ".emacs.d/lib/iy-go-to-char"]
+	path = .emacs.d/lib/iy-go-to-char
+	url = git://github.com/emacsmirror/iy-go-to-char.git
+[submodule ".emacs.d/lib/mark-multiple"]
+	path = .emacs.d/lib/mark-multiple
+	url = https://github.com/magnars/mark-multiple.el.git
+[submodule ".emacs.d/lib/expand-region"]
+	path = .emacs.d/lib/expand-region
+	url = git://github.com/magnars/expand-region.el.git
+[submodule ".emacs.d/lib/ace-jump-mode"]
+	path = .emacs.d/lib/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule ".emacs.d/lib/magit"]
+	path = .emacs.d/lib/magit
+	url = git://github.com/magit/magit.git
