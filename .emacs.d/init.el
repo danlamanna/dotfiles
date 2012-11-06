@@ -7,6 +7,7 @@
 (require 'ace-jump-mode)
 (require 'color-theme)
 (require 'expand-region)
+(require 'geben)
 (require 'inline-string-rectangle)
 (require 'iy-go-to-char)
 (require 'magit)
@@ -17,6 +18,7 @@
 (require 'yasnippet)
 
 (require 'emacs-config)
+(require 'geben-config)
 (require 'ido-config)
 (require 'keymap-config)
 (require 'modeline-config)

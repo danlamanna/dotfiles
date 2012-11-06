@@ -98,5 +98,4 @@
 	  (message "No manage.py found in project.")
 	(shell-command (format "python %smanage.py %s --settings settings.dev" abs-manage-py inner-command))))))
 
-
 (provide 'emacs-config)
