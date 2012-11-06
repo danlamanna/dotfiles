@@ -22,3 +22,6 @@
 [submodule ".emacs.d/lib/magit"]
 	path = .emacs.d/lib/magit
 	url = git://github.com/magit/magit.git
+[submodule ".emacs.d/lib/rinari"]
+	path = .emacs.d/lib/rinari
+	url = git://github.com/eschulte/rinari.git
