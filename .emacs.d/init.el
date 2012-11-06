@@ -13,6 +13,7 @@
 (require 'magit)
 (require 'mark-more-like-this)
 (require 'restclient)
+(require 'rinari)
 (require 'theme-config)
 (require 'uniquify)
 (require 'yasnippet)
