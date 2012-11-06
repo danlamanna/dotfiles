@@ -10,5 +10,11 @@
 			      (concat "gcc -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name))
 			      (concat "gcc -Wall -g -o " (substring (format "%s" (buffer-name)) 0 (- (length (buffer-name)) 2)) " " (buffer-name)))))
 
+(defun compile-or-recompile()
+  (interactive)
+  (if (get-buffer "*compilation*")
+      (recompile)
+    (compile compile-command)))
+
 
 (provide 'modes-config)

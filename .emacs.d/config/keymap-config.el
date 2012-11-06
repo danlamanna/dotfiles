@@ -38,6 +38,8 @@
 
 (define-key global-map (kbd "C-c s") 'magit-status)
 
+(define-key global-map (kbd "C-c c") 'compile-or-recompile)
+
 (define-key global-map (kbd "C-c C-t i") 'timeclock-in)
 (define-key global-map (kbd "C-c C-t o") 'timeclock-out)
 
