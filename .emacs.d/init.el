@@ -11,6 +11,7 @@
 (require 'inline-string-rectangle)
 (require 'iy-go-to-char)
 (require 'magit)
+(require 'magit-svn)
 (require 'mark-more-like-this)
 (require 'restclient)
 (require 'rinari)
