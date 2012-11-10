@@ -25,3 +25,6 @@
 [submodule ".emacs.d/lib/rinari"]
 	path = .emacs.d/lib/rinari
 	url = git://github.com/eschulte/rinari.git
+[submodule ".emacs.d/lib/spim-mode"]
+	path = .emacs.d/lib/spim-mode
+	url = git://github.com/matsu911/spim-mode.git
