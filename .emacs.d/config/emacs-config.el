@@ -16,7 +16,10 @@
 (global-set-key (kbd "C-x C-c") 'kill-emacs-no-prompt)
 
 ;; Before save
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook '(lambda()
+			       (if (buffer-file-name)
+				   (unless (string-equal (file-name-extension (buffer-file-name)) "md")
+				     (whitespace-cleanup)))))
 (add-hook 'before-save-hook
 	  '(lambda ()
 	     "If the file doesn't exist, we attempt to make the directory,
