@@ -28,3 +28,6 @@
 [submodule ".emacs.d/lib/spim-mode"]
 	path = .emacs.d/lib/spim-mode
 	url = git://github.com/matsu911/spim-mode.git
+[submodule ".emacs.d/lib/assembla-mode"]
+	path = .emacs.d/lib/assembla-mode
+	url = https://github.com/asdasDan/assembla-mode.git
