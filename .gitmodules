@@ -31,3 +31,6 @@
 [submodule ".emacs.d/lib/assembla-mode"]
 	path = .emacs.d/lib/assembla-mode
 	url = https://github.com/asdasDan/assembla-mode.git
+[submodule ".emacs.d/lib/wordpress-mode"]
+	path = .emacs.d/lib/wordpress-mode
+	url = https://github.com/asdasDan/wordpress-mode.git
