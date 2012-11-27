@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Backward Incompatible Changes</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration55.changes.html">What has changed in PHP 5.5.x</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration55.new-features.html">New features</a></div>
+ <div class="up"><a href="migration55.html">Migrating from PHP 5.4.x to PHP 5.5.x</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration55.incompatible" class="sect1">
+  <h2 class="title">Backward Incompatible Changes</h2>
+  <p class="simpara">
+   Although most existing PHP 5 code should work without changes, please take
+   note of some backward incompatible changes:
+  </p>
+  
+  <div class="sect2" id="migration55.incompatible.windows">
+   <h3 class="title">Windows XP and 2003 support dropped</h3>
+   
+   <p class="para">
+    Support for Windows XP and 2003 has been dropped. Windows builds of PHP
+    now require Windows Vista or newer.
+   </p>
+  </div>
+
+  <div class="sect2" id="migration55.incompatible.case">
+   <h3 class="title">Case insensitivity no longer locale specific</h3>
+   
+   <p class="para">
+    All case insensitive matching for function, class and constant names is
+    now performed in a locale independent manner according to ASCII rules.
+    This improves support for languages using the Latin alphabet with unusual
+    collating rules, such as Turkish and Azeri.
+   </p>
+   <p class="para">
+    This may cause issues for code that uses case insensitive matches for
+    non-ASCII characters in multibyte character sets (including UTF-8), such
+    as accented characters in many European languages. If you have a
+    non-English, non-ASCII code base, then you will need to test that you are
+    not inadvertently relying on this behaviour before deploying PHP 5.5 to
+    production systems.
+   </p>
+  </div>
+
+  <div class="sect2" id="migration55.incompatible.guid">
+   <h3 class="title">PHP logo GUIDs removed</h3>
+
+   <p class="para">
+    The GUIDs that previously resulted in PHP outputting various logos have
+    been removed. This includes the removal of the functions to return those
+    GUIDs. The removed functions are:
+   </p>
+
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+       <span class="function"><a href="function.php-logo-guid.html" class="function">php_logo_guid()</a></span>
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+       <span class="function"><strong>php_egg_logo_guid()</strong></span>
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+       <span class="function"><strong>php_real_logo_guid()</strong></span>
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+       <span class="function"><a href="function.zend-logo-guid.html" class="function">zend_logo_guid()</a></span>
+     </span>
+    </li>
+   </ul>
+  </div>
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration55.changes.html">What has changed in PHP 5.5.x</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration55.new-features.html">New features</a></div>
+ <div class="up"><a href="migration55.html">Migrating from PHP 5.4.x to PHP 5.5.x</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>
