@@ -34,3 +34,6 @@
 [submodule ".emacs.d/lib/wordpress-mode"]
 	path = .emacs.d/lib/wordpress-mode
 	url = https://github.com/asdasDan/wordpress-mode.git
+[submodule ".emacs.d/lib/w3m"]
+	path = .emacs.d/lib/w3m
+	url = git://github.com/doitian/emacs-w3m.git
