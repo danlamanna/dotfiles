@@ -28,6 +28,9 @@
 	     (or (file-exists-p (file-name-directory buffer-file-name))
 		 (make-directory (file-name-directory buffer-file-name) t))))
 
+(custom-set-variables
+ '(browse-url-browser-function 'w3m-browse-url))
+
 ;; Advice
 (defadvice zap-to-char (after zap-until-char (arg char) activate)
   "Makes zap-to-char act like zap-until-char."
