@@ -17,6 +17,7 @@
 (require 'rinari)
 (require 'theme-config)
 (require 'uniquify)
+(require 'w3m)
 (require 'yasnippet)
 
 (require 'emacs-config)
