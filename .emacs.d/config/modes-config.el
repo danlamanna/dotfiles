@@ -15,12 +15,8 @@
 				(wordpress-mode))))
 
 (add-hook 'php-mode-hook '(lambda()
-			    (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)))
-
-(defadvice yas--fallback (before try-php-expand (&optional arg from-trigger-key-p) activate)
-  (when (string-equal mode-name "PHP")
-    (let (message-log-max)
-      (php-complete-function))))
+			    (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)
+			    (define-key php-mode-map (kbd "<backtab>") 'php-complete-function)))
 
 ; C
 (defun compile-or-recompile()
