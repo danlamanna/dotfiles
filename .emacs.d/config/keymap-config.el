@@ -31,7 +31,8 @@
 (global-set-key (kbd "M-.") 'mark-next-like-this)
 (global-set-key (kbd "M-*") 'mark-all-like-this)
 
-(global-set-key (kbd "<tab>") 'yas/expand)
+(if (fboundp 'yas/expand)
+    (global-set-key (kbd "<tab>") 'yas/expand))
 
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
