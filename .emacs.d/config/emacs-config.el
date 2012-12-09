@@ -3,6 +3,32 @@
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
+;; Autosave/Backup Stuff
+(setq auto-save-list-file-prefix nil)
+(setq temporary-file-directory emacs-tmp-dir)
+
+;; X Emacs stuff..
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+
+(defun toggle-fullscreen()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+   nil 'fullscreen
+   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
+(global-set-key (kbd "<f11>") 'toggle-fullscreen)
+
+(toggle-fullscreen)
+
+;; Dired
+(add-hook 'dired-mode-hook (lambda()
+			     (hl-line-mode)))
+
 ;; Winner mode
 (require 'winner)
 (winner-mode t)
@@ -36,11 +62,6 @@
   "Makes zap-to-char act like zap-until-char."
   (insert char)
   (backward-char 1))
-
-;; Disable backup/autosave files
-(setq auto-save-interval 0)
-(setq backup-inhibited t)
-(setq auto-save-default nil)
 
 ;; Remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
@@ -89,7 +110,7 @@
    (message "done."))
 
 (defun generate-rand-string(&optional char-set &optional len)
-  "Generates a random string and inserts it at `point'. With no
+  "Generates a random string and inserts it at `point'.	With no
    arguments, it conforms to an MD5 hashes pattern.
 
    CHAR-SET can be specified as a string with characters to be used,

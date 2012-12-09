@@ -9,6 +9,19 @@
 (require 'flymake)
 (add-hook 'php-mode-hook 'flymake-mode-on)
 
+(require 'align)
+(add-to-list 'align-rules-list
+	     `(php-array-keys
+	       (regexp	. "\\(\\s-*\\)=")
+	       (justify	. nil)
+	       (repeat	. nil)
+	       (modes	. '(php-mode))
+	       (tab-stop)))
+
+(add-hook 'before-save-hook (lambda()
+			      (if (string-equal mode-name "PHP")
+				  (align (point-min) (point-max)))))
+
 (require 'wordpress-mode)
 (add-hook 'php-mode-hook '(lambda()
 			    (if (wp/exists)
@@ -24,6 +37,5 @@
   (if (get-buffer "*compilation*")
       (recompile)
     (compile compile-command)))
-
 
 (provide 'modes-config)

@@ -37,3 +37,6 @@
 [submodule ".emacs.d/lib/w3m"]
 	path = .emacs.d/lib/w3m
 	url = git://github.com/doitian/emacs-w3m.git
+[submodule ".emacs.d/lib/mumamo-mode"]
+	path = .emacs.d/lib/mumamo-mode
+	url = git://github.com/purcell/mmm-mode.git
