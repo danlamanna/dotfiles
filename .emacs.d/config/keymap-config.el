@@ -25,19 +25,18 @@
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
 (define-key global-map (kbd "C-c f") 'iy-go-to-char)
-(define-key global-map (kbd "C-c F") 'iy-go-to-char-backward)
+(define-key global-map (kbd "C-c b") 'iy-go-to-char-backward)
 
 (global-set-key (kbd "M-,") 'mark-previous-like-this)
 (global-set-key (kbd "M-.") 'mark-next-like-this)
 (global-set-key (kbd "M-*") 'mark-all-like-this)
 
-(if (fboundp 'yas/expand)
-    (global-set-key (kbd "<tab>") 'yas/expand))
-
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
 ; @ec config quoted-insert to something
 (define-key global-map (kbd "C-q") 'er/expand-region)
+
+(define-key global-map (kbd "C-c R") 'restclient-mode)
 
 (define-key global-map (kbd "C-c s") 'magit-status)
 
