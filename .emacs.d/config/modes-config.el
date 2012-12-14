@@ -18,9 +18,9 @@
 	       (modes	. '(php-mode))
 	       (tab-stop)))
 
-(add-hook 'before-save-hook (lambda()
-			      (if (string-equal mode-name "PHP")
-				  (align (point-min) (point-max)))))
+;(add-hook 'before-save-hook (lambda()
+;			      (if (string-equal mode-name "PHP")
+;				  (align (point-min) (point-max)))))
 
 (require 'wordpress-mode)
 (add-hook 'php-mode-hook '(lambda()
