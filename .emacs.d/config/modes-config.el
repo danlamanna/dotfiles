@@ -11,25 +11,24 @@
 
 (require 'align)
 (add-to-list 'align-rules-list
-	     `(php-array-keys
-	       (regexp	. "\\(\\s-*\\)=")
-	       (justify	. nil)
-	       (repeat	. nil)
-	       (modes	. '(php-mode))
-	       (tab-stop)))
+             `(php-array-keys
+               (regexp	. "\\(\\s-*\\)=")
+               (justify	. nil)
+               (repeat	. nil)
+               (modes	. '(php-mode))
+               (tab-stop)))
 
 ;(add-hook 'before-save-hook (lambda()
-;			      (if (string-equal mode-name "PHP")
-;				  (align (point-min) (point-max)))))
-
-(require 'wordpress-mode)
-(add-hook 'php-mode-hook '(lambda()
-			    (if (wp/exists)
-				(wordpress-mode))))
+;                             (if (string-equal mode-name "PHP")
+;                                 (align (point-min) (point-max)))))
 
 (add-hook 'php-mode-hook '(lambda()
-			    (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)
-			    (define-key php-mode-map (kbd "<backtab>") 'php-complete-function)))
+                            (if (wp/exists)
+                                (wordpress-mode))))
+
+(add-hook 'php-mode-hook '(lambda()
+                            (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)
+                            (define-key php-mode-map (kbd "<backtab>") 'php-complete-function)))
 
 ; C
 (defun compile-or-recompile()
