@@ -32,6 +32,12 @@
                             (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)
                             (define-key php-mode-map (kbd "<backtab>") 'php-complete-function)))
 
+(autoload 'django-html-mumamo-mode "~/.emacs.d/lib/nxhtml/autostart.el")
+(setq auto-mode-alist
+      (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
+(setq mumamo-background-colors nil)
+(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
+
 ; C
 (defun compile-or-recompile()
   (interactive)
