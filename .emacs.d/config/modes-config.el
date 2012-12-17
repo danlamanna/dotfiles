@@ -6,6 +6,8 @@
 (autoload 'php-mode "php-mode" "Major mode for PHP." t)
 (add-to-list 'auto-mode-alist '("\\.\\(php\\|phtml\\)\\'" . php-mode))
 
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+
 (require 'flymake)
 (add-hook 'php-mode-hook 'flymake-mode-on)
 
