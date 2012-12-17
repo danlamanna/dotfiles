@@ -15,6 +15,7 @@
 (autoload 'magit-status "magit" t)
 (autoload 'magit-svn-mode "magit-svn" t)
 (autoload 'mark-more-like-this "mark-more-like-this" t)
+(autoload 'mark-next-like-this "mark-more-like-this" t)
 (autoload 'restclient-mode "restclient" t)
 (autoload 'rinari-minor-mode "rinari" t)
 (autoload 'wordpress-mode "wordpress-mode" t)
