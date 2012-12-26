@@ -6,9 +6,11 @@
 (setq inhibit-splash-screen t)
 
 ;; Autosave/Backup Stuff
-(setq auto-save-list-file-prefix nil)
-(setq temporary-file-directory emacs-tmp-dir)
-(setq make-backup-files nil)
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat emacs-tmp-dir "backups")))))
+
+(setq vc-make-backup-files t)
 
 ;; X Emacs stuff..
 (if (fboundp 'tool-bar-mode)
@@ -140,5 +142,20 @@
                       "1234567890abcdefghijklmnopqrstyvwxyz")))
     (dotimes (i (or len 32))
       (insert (elt char-set (random (length char-set)))))))
+
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input"
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (goto-line (read-number "Goto line: ")))
+    (linum-mode -1)))
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+;; saveplace
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
 
 (provide 'emacs-config)
