@@ -20,6 +20,8 @@
 (autoload 'rinari-minor-mode "rinari" t)
 (autoload 'wordpress-mode "wordpress-mode" t)
 
+(eval-after-load "magit" '(require 'magit-config))
+
 (require 'assembla-mode)
 (require 'theme-config)
 (require 'emacs-config)
@@ -32,8 +34,13 @@
 (require 'yasnippet-config)
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(browse-url-browser-function (quote w3m-browse-url))
+ '(erc-hide-list (quote ("JOIN" "QUIT")))
  '(geben-dbgp-feature-list (quote ((:set max_data 32768) (:set max_depth 1) (:set max_children 1024) (:get breakpoint_types geben-dbgp-breakpoint-store-types))))
  '(geben-dbgp-redirect-buffer-init-hook nil)
  '(geben-temporary-file-directory "~/.emacs.d/tmp/geben")
@@ -42,5 +49,10 @@
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir))))
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(flymake-errline ((t (:background "brightblack"))))
  '(magit-item-highlight ((t (:inherit default)))))
+(put 'upcase-region 'disabled nil)
