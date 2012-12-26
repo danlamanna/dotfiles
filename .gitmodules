@@ -40,3 +40,6 @@
 [submodule ".emacs.d/lib/mumamo-mode"]
 	path = .emacs.d/lib/mumamo-mode
 	url = git://github.com/purcell/mmm-mode.git
+[submodule ".emacs.d/lib/nxhtml-github"]
+	path = .emacs.d/lib/nxhtml-github
+	url = git://github.com/emacsmirror/nxhtml.git
