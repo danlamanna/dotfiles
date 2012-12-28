@@ -25,6 +25,7 @@
 ;                                 (align (point-min) (point-max)))))
 
 (add-hook 'php-mode-hook '(lambda()
+                            (require 'wordpress-mode)
                             (if (wp/exists)
                                 (wordpress-mode))))
 
