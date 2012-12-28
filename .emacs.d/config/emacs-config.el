@@ -8,7 +8,7 @@
 ;; Autosave/Backup Stuff
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
-                 (concat emacs-tmp-dir "backups")))))
+                 (concat emacs-tmp-dir "/backups")))))
 
 (setq vc-make-backup-files t)
 
@@ -157,5 +157,24 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
+
+
+(defun open-line-below ()
+  (interactive)
+  (if (eolp)
+      (newline)
+    (end-of-line)
+    (newline))
+  (indent-for-tab-command))
+
+(defun open-line-above ()
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (forward-line -1)
+  (indent-for-tab-command))
+
+(global-set-key (kbd "<C-return>") 'open-line-below)
+(global-set-key (kbd "<C-S-return>") 'open-line-above)
 
 (provide 'emacs-config)

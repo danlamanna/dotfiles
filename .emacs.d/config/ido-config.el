@@ -1,10 +1,9 @@
-(require 'ido)
-
 (ido-mode 'both)
 
 (setq
- ido-save-directory-list-file (format "%s/tmp/ido.last" emacs-config-dir)
- ido-ignore-buffers '(".*Completion")
+ ido-save-directory-list-file (format "%s/ido.last" emacs-tmp-dir)
+ ido-ignore-buffers '(".*Completion"
+                      "\\*")
  ido-work-directory-list '("~/" "~/projects")
  ido-enable-flex-matching t
  ido-case-fold t
