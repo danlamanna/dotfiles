@@ -1,5 +1,7 @@
 (global-unset-key (kbd "C-z"))
 
+(define-key global-map (kbd "C-G") 'geben)
+
 (define-key global-map (kbd "C-b") 'revert-buffer)
 (define-key global-map (kbd "C-B") 'revert-all-buffers)
 
