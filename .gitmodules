@@ -30,10 +30,10 @@
 	url = git://github.com/matsu911/spim-mode.git
 [submodule ".emacs.d/lib/assembla-mode"]
 	path = .emacs.d/lib/assembla-mode
-	url = https://github.com/asdasDan/assembla-mode.git
+	url = https://github.com/danlamanna/assembla-mode.git
 [submodule ".emacs.d/lib/wordpress-mode"]
 	path = .emacs.d/lib/wordpress-mode
-	url = https://github.com/asdasDan/wordpress-mode.git
+	url = https://github.com/danlamanna/wordpress-mode.git
 [submodule ".emacs.d/lib/w3m"]
 	path = .emacs.d/lib/w3m
 	url = git://github.com/doitian/emacs-w3m.git
