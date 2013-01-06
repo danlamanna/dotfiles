@@ -12,6 +12,7 @@
 (autoload 'inline-string-rectangle "inline-string-rectangle" t)
 (autoload 'iy-go-to-char "iy-go-to-char" t)
 (autoload 'iy-go-to-char-backward "iy-go-to-char" t)
+(autoload 'geben "geben" t)
 (autoload 'magit-status "magit" t)
 (autoload 'magit-svn-mode "magit-svn" t)
 (autoload 'mark-more-like-this "mark-more-like-this" t)
