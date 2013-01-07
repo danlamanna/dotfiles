@@ -21,10 +21,11 @@
 (autoload 'rinari-minor-mode "rinari" t)
 (autoload 'wordpress-mode "wordpress-mode" t)
 
-(eval-after-load "geben" '(require 'geben-config))
-(eval-after-load "magit" '(require 'magit-config))
 (eval-after-load "dired" '(require 'dired-config))
+(eval-after-load "geben" '(require 'geben-config))
 (eval-after-load "ido"   '(require 'ido-config))
+(eval-after-load "magit" '(require 'magit-config))
+(eval-after-load "magit-svn" '(require 'magit-svn-config))
 
 (require 'assembla-mode)
 (require 'theme-config)
