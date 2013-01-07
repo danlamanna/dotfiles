@@ -11,4 +11,7 @@
 ;(add-hook 'kill-emacs-hook (lambda()
  ;                            (call-interactively 'geben-proxy-end)))
 
+(defadvice geben-display-context(before clear-windows-for-vars activate)
+  (delete-other-windows))
+
 (provide 'geben-config)
