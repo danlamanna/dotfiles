@@ -16,6 +16,8 @@
                              (if (magit-svn-get-ref-info)
                                  (magit-svn-mode))))
 
+(add-hook 'magit-mode-hook 'hl-line-mode)
+
 ;; Keymaps
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
 
