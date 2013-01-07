@@ -46,18 +46,34 @@
 
 (global-set-key (kbd "C-x C-c") 'kill-emacs-no-prompt)
 
-;; Before save
-(add-hook 'before-save-hook '(lambda()
-                               (if (buffer-file-name)
-                                   (unless (string-equal (file-name-extension (buffer-file-name)) "md")
-                                     (whitespace-cleanup)))))
-(add-hook 'before-save-hook
-          '(lambda ()
-             "If the file doesn't exist, we attempt to make the directory,
-              this way, we can 'open' files in non-existent directories, and when
-              saving them, it creates the directory for us."
-             (or (file-exists-p (file-name-directory buffer-file-name))
-                 (make-directory (file-name-directory buffer-file-name) t))))
+(defun buffer-cleanup()
+  (interactive)
+  (buffer-cleanup-safe)
+  (indent-region (point-min) (point-max)))
+
+(defun buffer-cleanup-safe()
+  "Unless its a markdown file, do some cleaning up."
+  (interactive)
+  (unless (and (buffer-file-name)
+               (string-equal (file-name-extension (buffer-file-name)) "md"))
+    (whitespace-cleanup)
+    (untabify (point-min) (point-max))
+    (set-buffer-file-coding-system 'utf-8)))
+
+(global-set-key (kbd "C-c n") 'buffer-cleanup)
+
+(add-hook 'before-save-hook 'buffer-cleanup-safe)
+
+(defun make-files-directory-if-not-exists()
+  "Makes the directory of the file referenced in `buffer-file-name',
+   so we can 'open' files in non-existent directories, and this can
+   create the directory. `before-save-hook' ftw."
+  (interactive)
+  (if (and (buffer-file-name)
+           (not (file-exists-p (file-name-directory (buffer-file-name)))))
+      (make-directory (file-name-directory buffer-file-name) t)))
+
+(add-hook 'before-save-hook 'make-files-directory-if-not-exists)
 
 (custom-set-variables
  '(browse-url-browser-function 'w3m-browse-url))
@@ -129,7 +145,7 @@
    (message "done."))
 
 (defun generate-rand-string(&optional char-set &optional len)
-  "Generates a random string and inserts it at `point'.	With no
+  "Generates a random string and inserts it at `point'. With no
    arguments, it conforms to an MD5 hashes pattern.
 
    CHAR-SET can be specified as a string with characters to be used,
