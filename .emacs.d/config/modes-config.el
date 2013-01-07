@@ -6,6 +6,11 @@
 (autoload 'php-mode "php-mode" "Major mode for PHP." t)
 (add-to-list 'auto-mode-alist '("\\.\\(php\\|phtml\\)\\'" . php-mode))
 
+(add-hook 'php-mode-hook (lambda()
+                           (setq indent-tabs-mode nil)
+                           (setq tab-width 2)
+                           (setq c-basic-offset 2)))
+
 (require 'flymake)
 (add-hook 'php-mode-hook 'flymake-mode-on)
 
