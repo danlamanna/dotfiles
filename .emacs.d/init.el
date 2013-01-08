@@ -29,6 +29,7 @@
 (eval-after-load "magit-svn" '(require 'magit-svn-config))
 (eval-after-load "package" '(require 'package-config))
 
+(require 'ido)
 (require 'theme-config)
 (require 'emacs-config)
 (require 'keymap-config)
