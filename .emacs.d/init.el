@@ -13,6 +13,7 @@
 (autoload 'iy-go-to-char "iy-go-to-char" t)
 (autoload 'iy-go-to-char-backward "iy-go-to-char" t)
 (autoload 'geben "geben" t)
+(autoload 'geben-single-or-proxy "geben-config" t)
 (autoload 'magit-status "magit" t)
 (autoload 'magit-svn-mode "magit-svn" t)
 (autoload 'mark-more-like-this "mark-more-like-this" t)
@@ -22,7 +23,6 @@
 (autoload 'wordpress-mode "wordpress-mode" t)
 
 (eval-after-load "dired" '(require 'dired-config))
-(eval-after-load "geben" '(require 'geben-config))
 (eval-after-load "ido"   '(require 'ido-config))
 (eval-after-load "magit" '(require 'magit-config))
 (eval-after-load "magit-svn" '(require 'magit-svn-config))
