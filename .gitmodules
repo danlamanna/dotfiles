@@ -43,3 +43,6 @@
 [submodule ".emacs.d/lib/nxhtml-github"]
 	path = .emacs.d/lib/nxhtml-github
 	url = git://github.com/emacsmirror/nxhtml.git
+[submodule ".emacs.d/lib/coding-standards"]
+	path = .emacs.d/lib/coding-standards
+	url = git@github.com:burstmarketing/coding-standards.git

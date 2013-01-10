@@ -46,24 +46,6 @@
 
 (global-set-key (kbd "C-x C-c") 'kill-emacs-no-prompt)
 
-(defun buffer-cleanup()
-  (interactive)
-  (buffer-cleanup-safe)
-  (indent-region (point-min) (point-max)))
-
-(defun buffer-cleanup-safe()
-  "Unless its a markdown file, do some cleaning up."
-  (interactive)
-  (unless (and (buffer-file-name)
-               (string-equal (file-name-extension (buffer-file-name)) "md"))
-    (whitespace-cleanup)
-    (untabify (point-min) (point-max))
-    (set-buffer-file-coding-system 'utf-8)))
-
-(global-set-key (kbd "C-c n") 'buffer-cleanup)
-
-(add-hook 'before-save-hook 'buffer-cleanup-safe)
-
 (defun make-files-directory-if-not-exists()
   "Makes the directory of the file referenced in `buffer-file-name',
    so we can 'open' files in non-existent directories, and this can
