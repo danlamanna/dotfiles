@@ -59,5 +59,10 @@
  '(flymake-errline ((t (:background "brightblack"))))
  '(magit-item-highlight ((t (:inherit default)))))
 (put 'upcase-region 'disabled nil)
-(electric-pair-mode)
+
 (require 'shell)
+
+(setq inferior-lisp-program "sbcl")
+(require 'slime)
+(require 'slime-autoloads)
+(slime-setup '(slime-fancy))
