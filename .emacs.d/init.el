@@ -5,6 +5,8 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+(load (concat emacs-config-dir "/lib/magit/magit.el"))
+
 (autoload 'assembla "assembla-mode" t)
 (autoload 'ace-jump-word-mode "ace-jump-mode" t)
 (autoload 'ace-jump-char-mode "ace-jump-mode" t)
@@ -52,6 +54,7 @@
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir))))
 
 (custom-set-faces
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -61,6 +64,13 @@
 (put 'upcase-region 'disabled nil)
 
 (require 'shell)
+
+(defun php-lint-this-file()
+  (interactive)
+  (shell-command (format "php -l %s" (buffer-file-name))))
+
+(add-hook 'php-mode-hook '(lambda()
+                            (define-key php-mode-map (kbd "C-c l") 'php-lint-this-file)))
 
 (setq inferior-lisp-program "sbcl")
 (require 'slime)
