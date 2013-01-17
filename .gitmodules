@@ -46,3 +46,6 @@
 [submodule ".emacs.d/lib/coding-standards"]
 	path = .emacs.d/lib/coding-standards
 	url = git@github.com:burstmarketing/coding-standards.git
+[submodule ".emacs.d/lib/powerline"]
+	path = .emacs.d/lib/powerline
+	url = git://github.com/jonathanchu/emacs-powerline.git
