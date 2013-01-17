@@ -59,7 +59,7 @@
  '(flymake-errline ((t (:background "brightblack"))))
  '(magit-item-highlight ((t (:inherit default)))))
 (put 'upcase-region 'disabled nil)
-(electric-pair-mode)
+
 (require 'shell)
 
 (defun php-lint-this-file()
@@ -68,3 +68,8 @@
 
 (add-hook 'php-mode-hook '(lambda()
                             (define-key php-mode-map (kbd "C-c l") 'php-lint-this-file)))
+
+(setq inferior-lisp-program "sbcl")
+(require 'slime)
+(require 'slime-autoloads)
+(slime-setup '(slime-fancy))
