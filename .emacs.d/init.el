@@ -61,3 +61,10 @@
 (put 'upcase-region 'disabled nil)
 (electric-pair-mode)
 (require 'shell)
+
+(defun php-lint-this-file()
+  (interactive)
+  (shell-command (format "php -l %s" (buffer-file-name))))
+
+(add-hook 'php-mode-hook '(lambda()
+                            (define-key php-mode-map (kbd "C-c l") 'php-lint-this-file)))
