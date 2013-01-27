@@ -30,6 +30,7 @@
 (eval-after-load "magit" '(require 'magit-config))
 (eval-after-load "magit-svn" '(require 'magit-svn-config))
 (eval-after-load "package" '(require 'package-config))
+(eval-after-load "tramp" '(require 'tramp-config))
 
 (require 'coding-standards)
 (require 'ido)
