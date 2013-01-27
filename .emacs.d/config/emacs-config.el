@@ -57,8 +57,12 @@
 
 (add-hook 'before-save-hook 'make-files-directory-if-not-exists)
 
-(custom-set-variables
- '(browse-url-browser-function 'w3m-browse-url))
+(if (fboundp 'w3m-browse-url)
+    (custom-set-variables
+     '(browse-url-browser-function 'w3m-browse-url))
+  (if (fboundp 'browse-url-chromium)
+      (custom-set-variables
+       '(browse-url-browser-function 'browse-url-chromium))))
 
 ;; Copying current line (start-finish, regardless of point)
 ;; http://justin.jetfive.com/emacs-copy-line-to-kill-ring-fast

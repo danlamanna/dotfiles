@@ -77,3 +77,8 @@
 (require 'slime)
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy))
+
+(global-set-key (kbd "M-j")
+            (lambda ()
+                  (interactive)
+                  (join-line -1)))
