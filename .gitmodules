@@ -12,7 +12,7 @@
         url = git://github.com/emacsmirror/iy-go-to-char.git
 [submodule ".emacs.d/lib/mark-multiple"]
         path = .emacs.d/lib/mark-multiple
-        url = https://github.com/magnars/mark-multiple.el.git
+        url = git@github.com:magnars/mark-multiple.el.git
 [submodule ".emacs.d/lib/expand-region"]
         path = .emacs.d/lib/expand-region
         url = git://github.com/magnars/expand-region.el.git
@@ -27,7 +27,7 @@
         url = git://github.com/matsu911/spim-mode.git
 [submodule ".emacs.d/lib/assembla-mode"]
         path = .emacs.d/lib/assembla-mode
-        url = https://github.com/danlamanna/assembla-mode.git
+        url = git@github.com:danlamanna/assembla-mode.git
 [submodule ".emacs.d/lib/wordpress-mode"]
         path = .emacs.d/lib/wordpress-mode
         url = git@github.com:danlamanna/wordpress-mode.git
