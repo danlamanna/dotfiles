@@ -1,0 +1,46 @@
+// I think by the time kill_buffer_hook runs the buffer is gone so I
+// patch kill_buffer
+
+var kill_buffer_original = kill_buffer_original || kill_buffer;
+
+var killed_buffer_urls = [];
+
+kill_buffer = function (buffer, force) {
+    if (buffer.display_uri_string) {
+        killed_buffer_urls.push(buffer.display_uri_string);
+    }
+
+    kill_buffer_original(buffer,force);
+};
+
+interactive("restore-killed-buffer-url", "Loads url from a previously killed buffer",
+            function restore_killed_buffer_url (I) {
+                if (killed_buffer_urls.length !== 0) {
+                    var url = yield I.minibuffer.read(
+                        $prompt = "Restore killed url:",
+                        $completer = all_word_completer($completions = killed_buffer_urls),
+                        $default_completion = killed_buffer_urls[killed_buffer_urls.length - 1],
+                        $auto_complete = "url",
+                        $auto_complete_initial = true,
+                        $auto_complete_delay = 0,
+                        $match_required);
+
+                    load_url_in_new_buffer(url);
+                } else {
+                    I.window.minibuffer.message("No killed buffer urls");
+                }
+            });
+
+
+//define_keymap(default_base_keymap, "C-t", "restore-killed-buffer-url");
+
+function disable_scrollbars (buffer) {
+    buffer.top_frame.scrollbars.visible = false;
+}
+add_hook("create_buffer_late_hook", disable_scrollbars);
+
+
+session_pref("signon.rememberSignons", true);
+session_pref("signon.expireMasterPassword", false);
+session_pref("signon.SignonFileName", "signons.txt");
+Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
