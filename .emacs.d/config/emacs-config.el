@@ -10,6 +10,9 @@
       `(("." . ,(expand-file-name
                  (concat emacs-tmp-dir "/backups")))))
 
+;; Make tramp autosaves save locally, saves time.
+(setq tramp-auto-save-directory (concat emacs-tmp-dir "/backups"))
+
 (setq vc-make-backup-files t)
 
 ;; X Emacs stuff..
@@ -57,12 +60,16 @@
 
 (add-hook 'before-save-hook 'make-files-directory-if-not-exists)
 
+;; set to w3m if its bound, otherwise try conkeror, otherwise try chromium
 (if (fboundp 'w3m-browse-url)
     (custom-set-variables
      '(browse-url-browser-function 'w3m-browse-url))
-  (if (fboundp 'browse-url-chromium)
-      (custom-set-variables
-       '(browse-url-browser-function 'browse-url-chromium))))
+  (if (file-exists-p "/usr/bin/conkeror")
+      (setq browse-url-browser-function 'browse-url-generic
+            browse-url-generic-program "/usr/bin/conkeror")
+    (if (fboundp 'browse-url-chromium)
+        (custom-set-variables
+         '(browse-url-browser-function 'browse-url-chromium)))))
 
 ;; Copying current line (start-finish, regardless of point)
 ;; http://justin.jetfive.com/emacs-copy-line-to-kill-ring-fast
