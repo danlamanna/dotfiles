@@ -37,10 +37,22 @@ interactive("restore-killed-buffer-url", "Loads url from a previously killed buf
 function disable_scrollbars (buffer) {
     buffer.top_frame.scrollbars.visible = false;
 }
-add_hook("create_buffer_late_hook", disable_scrollbars);
+//add_hook("create_buffer_late_hook", disable_scrollbars);
 
 
 session_pref("signon.rememberSignons", true);
 session_pref("signon.expireMasterPassword", false);
 session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
+
+homepage = "http://en.wikipedia.org/wiki/Special:Random";
+
+// auto completion in the minibuffer
+minibuffer_auto_complete_default = true;
+url_completion_use_history = true; // should work since bf05c87405
+url_completion_use_bookmarks = true;
+
+// makes links clicked open in existing conkeror, rather than opening another one
+url_remoting_fn = load_url_in_new_buffer;
+
+define_webjump("g", "http://www.google.com/search?q=%s&ie=utf-8&oe=utf-8&aq=t");
