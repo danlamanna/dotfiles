@@ -13,10 +13,10 @@
 (define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
 (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
 
-(global-set-key [(meta up)] 'windmove-up)
-(global-set-key [(meta down)] 'windmove-down)
-(global-set-key [(meta left)] 'windmove-left)
-(global-set-key [(meta right)] 'windmove-right)
+(global-set-key (kbd "C-<up>") 'windmove-up)
+(global-set-key (kbd "C-<down>") 'windmove-down)
+(global-set-key (kbd "C-<left>") 'windmove-left)
+(global-set-key (kbd "C-<right>") 'windmove-right)
 
 
 ;; Wrap selected text in quotes, or just insert empty pair
