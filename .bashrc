@@ -59,6 +59,11 @@ function tmpmv() {
    mv $1 _$1
 }
 
+function file_to_clipboard() {
+    xclip -sel clip < $1
+    echo "$1's contents are now on the clipboard.";
+}
+
 # Extract tar, gz, zip, etc
 function extract()
 {

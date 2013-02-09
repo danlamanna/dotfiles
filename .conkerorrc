@@ -56,3 +56,17 @@ url_completion_use_bookmarks = true;
 url_remoting_fn = load_url_in_new_buffer;
 
 define_webjump("g", "http://www.google.com/search?q=%s&ie=utf-8&oe=utf-8&aq=t");
+
+
+define_variable("firebug_url",
+    "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
+
+function firebug (I) {
+    var doc = I.buffer.document;
+    var script = doc.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', firebug_url);
+    script.setAttribute('onload', 'firebug.init();');
+    doc.body.appendChild(script);
+}
+interactive("firebug", "open firebug lite", firebug);
