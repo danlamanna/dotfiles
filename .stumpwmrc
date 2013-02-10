@@ -1,11 +1,11 @@
 (in-package :stumpwm)
 
 (defcommand shell-command (command) ((:string "sh: "))
-  "Run a shell command and display output to screen.
+            "Run a shell command and display output to screen.
 This must be used in a functional side-effects-free style! If a program does not
 exit of its own accord, Stumpwm might hang!"
-  (check-type command string)
-  (echo-string (current-screen) (run-shell-command command t)))
+            (check-type command string)
+            (echo-string (current-screen) (run-shell-command command t)))
 
 (defun getx (coords)
   (parse-integer (subseq coords 0 1)))
@@ -13,36 +13,33 @@ exit of its own accord, Stumpwm might hang!"
 (defun gety (coords)
   (parse-integer (subseq coords 2 3)))
 
-
 (defcommand move-right () ()
-  "Move to the group on the right"
-  (let ((x (getx (group-name (current-group))))
-(y (gety (group-name (current-group)))))
-(run-commands (concatenate 'string "gselect " (write-to-string x) ":" (write-to-string (+ y 1))))))
+            "Move to the group on the right"
+            (let ((x (getx (group-name (current-group))))
+                  (y (gety (group-name (current-group)))))
+              (run-commands (concatenate 'string "gselect " (write-to-string x) ":" (write-to-string (+ y 1))))))
 
 (defcommand move-left () ()
-  "Move to the group on the left"
-  (let ((x (getx (group-name (current-group))))
-(y (gety (group-name (current-group)))))
-(run-commands (concatenate 'string "gselect " (write-to-string x) ":" (write-to-string (- y 1))))))
+            "Move to the group on the left"
+            (let ((x (getx (group-name (current-group))))
+                  (y (gety (group-name (current-group)))))
+              (run-commands (concatenate 'string "gselect " (write-to-string x) ":" (write-to-string (- y 1))))))
 
 (defcommand move-up () ()
-  "Move to the group on the left"
-  (let ((x (getx (group-name (current-group))))
-(y (gety (group-name (current-group)))))
-(run-commands (concatenate 'string "gselect " (write-to-string (- x 1 )) ":" (write-to-string y)))))
+            "Move to the group on the left"
+            (let ((x (getx (group-name (current-group))))
+                  (y (gety (group-name (current-group)))))
+              (run-commands (concatenate 'string "gselect " (write-to-string (- x 1 )) ":" (write-to-string y)))))
 
 (defcommand move-down () ()
-  "Move to the group on the left"
-  (let ((x (getx (group-name (current-group))))
-(y (gety (group-name (current-group)))))
-(run-commands (concatenate 'string "gselect " (write-to-string (+ x 1)) ":" (write-to-string y)))))
+            "Move to the group on the left"
+            (let ((x (getx (group-name (current-group))))
+                  (y (gety (group-name (current-group)))))
+              (run-commands (concatenate 'string "gselect " (write-to-string (+ x 1)) ":" (write-to-string y)))))
 
 (add-hook *focus-group-hook* (lambda (curr-group prev-group) (message (group-name curr-group))))
 
 (define-key *top-map* (kbd "C-E") "exec")
-(define-key *top-map* (kbd "C-i") "exec chromium-browser")
-(define-key *top-map* (kbd "C-m") "exec gnome-terminal")
 
 (define-key *top-map* (kbd "M-C-Right") "move-right")
 (define-key *top-map* (kbd "M-C-Left") "move-left")
@@ -59,8 +56,8 @@ exit of its own accord, Stumpwm might hang!"
 (define-key *root-map* (kbd "3") "hsplit")
 (define-key *root-map* (kbd "0") "remove")
 
-
 (when *initializing*
+  (run-shell-command "setxkbmap -option ctrl:nocaps")
   (run-commands
    "grename 0:0"
    "gnewbg 0:1"
@@ -70,5 +67,4 @@ exit of its own accord, Stumpwm might hang!"
    "gnewbg 1:2"
    "gnewbg 2:0"
    "gnewbg 2:1"
-   "gnewbg 2:2"
-   ))
+   "gnewbg 2:2"))
