@@ -15,6 +15,10 @@
 
 (setq vc-make-backup-files t)
 
+;; Grep..
+(custom-set-variables
+ '(grep-command "grep -rnh -e "))
+
 ;; X Emacs stuff..
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
@@ -30,8 +34,6 @@
    (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
 (global-set-key (kbd "<f11>") 'toggle-fullscreen)
-
-(toggle-fullscreen)
 
 ;; Dired
 (add-hook 'dired-mode-hook (lambda()
@@ -93,25 +95,25 @@
 
 ;; Remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
-  (remq 'process-kill-buffer-query-function
-         kill-buffer-query-functions))
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
 
 ;; Misc functions
 (defun swap-windows()
- "If you have 2 windows, it swaps them."
- (interactive)
- (cond ((not (= (count-windows) 2)) (message "You need exactly 2 windows to do this."))
-       (t
-        (let* ((w1 (first (window-list)))
-               (w2 (second (window-list)))
-               (b1 (window-buffer w1))
-               (b2 (window-buffer w2))
-               (s1 (window-start w1))
-               (s2 (window-start w2)))
-          (set-window-buffer w1 b2)
-          (set-window-buffer w2 b1)
-          (set-window-start w1 s2)
-          (set-window-start w2 s1)))))
+  "If you have 2 windows, it swaps them."
+  (interactive)
+  (cond ((not (= (count-windows) 2)) (message "You need exactly 2 windows to do this."))
+        (t
+         (let* ((w1 (first (window-list)))
+                (w2 (second (window-list)))
+                (b1 (window-buffer w1))
+                (b2 (window-buffer w2))
+                (s1 (window-start w1))
+                (s2 (window-start w2)))
+           (set-window-buffer w1 b2)
+           (set-window-buffer w2 b1)
+           (set-window-start w1 s2)
+           (set-window-start w2 s1)))))
 
 
 (defun rename-current-buffer-file ()
@@ -149,17 +151,17 @@
 (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
 
 (defun revert-all-buffers()
-   "Refreshes all open buffers from their respective files."
-   (interactive)
-   (let* ((list (buffer-list))
-          (buffer (car list)))
-     (while buffer
-       (when (buffer-file-name buffer)
-         (set-buffer buffer)
-         (revert-buffer t t t))
-       (setq list (cdr list))
-       (setq buffer (car list))))
-   (message "done."))
+  "Refreshes all open buffers from their respective files."
+  (interactive)
+  (let* ((list (buffer-list))
+         (buffer (car list)))
+    (while buffer
+      (when (buffer-file-name buffer)
+        (set-buffer buffer)
+        (revert-buffer t t t))
+      (setq list (cdr list))
+      (setq buffer (car list))))
+  (message "done."))
 
 (defun generate-rand-string(&optional char-set &optional len)
   "Generates a random string and inserts it at `point'. With no

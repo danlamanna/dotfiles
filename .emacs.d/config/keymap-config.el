@@ -7,6 +7,8 @@
 
 (define-key global-map (kbd "M-g")         'goto-line)
 
+(define-key global-map (kbd "C-c C-g") 'grep)
+
 (define-key global-map (kbd "C-c r")       'replace-string)
 
 (define-key global-map (kbd "<f3>")      'start-kbd-macro)
