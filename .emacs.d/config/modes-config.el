@@ -29,4 +29,7 @@
       (recompile)
     (compile compile-command)))
 
+;; Emacs Lisp..
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
 (provide 'modes-config)
