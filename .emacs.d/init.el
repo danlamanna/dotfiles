@@ -50,9 +50,11 @@
  '(asl/cache-enabled t)
  '(browse-url-browser-function (quote w3m-browse-url))
  '(erc-hide-list (quote ("JOIN" "QUIT")))
+ '(erc-autojoin-channels-alist (quote (("freenode.net" "#stumpwm" "#conkeror" "#emacs"))))
  '(indent-tabs-mode nil)
  '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
- '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir))))
+ '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
+ '(vc-follow-symlinks t))
 
 (custom-set-faces
 
