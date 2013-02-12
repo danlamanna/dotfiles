@@ -56,6 +56,8 @@ exit of its own accord, Stumpwm might hang!"
 (define-key *root-map* (kbd "3") "hsplit")
 (define-key *root-map* (kbd "0") "remove")
 
+(stumpwm:run-shell-command "xsetroot -cursor_name left_ptr")
+
 (when *initializing*
   (run-shell-command "setxkbmap -option ctrl:nocaps")
   (run-commands
