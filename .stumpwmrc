@@ -70,3 +70,17 @@ exit of its own accord, Stumpwm might hang!"
    "gnewbg 2:0"
    "gnewbg 2:1"
    "gnewbg 2:2"))
+
+(defun unix-timestamp()
+  (parse-integer (run-shell-command "date +%s" t)))
+
+(defcommand it-will-be-ok() ()
+  (let* ((now          (unix-timestamp))
+         (seconds-left (float (- 1367989200 now)))
+         (days-left    (float (/ seconds-left 86400)))
+         (weeks-left   (float (/ days-left 7)))
+         (weeks-passed (float (- 15 weeks-left))))
+    (message "Cheer up, you're ~$% through the semester." (* 100 (/ weeks-passed 15)))))
+
+
+(define-key *top-map* (kbd "C-F1") "it-will-be-ok")
