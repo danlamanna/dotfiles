@@ -45,6 +45,8 @@ session_pref("signon.expireMasterPassword", false);
 session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
+session_pref('browser.history_expire_days', 7);
+
 homepage = "http://en.wikipedia.org/wiki/Special:Random";
 
 // auto completion in the minibuffer
