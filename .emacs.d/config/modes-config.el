@@ -29,7 +29,11 @@
       (recompile)
     (compile compile-command)))
 
+;; Common Lisp
+(add-to-list 'auto-mode-alist '(".stumpwmrc$" . common-lisp-mode))
+
 ;; Emacs Lisp..
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'inferior-emacs-lisp-mode-hook 'eldoc-mode)
 
 (provide 'modes-config)
