@@ -72,3 +72,47 @@ function firebug (I) {
     doc.body.appendChild(script);
 }
 interactive("firebug", "open firebug lite", firebug);
+
+add_hook("before_quit_hook",
+         function () {
+             var w = get_recent_conkeror_window();
+             var result = (w == null) ||
+                 "y" == (yield w.minibuffer.read_single_character_option(
+                     $prompt = "Quit Conkeror? (y/n)",
+                     $options = ["y", "n"]));
+             yield co_return(result);
+         });
+
+can_kill_last_buffer = false;
+
+mode_line_mode(false);
+
+/*interactive("assembla-spot-check-space-urls", "Loads n URLs with random space IDs.",
+            function assembla_spot_check(I) {
+                var url_format = yield I.minibuffer.read($prompt = "Assembla URL (with %s where space-id should belong): ");
+                var num_spaces = yield I.minibuffer.read($prompt = "Number of spot checks: ");
+
+                if (num_spaces > assembla_space_ids.length) {
+                    I.window.minibuffer.message("Number of spot checks exceeds number of space IDs known, performing " + assembla_space_ids.length + " instead.");
+                    num_spaces = assembla_space_ids.length;
+                }
+
+                for (i=0;i<num_spaces;i++) {
+                    load_url_in_new_buffer(url_format.replace("%s",
+                                                              assembla_space_ids[Math.floor(Math.random()*assembla_space_ids.length)]);
+                }
+
+                I.window.minibuffer.message("Opened " + num_spaces + " new buffers.");
+            });
+*/
+read_url_handler_list = [read_url_make_default_webjump_handler("g")];
+
+
+function history_clear () {
+    var history = Cc["@mozilla.org/browser/nav-history-service;1"]
+        .getService(Ci.nsIBrowserHistory);
+    history.removeAllPages();
+}
+interactive("history-clear",
+    "Clear the history.",
+    history_clear);
