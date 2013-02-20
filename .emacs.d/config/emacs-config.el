@@ -43,6 +43,12 @@
 (require 'winner)
 (winner-mode t)
 
+(defun back-to-indentation-or-beginning ()
+   (interactive)
+   (if (bolp)
+       (back-to-indentation)
+     (beginning-of-line)))
+
 ;; Remove prompts from close
 (defun kill-emacs-no-prompt()
   (interactive)

@@ -29,6 +29,9 @@
       (recompile)
     (compile compile-command)))
 
+;; Javascript
+(add-to-list 'auto-mode-alist '(".conkerorrc$" . javascript-mode-hook))
+
 ;; Common Lisp
 (add-to-list 'auto-mode-alist '(".stumpwmrc$" . common-lisp-mode))
 
