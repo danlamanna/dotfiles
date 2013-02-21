@@ -49,7 +49,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
- '(browse-url-browser-function (quote w3m-browse-url))
  '(erc-hide-list (quote ("JOIN" "QUIT")))
  '(erc-autojoin-channels-alist (quote (("freenode.net" "#stumpwm" "#conkeror" "#emacs"))))
  '(indent-tabs-mode nil)
