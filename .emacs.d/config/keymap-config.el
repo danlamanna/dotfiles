@@ -54,4 +54,6 @@
 (define-key global-map (kbd "C-c C-t i") 'timeclock-in)
 (define-key global-map (kbd "C-c C-t o") 'timeclock-out)
 
+(global-set-key (kbd "C-x g") 'webjump)
+
 (provide 'keymap-config)
