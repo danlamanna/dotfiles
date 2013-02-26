@@ -17,7 +17,7 @@
 (define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
 (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
 
-(eval-after-load "comint"
+(add-hook 'comint-mode-hook
   (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
   (define-key comint-mode-map (kbd "C-<down>") 'windmove-down))
 
