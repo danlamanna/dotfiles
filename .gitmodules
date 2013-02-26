@@ -46,3 +46,6 @@
 [submodule ".emacs.d/lib/powerline"]
         path = .emacs.d/lib/powerline
         url = git://github.com/jonathanchu/emacs-powerline.git
+[submodule ".emacs.d/lib/magit"]
+	path = .emacs.d/lib/magit
+	url = git://github.com/magit/magit.git
