@@ -1,3 +1,8 @@
 .emacs.d/cache
 .emacs.d/auto-save-list
 .emacs.d/tmp
+.emacs.d/eshell
+.emacs.d/tramp
+.emacs.d/url
+.emacs.d/var
+.emacs.d/elpa/archives/
