@@ -36,7 +36,8 @@
 (add-to-list 'auto-mode-alist '(".stumpwmrc$" . common-lisp-mode))
 
 ;; Emacs Lisp..
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'inferior-emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
 (provide 'modes-config)

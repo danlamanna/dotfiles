@@ -49,3 +49,6 @@
 [submodule ".emacs.d/lib/magit"]
 	path = .emacs.d/lib/magit
 	url = git://github.com/magit/magit.git
+[submodule ".emacs.d/lib/php-eldoc"]
+	path = .emacs.d/lib/php-eldoc
+	url = git://github.com/zenozeng/php-eldoc.git
