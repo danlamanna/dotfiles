@@ -6,3 +6,4 @@
 .emacs.d/url
 .emacs.d/var
 .emacs.d/elpa/archives/
+*.elc
