@@ -19,6 +19,8 @@
 
 (add-hook 'comint-mode-hook
           (lambda()
+            (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+            (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
             (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
             (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
 
