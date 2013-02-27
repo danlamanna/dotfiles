@@ -18,8 +18,9 @@
 (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
 
 (add-hook 'comint-mode-hook
-  (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
-  (define-key comint-mode-map (kbd "C-<down>") 'windmove-down))
+          (lambda()
+            (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
+            (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
 
 (global-set-key (kbd "C-<up>") 'windmove-up)
 (global-set-key (kbd "C-<down>") 'windmove-down)
