@@ -84,3 +84,5 @@
             (lambda ()
                   (interactive)
                   (join-line -1)))
+
+(prefer-coding-system 'utf-8)
