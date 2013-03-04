@@ -49,15 +49,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
- '(erc-hide-list (quote ("JOIN" "QUIT")))
+ '(browse-url-browser-function (quote browse-url-generic))
+ '(browse-url-generic-program "/usr/bin/conkeror")
+ '(dired-listing-switches "-alh")
  '(erc-autojoin-channels-alist (quote (("freenode.net" "#stumpwm" "#conkeror" "#emacs"))))
+ '(erc-hide-list (quote ("JOIN" "QUIT")))
+ '(grep-command "grep -rnh -e ")
  '(indent-tabs-mode nil)
  '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
  '(vc-follow-symlinks t))
 
 (custom-set-faces
-
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -86,3 +89,4 @@
                   (join-line -1)))
 
 (prefer-coding-system 'utf-8)
+(put 'narrow-to-region 'disabled nil)
