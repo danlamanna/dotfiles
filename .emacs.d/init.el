@@ -40,6 +40,7 @@
 (require 'keymap-config)
 (require 'modeline-config)
 (require 'modes-config)
+(require 'tramp-config)
 (require 'uniquify-config)
 (require 'yasnippet-config)
 
