@@ -8,6 +8,7 @@
  ido-enable-flex-matching t
  ido-case-fold t
  ido-enable-last-directory-history t
+ ido-max-directory-size 500000
  ido-max-work-directory-list 10
  ido-max-work-file-list 20
  ido-use-filename-at-point nil
