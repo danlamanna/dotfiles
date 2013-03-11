@@ -71,6 +71,13 @@ exit of its own accord, Stumpwm might hang!"
    "gnewbg 2:1"
    "gnewbg 2:2"))
 
+(defcommand im-stuck-in-caps-omfg() ()
+  (run-shell-command "setxkbmap -option")
+  (run-shell-command "setxkbmap -option ctrl:nocaps")
+  (message "It will be ok, we both hate caps lock."))
+
+(define-key *top-map* (kbd "F3") "im-stuck-in-caps-omfg")
+
 (defun unix-timestamp()
   (parse-integer (run-shell-command "date +%s" t)))
 
