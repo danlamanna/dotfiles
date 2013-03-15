@@ -44,6 +44,9 @@
 (require 'uniquify-config)
 (require 'yasnippet-config)
 
+(if (member (expand-file-name "~/.emacs.d/lib/burst") load-path)
+    (require 'burst))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
