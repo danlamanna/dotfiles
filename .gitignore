@@ -6,4 +6,5 @@
 .emacs.d/url
 .emacs.d/var
 .emacs.d/elpa/archives/
+.emacs.d/thumbs
 *.elc
