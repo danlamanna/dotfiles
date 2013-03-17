@@ -131,6 +131,7 @@
       (let ((new-name (read-file-name "New name: " filename)))
         (if (get-buffer new-name)
             (error "A buffer named '%s' already exists!" new-name)
+          (ignore-errors (make-directory new-name t))
           (rename-file filename new-name 1)
           (rename-buffer new-name)
           (set-visited-file-name new-name)
