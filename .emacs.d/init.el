@@ -5,6 +5,8 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+(setq default-directory "~")
+
 (load (concat emacs-config-dir "/lib/magit/magit.el"))
 
 (autoload 'assembla "assembla-mode" t)
@@ -94,3 +96,6 @@
 
 (prefer-coding-system 'utf-8)
 (put 'narrow-to-region 'disabled nil)
+
+ (setq org-todo-keywords
+           '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
