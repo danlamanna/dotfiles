@@ -64,7 +64,8 @@
  '(indent-tabs-mode nil)
  '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
- '(vc-follow-symlinks t))
+ '(vc-follow-symlinks t)
+ '(virtualenv-root "~/.envs/"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -99,3 +100,13 @@
 
  (setq org-todo-keywords
            '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
+
+
+;; Workaround the annoying warnings:
+;;    Warning (mumamo-per-buffer-local-vars):
+;;    Already 'permanent-local t: buffer-file-name
+(when (and (>= emacs-major-version 24)
+           (>= emacs-minor-version 2))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
