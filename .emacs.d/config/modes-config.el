@@ -19,6 +19,11 @@
 (setq mumamo-background-colors nil)
 (add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
 
+(add-hook 'python-mode-hook '(lambda()
+                               (elpy-mode)
+                               (define-key elpy-mode-map (kbd "<M-down>") 'elpy-forward-definition)
+                               (define-key elpy-mode-map (kbd "<M-up>") 'elpy-backward-definition)))
+
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
