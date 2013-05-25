@@ -13,6 +13,8 @@ if [ -f ~/.env_specific_bashrc ]; then
     . ~/.env_specific_bashrc
 fi
 
+alias uu="sudo apt-fast update && sudo apt-fast upgrade -y"
+
 # I don't play any games.
 alias e="emacsclient"
 alias ed="emacs"
@@ -100,3 +102,12 @@ VISUAL_EDITOR=$(which emacs)
 
 #export WORKON_HOME="$HOME/.virtualenvs"
 #source $HOME/bin/virtualenvwrapper_bashrc
+
+
+export PAGER=less
+export LESS='-iMFXSx4R'
+
+
+
+export PATH
+PATH=$PATH:/usr/lib/jvm/java-6-openjdk/bin
