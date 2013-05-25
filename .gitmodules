@@ -52,3 +52,6 @@
 [submodule ".emacs.d/lib/php-eldoc"]
 	path = .emacs.d/lib/php-eldoc
 	url = git://github.com/zenozeng/php-eldoc.git
+[submodule ".emacs.d/lib/dizzee"]
+	path = .emacs.d/lib/dizzee
+	url = https://github.com/davidmiller/dizzee.git
