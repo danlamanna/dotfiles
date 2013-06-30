@@ -69,14 +69,8 @@
 (add-hook 'before-save-hook 'make-files-directory-if-not-exists)
 
 ;; set to conkeror if it exists, otherwise try chromium
-(cond
- ((file-exists-p "/usr/bin/conkeror")
-  (custom-set-variables
-   '(browse-url-generic-program "/usr/bin/conkeror")
-   '(browse-url-browser-function 'browse-url-generic)))
- ((fboundp 'browse-url-chromium)
-  (custom-set-variables
-   '(browse-url-browser-function 'browse-url-chromium))))
+(custom-set-variables
+ '(browse-url-browser-function 'browse-url-chromium))
 
 ;; Copying current line (start-finish, regardless of point)
 ;; http://justin.jetfive.com/emacs-copy-line-to-kill-ring-fast
