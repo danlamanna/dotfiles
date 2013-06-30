@@ -56,14 +56,15 @@
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(browse-url-browser-function (quote browse-url-generic))
- '(browse-url-generic-program "/usr/bin/conkeror")
+ '(browse-url-browser-function 'browse-url-chromium)
  '(dired-listing-switches "-alh")
- '(erc-autojoin-channels-alist (quote (("freenode.net" "#stumpwm" "#conkeror" "#emacs"))))
+ '(erc-autojoin-channels-alist (quote (("freenode.net" "#emacs"))))
  '(erc-hide-list (quote ("JOIN" "QUIT")))
  '(grep-command "grep -rnh -e ")
  '(indent-tabs-mode nil)
  '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
+ '(php-template-compatibility nil)
  '(vc-follow-symlinks t)
  '(virtualenv-root "~/.envs/"))
 
