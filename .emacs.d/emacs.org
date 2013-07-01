@@ -1,4 +1,5 @@
-
+* initialization
+#+begin_src emacs-lisp :tangle init.el
 (defvar emacs-config-dir (expand-file-name "~/.emacs.d"))
 (defvar emacs-tmp-dir    (expand-file-name (concat emacs-config-dir "/" "tmp")))
 
@@ -7,7 +8,10 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 (setq default-directory "~")
+#+end_src
 
+** library loading
+#+begin_src emacs-lisp :tangle init.el
 (load (concat emacs-config-dir "/lib/magit/magit.el"))
 
 (autoload 'assembla "assembla-mode" t)
@@ -33,7 +37,9 @@
 
 (if (member (expand-file-name "~/.emacs.d/lib/burst") load-path)
     (require 'burst))
-
+#+end_src
+** custom variables
+#+begin_src emacs-lisp :tangle init.el
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -65,10 +71,14 @@
 
 (prefer-coding-system 'utf-8)
 (put 'narrow-to-region 'disabled nil)
-
-(setq org-todo-keywords
-          '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
-
+#+end_src
+** org-keywords
+#+begin_src emacs-lisp :tangle init.el
+ (setq org-todo-keywords
+           '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
+#+end_src
+** mumamo
+#+begin_src emacs-lisp :tangle init.el
 ;; Workaround the annoying warnings:
 ;;    Warning (mumamo-per-buffer-local-vars):
 ;;    Already 'permanent-local t: buffer-file-name
@@ -77,7 +87,9 @@
   (eval-after-load "mumamo"
     '(setq mumamo-per-buffer-local-vars
            (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
-
+#+end_src
+* dired
+#+begin_src emacs-lisp :tangle init.el
 (defun truncate-file-contents(filename)
   (with-temp-buffer
     (write-file filename)))
@@ -88,7 +100,9 @@
 
 (add-hook 'dired-mode-hook (lambda()
                              (hl-line-mode)))
-
+#+end_src
+* tramp
+#+begin_src emacs-lisp :tangle init.el
 (require 'tramp)
 
 (setq tramp-default-method "ssh")
@@ -104,13 +118,20 @@
     (let ((pos (point)))
       (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))
       (goto-char pos))))
+#+end_src
 
+* geben
+** variables
+#+begin_src emacs-lisp :tangle init.el
 (custom-set-variables
  '(geben-dbgp-default-proxy '("127.0.0.1" 9001 "dan" nil t))
  '(geben-dbgp-feature-list (quote ((:set max_data 32768) (:set max_depth 1) (:set max_children 1024) (:get breakpoint_types geben-dbgp-breakpoint-store-types))))
  '(geben-dbgp-redirect-buffer-init-hook nil)
  '(geben-temporary-file-directory "~/.emacs.d/tmp/geben"))
+#+end_src
 
+** proxy fixes
+#+begin_src emacs-lisp :tangle init.el
 (defun geben-safely-end-proxy()
   "Tries to call `dbgp-proxy-unregister', but silently
    returns `nil' if it throws an error."
@@ -130,10 +151,17 @@
     (error (geben-proxy "127.0.0.1" 9001 "dan"))))
 
 (add-hook 'kill-emacs-hook 'geben-safely-end-proxy)
+#+end_src
 
+** usage fixes
+#+begin_src emacs-lisp :tangle init.el
 (defadvice geben-display-context(before clear-windows-for-vars activate)
   (delete-other-windows))
+#+end_src
 
+* ido
+** general ido
+#+begin_src emacs-lisp :tangle init.el
 (ido-mode 'both)
 
 (setq
@@ -154,7 +182,10 @@
  ido-confirm-unique-completion nil)
 
 (setq confirm-nonexistent-file-or-buffer nil)
+#+end_src
 
+** ido ubiquitous
+#+begin_src emacs-lisp :tangle init.el
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
@@ -169,7 +200,10 @@
 (ido-ubiquitous-use-new-completing-read webjump 'webjump)
 (ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
 (ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
+#+end_src
 
+* keymaps
+#+begin_src emacs-lisp :tangle init.el
 (global-unset-key (kbd "C-z"))
 
 (define-key global-map (kbd "C-c G") 'geben-single-or-proxy)
@@ -236,7 +270,11 @@
 (define-key global-map (kbd "C-c C-t o") 'timeclock-out)
 
 (global-set-key (kbd "C-x g") 'webjump)
+#+end_src
 
+* magit
+** git
+#+begin_src emacs-lisp :tangle init.el
 (defadvice magit-status (around magit-fullscreen activate)
   (window-configuration-to-register :magit-fullscreen)
   ad-do-it
@@ -259,7 +297,10 @@
 
 ;; Keymaps
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+#+end_src
 
+** git-svn
+#+begin_src emacs-lisp :tangle init.el
 (defvar magit-svn-externals-dir ".git_externals")
 
 (defun magit-svn-fetch-externals()
@@ -282,7 +323,11 @@
                                (type "d")))))
     (when (file-directory-p default-directory)
       (remove "" (split-string (shell-command-to-string find) "\n")))))
+#+end_src
 
+* misc
+** ui
+#+begin_src emacs-lisp :tangle init.el
 (menu-bar-mode -1)
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
@@ -303,17 +348,25 @@
    (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
 (global-set-key (kbd "<f11>") 'toggle-fullscreen)
-
+#+end_src
+** winner
+#+begin_src emacs-lisp :tangle init.el
 (require 'winner)
 (winner-mode t)
+#+end_src
 
+** autosave/backup
+#+begin_src emacs-lisp :tangle init.el
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
                  (concat emacs-tmp-dir "/backups")))))
 
 ;; Make tramp autosaves save locally, saves time.
 (setq tramp-auto-save-directory (concat emacs-tmp-dir "/backups"))
+#+end_src
 
+** misc functions
+#+begin_src emacs-lisp :tangle init.el
 (defun kill-emacs-no-prompt()
   (interactive)
   (save-some-buffers nil t)
@@ -452,11 +505,17 @@
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
 
 (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
+** saveplace
+#+begin_src emacs-lisp :tangle init.el
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
+#+END_SRC
 
+* modeline
+#+begin_src emacs-lisp :tangle init.el
 (setq default-mode-line-format
           (list
            "-- "
@@ -477,7 +536,10 @@
            ;; Display time, followed by dashes till the end
             '(:eval (propertize (format-time-string "%l:%M%p")))
             " %-"))
-
+#+end_src
+* modes
+** php-mode
+#+begin_src emacs-lisp :tangle init.el
 (custom-set-variables
  '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
  '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir))))
@@ -496,7 +558,10 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+#+end_src
 
+** python-mode
+#+begin_src emacs-lisp :tangle init.el
 (autoload 'django-html-mumamo-mode "~/.emacs.d/lib/nxhtml/autostart.el")
 (setq auto-mode-alist
       (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
@@ -507,19 +572,31 @@
                                (elpy-mode)
                                (define-key elpy-mode-map (kbd "<M-down>") 'elpy-forward-definition)
                                (define-key elpy-mode-map (kbd "<M-up>") 'elpy-backward-definition)))
+#+end_src
 
+** ruby-mode
+#+begin_src emacs-lisp :tangle init.el
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+#+end_src
 
+** c-mode
+#+begin_src emacs-lisp :tangle init.el
 (defun compile-or-recompile()
   (interactive)
   (if (get-buffer "*compilation*")
       (recompile)
     (compile compile-command)))
+#+end_src
 
+** emacs-lisp-mode
+#+begin_src emacs-lisp :tangle init.el
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+#+end_src
 
+* package
+#+begin_src emacs-lisp :tangle init.el
 (require 'package)
 
 (add-to-list 'package-archives
@@ -527,7 +604,9 @@
     '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (package-initialize)
-
+#+end_src
+* shell
+#+begin_src emacs-lisp :tangle init.el
 (defun comint-delchar-or-eof-or-kill-buffer (arg)
   (interactive "p")
   (if (null (get-buffer-process (current-buffer)))
@@ -538,7 +617,9 @@
           (lambda ()
             (define-key shell-mode-map
               (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
-
+#+end_src
+* sql
+#+begin_src emacs-lisp :tangle init.el
 (defun run-mysql()
   (interactive)
   (let ((sql-scratch-buf (get-buffer-create "*sql-scratch*"))
@@ -548,12 +629,18 @@
       (sql-highlight-mysql-keywords))))
 
 (define-key global-map (kbd "C-c m") 'run-mysql)
+#+end_src
 
+* theme
+#+begin_src emacs-lisp :tangle init.el
 (require 'color-theme)
 (require 'color-theme-almost-monokai)
 
 (color-theme-almost-monokai)
+#+end_src
 
+* uniquify
+#+begin_src emacs-lisp :tangle init.el
 (require 'uniquify)
 
 (setq
@@ -561,7 +648,10 @@
  uniquify-separator " - "
  uniquify-after-kill-buffer-p t
  uniquify-ignore-buffers-re "^\\*")
+#+end_src
 
+* webjump
+#+begin_src emacs-lisp :tangle init.el
 (require 'webjump)
 
 (add-to-list 'webjump-sites
@@ -569,7 +659,10 @@
                [simple-query "stackoverflow.com"
                              "http://stackoverflow.com/search?q="
                              ""]))
+#+end_src
 
+* yasnippet
+#+begin_src emacs-lisp :tangle init.el
 (require 'yasnippet)
 
 (yas-global-mode 1)
@@ -579,3 +672,4 @@
       '("~/.emacs.d/etc/snippets"))
 
 (yas/reload-all)
+#+end_src
