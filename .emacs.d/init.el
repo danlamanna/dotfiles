@@ -323,6 +323,12 @@
 
 (global-set-key (kbd "C-x C-c") 'kill-emacs-no-prompt)
 
+(defun back-to-indentation-or-beginning ()
+   (interactive)
+   (if (bolp)
+       (back-to-indentation)
+     (beginning-of-line)))
+
 (defun make-files-directory-if-not-exists()
   "Makes the directory of the file referenced in `buffer-file-name',
    so we can 'open' files in non-existent directories, and this can
