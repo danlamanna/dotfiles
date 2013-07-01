@@ -478,6 +478,37 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Indent pasted code in these modes:
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(asm-mode
+                                     c++-mode
+                                     c-mode
+                                     clojure-mode
+                                     cperl-mode
+                                     csharp-mode
+                                     espresso-mode
+                                     factor-mode
+                                     haskell-mode
+                                     js-mode
+                                     latex-mode
+                                     lisp-mode
+                                     lua-mode
+                                     nxml-mode
+                                     objc-mode
+                                     php-mode
+                                     plain-tex-mode
+                                     python-mode
+                                     rspec-mode
+                                     ruby-mode
+                                     rust-mode
+                                     scheme-mode
+                                     vbnet-mode
+                                     emacs-lisp-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
+
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
