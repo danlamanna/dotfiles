@@ -55,3 +55,6 @@
 [submodule ".emacs.d/lib/dizzee"]
 	path = .emacs.d/lib/dizzee
 	url = https://github.com/davidmiller/dizzee.git
+[submodule ".emacs.d/lib/noctilux-theme"]
+	path = .emacs.d/lib/noctilux-theme
+	url = git@github.com:stafu/noctilux-theme.git

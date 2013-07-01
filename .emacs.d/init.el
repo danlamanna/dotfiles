@@ -557,10 +557,9 @@
 
 (define-key global-map (kbd "C-c m") 'run-mysql)
 
-(require 'color-theme)
-(require 'color-theme-almost-monokai)
+(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib/noctilux-theme"))
 
-(color-theme-almost-monokai)
+(load-theme 'noctilux t)
 
 (require 'uniquify)
 
