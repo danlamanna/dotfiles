@@ -10,3 +10,4 @@
 *.elc
 /.emacs.d/ac-comphist.dat
 /.emacs.d/geben/.storage
+/.emacs.d/.mc-lists.el
