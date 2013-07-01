@@ -80,6 +80,8 @@
     '(setq mumamo-per-buffer-local-vars
            (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
 
+(require 'dired)
+
 (defun truncate-file-contents(filename)
   (with-temp-buffer
     (write-file filename)))
@@ -90,6 +92,22 @@
 
 (add-hook 'dired-mode-hook (lambda()
                              (hl-line-mode)))
+
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 4))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
 (require 'tramp)
 
@@ -253,7 +271,6 @@
 ;; Hooks
 (add-hook 'magit-mode-hook (lambda()
                              (require 'magit-svn)
-                             (magit-key-mode-insert-action 'svn "x" "Fetch Externals" 'magit-svn-fetch-externals)
                              (if (magit-svn-get-ref-info)
                                  (magit-svn-mode))))
 
