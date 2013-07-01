@@ -8,6 +8,8 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 (setq default-directory "~")
+
+(setq org-src-fontify-natively t)
 #+end_src
 
 ** library loading

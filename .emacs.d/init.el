@@ -8,6 +8,8 @@
 
 (setq default-directory "~")
 
+(setq org-src-fontify-natively t)
+
 (load (concat emacs-config-dir "/lib/magit/magit.el"))
 
 (autoload 'assembla "assembla-mode" t)
