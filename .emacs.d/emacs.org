@@ -1,5 +1,5 @@
 * initialization
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (let ((default-directory emacs-config-dir))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
@@ -10,7 +10,7 @@
 #+end_src
 
 ** library loading
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (load (concat emacs-config-dir "/lib/magit/magit.el"))
 
 (autoload 'assembla "assembla-mode" t)
@@ -38,7 +38,7 @@
     (require 'burst))
 #+end_src
 ** custom variables
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,12 +72,12 @@
 (put 'narrow-to-region 'disabled nil)
 #+end_src
 ** org-keywords
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
  (setq org-todo-keywords
            '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
 #+end_src
 ** mumamo
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 ;; Workaround the annoying warnings:
 ;;    Warning (mumamo-per-buffer-local-vars):
 ;;    Already 'permanent-local t: buffer-file-name
@@ -88,7 +88,7 @@
            (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
 #+end_src
 * dired
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (require 'dired)
 
   (defun truncate-file-contents(filename)
@@ -119,7 +119,7 @@
     (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 #+end_src
 * tramp
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'tramp)
 
 (setq tramp-default-method "ssh")
@@ -139,7 +139,7 @@
 
 * geben
 ** variables
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (custom-set-variables
  '(geben-dbgp-default-proxy '("127.0.0.1" 9001 "dan" nil t))
  '(geben-dbgp-feature-list (quote ((:set max_data 32768) (:set max_depth 1) (:set max_children 1024) (:get breakpoint_types geben-dbgp-breakpoint-store-types))))
@@ -148,7 +148,7 @@
 #+end_src
 
 ** proxy fixes
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun geben-safely-end-proxy()
   "Tries to call `dbgp-proxy-unregister', but silently
    returns `nil' if it throws an error."
@@ -171,14 +171,14 @@
 #+end_src
 
 ** usage fixes
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defadvice geben-display-context(before clear-windows-for-vars activate)
   (delete-other-windows))
 #+end_src
 
 * ido
 ** general ido
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (ido-mode 'both)
 
 (setq
@@ -202,7 +202,7 @@
 #+end_src
 
 ** ido ubiquitous
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
@@ -220,78 +220,117 @@
 #+end_src
 
 * keymaps
-#+begin_src emacs-lisp 
-(global-unset-key (kbd "C-z"))
+#+begin_src emacs-lisp
+  (global-unset-key (kbd "C-z"))
 
-(define-key global-map (kbd "C-c G") 'geben-single-or-proxy)
+  (define-key global-map (kbd "C-c G") 'geben-single-or-proxy)
 
-(define-key global-map (kbd "C-b") 'revert-buffer)
-(define-key global-map (kbd "C-B") 'revert-all-buffers)
+  (define-key global-map (kbd "C-b") 'revert-buffer)
+  (define-key global-map (kbd "C-B") 'revert-all-buffers)
 
-(define-key global-map (kbd "M-g")         'goto-line)
+  (define-key global-map (kbd "M-g")         'goto-line)
 
-(define-key global-map (kbd "C-a") 'back-to-indentation-or-beginning)
+  (define-key global-map (kbd "C-a") 'back-to-indentation-or-beginning)
 
-(define-key global-map (kbd "C-c C-g") 'grep)
+  (define-key global-map (kbd "C-c C-g") 'grep)
 
-(define-key global-map (kbd "C-c r")       'replace-string)
+  (define-key global-map (kbd "C-c r")       'replace-string)
 
-(define-key global-map (kbd "<f3>")      'start-kbd-macro)
-(define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
-(define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
+  (define-key global-map (kbd "<f3>")      'start-kbd-macro)
+  (define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
+  (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
 
-(add-hook 'comint-mode-hook
-          (lambda()
-            (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-            (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-            (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
-            (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
+  (add-hook 'comint-mode-hook
+            (lambda()
+              (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+              (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+              (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
+              (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
 
-(global-set-key (kbd "C-<up>") 'windmove-up)
-(global-set-key (kbd "C-<down>") 'windmove-down)
-(global-set-key (kbd "C-<left>") 'windmove-left)
-(global-set-key (kbd "C-<right>") 'windmove-right)
+  (global-set-key (kbd "C-<up>") 'windmove-up)
+  (global-set-key (kbd "C-<down>") 'windmove-down)
+  (global-set-key (kbd "C-<left>") 'windmove-left)
+  (global-set-key (kbd "C-<right>") 'windmove-right)
 
 
-;; Wrap selected text in quotes, or just insert empty pair
-(global-set-key (kbd "M-'") 'insert-pair)
-(global-set-key (kbd "M-\"") 'insert-pair)
+  ;; Wrap selected text in quotes, or just insert empty pair
+  (global-set-key (kbd "M-'") 'insert-pair)
+  (global-set-key (kbd "M-\"") 'insert-pair)
 
-(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
-(define-key global-map (kbd "C-z SPC") 'ace-jump-word-mode)
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+  (define-key global-map (kbd "C-z SPC") 'ace-jump-word-mode)
+  (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
-(define-key global-map (kbd "C-c f") 'iy-go-to-char)
-(define-key global-map (kbd "C-c b") 'iy-go-to-char-backward)
+  (define-key global-map (kbd "C-c f") 'iy-go-to-char)
+  (define-key global-map (kbd "C-c b") 'iy-go-to-char-backward)
 
-(global-set-key (kbd "M-,") 'mark-previous-like-this)
-(global-set-key (kbd "M-.") 'mark-next-like-this)
-(global-set-key (kbd "M-*") 'mark-all-like-this)
+  (global-set-key (kbd "M-,") 'mark-previous-like-this)
+  (global-set-key (kbd "M-.") 'mark-next-like-this)
+  (global-set-key (kbd "M-*") 'mark-all-like-this)
 
-(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+  (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
-; @ec config quoted-insert to something
-(define-key global-map (kbd "C-q") 'er/expand-region)
+  ; @ec config quoted-insert to something
+  (define-key global-map (kbd "C-q") 'er/expand-region)
 
-(define-key global-map (kbd "C-c R") 'restclient-mode)
+  (define-key global-map (kbd "C-c R") 'restclient-mode)
 
-(define-key global-map (kbd "C-c s") 'magit-status)
+  (define-key global-map (kbd "C-c s") 'magit-status)
 
-(define-key global-map (kbd "C-c c") 'compile-or-recompile)
+  (define-key global-map (kbd "C-c c") 'compile-or-recompile)
 
-(define-key global-map (kbd "C-c k") 'quick-copy-line)
+  (define-key global-map (kbd "C-c k") 'quick-copy-line)
 
-(define-key global-map (kbd "C-c C-s") 'shell)
+  (define-key global-map (kbd "C-c C-s") 'shell)
 
-(define-key global-map (kbd "C-c C-t i") 'timeclock-in)
-(define-key global-map (kbd "C-c C-t o") 'timeclock-out)
+  (define-key global-map (kbd "C-c C-t i") 'timeclock-in)
+  (define-key global-map (kbd "C-c C-t o") 'timeclock-out)
 
-(global-set-key (kbd "C-x g") 'webjump)
+  (global-set-key (kbd "C-x g") 'webjump)
+
+  (global-set-key (kbd "C-x p") 'proced)
+
+  ;; Start eshell or switch to it if it's active.
+  (global-set-key (kbd "C-x m") 'eshell)
+
+  ;; Start a new eshell even if one is active.
+  (global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
+
+  (global-set-key (kbd "C-<backspace>") (lambda ()
+                                          (interactive)
+                                          (kill-line 0)
+                                          (indent-according-to-mode)))
+
+
+  ;; Activate occur easily inside isearch
+  (define-key isearch-mode-map (kbd "C-o")
+    (lambda () (interactive)
+      (let ((case-fold-search isearch-case-fold-search))
+        (occur (if isearch-regexp
+                   isearch-string
+                 (regexp-quote isearch-string))))))
+
+  (global-set-key (kbd "M-/") 'hippie-expand)
+
+  ;; Start a regular shell if you prefer that.
+  (global-set-key (kbd "C-x M-m") 'shell)
+
+  (global-set-key (kbd "C-c t") 'start-or-switch-to-term)
+
+  (defun start-or-switch-to-term()
+    (interactive)
+    (if (not (get-buffer "*ansi-term*"))
+        (progn
+          (split-window-sensibly (selected-window))
+          (other-window 1)
+          (ansi-term (getenv "SHELL")))
+      (switch-to-buffer-other-window "*ansi-term*")))
+
 #+end_src
 
 * magit
 ** git
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defadvice magit-status (around magit-fullscreen activate)
   (window-configuration-to-register :magit-fullscreen)
   ad-do-it
@@ -316,7 +355,7 @@
 #+end_src
 
 ** git-svn
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defvar magit-svn-externals-dir ".git_externals")
 
 (defun magit-svn-fetch-externals()
@@ -343,7 +382,7 @@
 
 * misc
 ** ui
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (menu-bar-mode -1)
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
@@ -366,13 +405,13 @@
 (global-set-key (kbd "<f11>") 'toggle-fullscreen)
 #+end_src
 ** winner
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'winner)
 (winner-mode t)
 #+end_src
 
 ** autosave/backup
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
                  (concat emacs-tmp-dir "/backups")))))
@@ -382,7 +421,7 @@
 #+end_src
 
 ** misc functions
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (defun kill-emacs-no-prompt()
     (interactive)
     (save-some-buffers nil t)
@@ -561,14 +600,14 @@
 #+end_src
 
 ** saveplace
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
 #+END_SRC
 
 * modeline
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (setq default-mode-line-format
           (list
            "-- "
@@ -592,7 +631,7 @@
 #+end_src
 * modes
 ** php-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (custom-set-variables
    '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
    '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir))))
@@ -614,7 +653,7 @@
 #+end_src
 
 *** magento mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defvar n98-magerun-executable "/usr/local/bin/magerun")
 
 (defun magerun-commands()
@@ -636,7 +675,7 @@
 #+end_src
 
 ** python-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (autoload 'django-html-mumamo-mode "~/.emacs.d/lib/nxhtml/autostart.el")
 (setq auto-mode-alist
       (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
@@ -650,12 +689,12 @@
 #+end_src
 
 ** ruby-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 #+end_src
 
 ** c-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun compile-or-recompile()
   (interactive)
   (if (get-buffer "*compilation*")
@@ -664,14 +703,14 @@
 #+end_src
 
 ** emacs-lisp-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+end_src
 
 * multiple cursors
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (require 'multiple-cursors)
 
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -682,7 +721,7 @@
 #+end_src
 
 * package
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'package)
 
 (add-to-list 'package-archives
@@ -692,7 +731,7 @@
 (package-initialize)
 #+end_src
 * shell
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun comint-delchar-or-eof-or-kill-buffer (arg)
   (interactive "p")
   (if (null (get-buffer-process (current-buffer)))
@@ -705,7 +744,7 @@
               (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
 #+end_src
 * sql
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun run-mysql()
   (interactive)
   (let ((sql-scratch-buf (get-buffer-create "*sql-scratch*"))
@@ -718,14 +757,14 @@
 #+end_src
 
 * theme
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib/noctilux-theme"))
 
 (load-theme 'noctilux t)
 #+end_src
 
 * uniquify
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'uniquify)
 
 (setq
@@ -736,7 +775,7 @@
 #+end_src
 
 * webjump
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'webjump)
 
 (add-to-list 'webjump-sites
@@ -747,7 +786,7 @@
 #+end_src
 
 * yasnippet
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (require 'yasnippet)
 
 (yas-global-mode 1)
