@@ -58,3 +58,6 @@
 [submodule ".emacs.d/lib/noctilux-theme"]
 	path = .emacs.d/lib/noctilux-theme
 	url = git@github.com:stafu/noctilux-theme.git
+[submodule ".emacs.d/lib/vlfi"]
+	path = .emacs.d/lib/vlfi
+	url = git@github.com:m00natic/vlfi.git

@@ -774,6 +774,12 @@
  uniquify-ignore-buffers-re "^\\*")
 #+end_src
 
+* vlfi
+#+begin_src emacs-lisp
+
+  (require 'vlfi)
+#+end_src
+
 * webjump
 #+begin_src emacs-lisp
 (require 'webjump)
