@@ -641,6 +641,9 @@
   (require 'php-eldoc)
 
   (add-hook 'php-mode-hook '(lambda()
+                              (require 'geben)))
+
+  (add-hook 'php-mode-hook '(lambda()
                               (require 'wordpress-mode)
                               (if (wp/exists)
                                   (wordpress-mode))))
