@@ -236,6 +236,8 @@
 
   (define-key global-map (kbd "C-c r")       'replace-string)
 
+  (define-key global-map (kbd "C-c o") 'occur)
+
   (define-key global-map (kbd "<f3>")      'start-kbd-macro)
   (define-key global-map (kbd "ESC <f3>")  'end-kbd-macro)
   (define-key global-map (kbd "<f4>")      'call-last-kbd-macro)
