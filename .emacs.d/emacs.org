@@ -758,9 +758,9 @@
 
 * theme
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib/noctilux-theme"))
+(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib"))
 
-(load-theme 'noctilux t)
+(load-theme 'hickey t)
 #+end_src
 
 * uniquify
