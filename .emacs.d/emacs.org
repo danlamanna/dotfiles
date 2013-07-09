@@ -285,9 +285,6 @@
 
   (define-key global-map (kbd "C-c C-s") 'shell)
 
-  (define-key global-map (kbd "C-c C-t i") 'timeclock-in)
-  (define-key global-map (kbd "C-c C-t o") 'timeclock-out)
-
   (global-set-key (kbd "C-x g") 'webjump)
 
   (global-set-key (kbd "C-x p") 'proced)
@@ -423,6 +420,16 @@
 #+end_src
 
 ** misc functions
+*** Occur
+#+BEGIN_SRC emacs-lisp
+  (defun multi-occur-in-all-buffers (regexp &optional allbufs)
+    "Show all lines matching REGEXP in all buffers."
+    (interactive (occur-read-primary-args))
+    (multi-occur-in-matching-buffers ".*" regexp))
+
+  (global-set-key (kbd "C-c O") 'multi-occur-in-matching-buffers)
+#+END_SRC
+*** misc
 #+begin_src emacs-lisp
   (defun kill-emacs-no-prompt()
     (interactive)
@@ -812,11 +819,4 @@
 ** TODO Learn about/implement speedbar
 ** TODO Agenda Mode
 ** TODO Implement Undo Tree
-** TODO Implement multi-occur in all buffers
-#+BEGIN_SRC emacs-lisp :tangle no
-  (defun my-multi-occur-in-matching-buffers (regexp &optional allbufs)
-    "Show all lines matching REGEXP in all buffers."
-    (interactive (occur-read-primary-args))
-    (multi-occur-in-matching-buffers ".*" regexp))
-#+END_SRC
 ** TODO Implement a decent grep/eshell grep
