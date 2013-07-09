@@ -723,8 +723,7 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-#+end_src
-
+#+end_srC
 * package
 #+begin_src emacs-lisp
 (require 'package)
@@ -811,3 +810,13 @@
 * To do
 ** TODO Learn how to get Skewer working with D3 well
 ** TODO Learn about/implement speedbar
+** TODO Agenda Mode
+** TODO Implement Undo Tree
+** TODO Implement multi-occur in all buffers
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun my-multi-occur-in-matching-buffers (regexp &optional allbufs)
+    "Show all lines matching REGEXP in all buffers."
+    (interactive (occur-read-primary-args))
+    (multi-occur-in-matching-buffers ".*" regexp))
+#+END_SRC
+** TODO Implement a decent grep/eshell grep
