@@ -808,3 +808,6 @@
 
 (yas/reload-all)
 #+end_src
+* To do
+** TODO Learn how to get Skewer working with D3 well
+** TODO Learn about/implement speedbar
