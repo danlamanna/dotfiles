@@ -50,7 +50,7 @@
    '(dired-listing-switches "-alh")
    '(erc-autojoin-channels-alist (quote (("freenode.net" "#emacs"))))
    '(erc-hide-list (quote ("JOIN" "QUIT")))
-   '(grep-command "grep -rn -e ")
+   '(grep-command "grep -rin -e ")
    '(indent-tabs-mode nil)
    '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
    '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
