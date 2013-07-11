@@ -33,6 +33,7 @@
 
 (require 'coding-standards)
 (require 'ido)
+(require 's)
 
 (if (member (expand-file-name "~/.emacs.d/lib/burst") load-path)
     (require 'burst))
@@ -435,6 +436,28 @@
 
   (global-undo-tree-mode)
 #+END_SRC
+*** Eval and Replace
+#+BEGIN_SRC emacs-lisp
+  (defun insert-shell-command(command)
+    "Execute COMMAND and return the output, sans trailing newline."
+    (interactive)
+    (let ((result (shell-command-to-string command)))
+      (insert (substring result 0 (1- (length result))))))
+
+  (global-set-key (kbd "C-c i") 'insert-shell-command)
+
+  (defun eval-and-replace()
+    "Replace the preceding sexp with its value."
+    (interactive)
+    (backward-kill-sexp)
+    (condition-case nil
+        (prin1 (eval (read (current-kill 0)))
+               (current-buffer))
+      (error (message "Invalid expression")
+             (insert (current-kill 0)))))
+
+  (global-set-key (kbd "C-c e") 'eval-and-replace)
+#+END_SRC
 *** misc
 #+begin_src emacs-lisp
   (defun kill-emacs-no-prompt()
@@ -737,6 +760,20 @@
 
   (global-set-key (kbd "S-SPC") 'set-rectangular-region-anchor)
 #+end_srC
+* org
+#+BEGIN_SRC emacs-lisp
+  (defun hour-min-to-decimal(hour-min level)
+    (if (or (s-contains? "*" hour-min)
+            (s-equals? "" hour-min)
+            (s-equals? level "1"))
+        ""
+      (let* ((time (s-split ":" hour-min))
+             (hr   (string-to-number (car time)))
+             (min  (ceiling (* 100 (/ (float (string-to-number (car (cdr time)))) 60.0)))))
+        (concat (number-to-string hr)
+                "."
+                (number-to-string min)))))
+#+END_SRC
 * package
 #+begin_src emacs-lisp
 (require 'package)
@@ -824,3 +861,4 @@
 ** TODO Learn how to get Skewer working with D3 well
 ** TODO Learn about/implement speedbar
 ** TODO Agenda Mode
+** TODO Implement flycheck and make sure it works well over tramp
