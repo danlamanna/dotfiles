@@ -862,3 +862,4 @@
 ** TODO Learn about/implement speedbar
 ** TODO Agenda Mode
 ** TODO Implement flycheck and make sure it works well over tramp
+** TODO Shell Command Output popup beneath
