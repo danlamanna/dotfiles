@@ -61,3 +61,6 @@
 [submodule ".emacs.d/lib/vlfi"]
 	path = .emacs.d/lib/vlfi
 	url = git@github.com:m00natic/vlfi.git
+[submodule ".emacs.d/lib/org-bullets"]
+	path = .emacs.d/lib/org-bullets
+	url = git@github.com:sabof/org-bullets.git
