@@ -176,6 +176,12 @@
   (delete-other-windows))
 #+end_src
 
+* guide key
+#+BEGIN_SRC emacs-lisp
+  (require 'guide-key)
+  (setq guide-key/guide-key-sequence '("C-x r"))
+  (guide-key-mode 1)
+#+END_SRC
 * ido
 ** general ido
 #+begin_src emacs-lisp
@@ -232,7 +238,7 @@
 
   (define-key global-map (kbd "C-a") 'back-to-indentation-or-beginning)
 
-  (define-key global-map (kbd "C-c C-g") 'grep)
+  (define-key global-map (kbd "C-c g") 'grep)
 
   (define-key global-map (kbd "C-c r")       'replace-string)
 
@@ -756,8 +762,6 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-  (global-set-key (kbd "S-SPC") 'set-rectangular-region-anchor)
 #+end_srC
 * org
 #+BEGIN_SRC emacs-lisp
@@ -861,7 +865,7 @@
 
 (yas/reload-all)
 #+end_src
-* To do
+* Tasks
 ** TODO Learn how to get Skewer working with D3 well
 ** TODO Learn about/implement speedbar
 ** TODO Agenda Mode
