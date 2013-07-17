@@ -51,6 +51,7 @@
     '(erc-hide-list (quote ("JOIN" "QUIT")))
     '(grep-command "grep -rin -e ")
     '(indent-tabs-mode nil)
+ '(flymake-allowed-file-name-masks (quote (("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'" flymake-simple-make-init) ("\\.xml\\'" flymake-xml-init) ("\\.html?\\'" flymake-xml-init) ("\\.cs\\'" flymake-simple-make-init) ("\\.p[ml]\\'" flymake-perl-init) ("\\.php[345]?\\'" flymake-php-init) ("\\.h\\'" flymake-master-make-header-init flymake-master-cleanup) ("\\.java\\'" flymake-simple-make-java-init flymake-simple-java-cleanup) ("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup) ("\\.tex\\'" flymake-simple-tex-init) ("\\.idl\\'" flymake-simple-make-init))))
     '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . emacs))))
     '(php-completion-file (expand-file-name (format "%s/etc/php-completion.txt" emacs-config-dir)))
     '(php-manual-path (expand-file-name (format "%s/etc/php-manual" emacs-config-dir)))
@@ -773,7 +774,7 @@
   (defun hour-min-to-decimal(hour-min level)
     (if (or (s-contains? "*" hour-min)
             (s-equals? "" hour-min)
-            (not (s-equals? level "3")))
+            (not (s-equals? level "2")))
         ""
       (let* ((time (s-split ":" hour-min))
              (hr   (string-to-number (car time)))
@@ -807,15 +808,19 @@
 #+end_src
 * sql
 #+begin_src emacs-lisp
-(defun run-mysql()
-  (interactive)
-  (let ((sql-scratch-buf (get-buffer-create "*sql-scratch*"))
-        (sql-buf         (sql-mysql "*mysql*")))
-    (with-current-buffer sql-scratch-buf
-      (sql-mode)
-      (sql-highlight-mysql-keywords))))
+  (defun run-mysql()
+    (interactive)
+    (let ((sql-scratch-buf (get-buffer-create "*sql-scratch*"))
+          (sql-buf         (sql-mysql "*mysql*")))
+      (with-current-buffer sql-scratch-buf
+        (sql-mode)
+        (sql-highlight-mysql-keywords))))
 
-(define-key global-map (kbd "C-c m") 'run-mysql)
+  (define-key global-map (kbd "C-c m") 'run-mysql)
+
+  (add-hook 'sql-mode-hook
+            (lambda ()
+              (sql-highlight-mysql-keywords)))
 #+end_src
 
 * theme
@@ -855,15 +860,15 @@
 
 * yasnippet
 #+begin_src emacs-lisp
-(require 'yasnippet)
+  (require 'yasnippet)
 
-(yas-global-mode 1)
-(setq yas-trigger-key "TAB")
+  (yas-global-mode 1)
+  (setq yas-trigger-key "TAB")
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/etc/snippets"))
+  (setq yas-snippet-dirs
+        '("/home/dan/.emacs.d/etc/snippets"))
 
-(yas/reload-all)
+  (yas/reload-all)
 #+end_src
 * Tasks
 ** TODO Learn how to get Skewer working with D3 well
