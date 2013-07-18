@@ -182,7 +182,7 @@
 * guide key
 #+BEGIN_SRC emacs-lisp
   (require 'guide-key)
-  (setq guide-key/guide-key-sequence '("C-x r"))
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x n"))
   (guide-key-mode 1)
 #+END_SRC
 * ido
