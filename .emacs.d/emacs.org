@@ -228,6 +228,16 @@
 (ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
 #+end_src
 
+** minibuffer customizations
+   #+BEGIN_SRC emacs-lisp
+     (setq enable-recursive-minibuffers t)
+
+     (define-key minibuffer-local-map (kbd "M-i") 'minibuffer-insert-ido-filename)
+
+     (defun minibuffer-insert-ido-filename()
+       (interactive)
+       (insert (ido-read-file-name "File: ")))
+   #+END_SRC
 * keymaps
 #+begin_src emacs-lisp
   (global-unset-key (kbd "C-z"))
@@ -883,8 +893,6 @@
 * Tasks
 ** TODO Learn how to get Skewer working with D3 well
 ** TODO Learn about/implement speedbar
-** TODO Agenda Mode
 ** TODO Implement flycheck and make sure it works well over tramp
 ** TODO Shell Command Output popup beneath
 ** TODO mark-next-like-this scroll
-** TODO Minibuffer ido keybind
