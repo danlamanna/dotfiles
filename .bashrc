@@ -111,3 +111,7 @@ export LESS='-iMFXSx4R'
 
 export PATH
 PATH=$PATH:/usr/lib/jvm/java-6-openjdk/bin
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -6,7 +6,7 @@
 
   (setq default-directory "~")
 
-  (add-hook 'after-init-hook #'global-flycheck-mode)
+  ;(add-hook 'after-init-hook #'global-flycheck-mode)
 #+end_src
 
 ** library loading
@@ -76,8 +76,8 @@
 #+end_src
 ** org-keywords
 #+begin_src emacs-lisp
- (setq org-todo-keywords
-           '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "DONE")))
+  (setq org-todo-keywords
+            '((sequence "TODO" "SUM-2013" "FALL-2013" "WIN-2013" "SPR-2014" "SUM-2014" "FALL-2014" "|" "CURRENT" "DONE")))
 #+end_src
 ** mumamo
 #+begin_src emacs-lisp
@@ -802,6 +802,18 @@
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cb" 'org-iswitchb)
 
+  (require 'org-latex)
+  (require 'ob-sql)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '( (perl . t)
+      (ruby . t)
+      (sh . t)
+      (python . t)
+      (emacs-lisp . t)
+      (sql . t)
+      ))
 #+END_SRC
 * package
 #+begin_src emacs-lisp
@@ -896,3 +908,4 @@
 ** TODO Implement flycheck and make sure it works well over tramp
 ** TODO Shell Command Output popup beneath
 ** TODO mark-next-like-this scroll
+** TODO Implement git-gutter https://github.com/nonsequitur/git-gutter-plus
