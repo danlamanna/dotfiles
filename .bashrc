@@ -30,9 +30,6 @@ alias b="cd $OLDPWD"
 # cd to the root httpdocs folder
 alias cdh="source ~/bin/cdh"
 
-# Always recursive grep, this may come back to haunt me
-alias grep="grep -R "
-
 # Quick finding of files by grepping name
 function ff() {
     find . | grep $1
