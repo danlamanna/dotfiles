@@ -10,9 +10,6 @@
 [submodule ".emacs.d/lib/iy-go-to-char"]
         path = .emacs.d/lib/iy-go-to-char
         url = git://github.com/emacsmirror/iy-go-to-char.git
-[submodule ".emacs.d/lib/mark-multiple"]
-        path = .emacs.d/lib/mark-multiple
-        url = git@github.com:magnars/mark-multiple.el.git
 [submodule ".emacs.d/lib/expand-region"]
         path = .emacs.d/lib/expand-region
         url = git://github.com/magnars/expand-region.el.git
@@ -47,20 +44,20 @@
         path = .emacs.d/lib/powerline
         url = git://github.com/jonathanchu/emacs-powerline.git
 [submodule ".emacs.d/lib/magit"]
-	path = .emacs.d/lib/magit
-	url = git://github.com/magit/magit.git
+        path = .emacs.d/lib/magit
+        url = git://github.com/magit/magit.git
 [submodule ".emacs.d/lib/php-eldoc"]
-	path = .emacs.d/lib/php-eldoc
-	url = git://github.com/zenozeng/php-eldoc.git
+        path = .emacs.d/lib/php-eldoc
+        url = git://github.com/zenozeng/php-eldoc.git
 [submodule ".emacs.d/lib/dizzee"]
-	path = .emacs.d/lib/dizzee
-	url = https://github.com/davidmiller/dizzee.git
+        path = .emacs.d/lib/dizzee
+        url = https://github.com/davidmiller/dizzee.git
 [submodule ".emacs.d/lib/noctilux-theme"]
-	path = .emacs.d/lib/noctilux-theme
-	url = git@github.com:stafu/noctilux-theme.git
+        path = .emacs.d/lib/noctilux-theme
+        url = git@github.com:stafu/noctilux-theme.git
 [submodule ".emacs.d/lib/vlfi"]
-	path = .emacs.d/lib/vlfi
-	url = git@github.com:m00natic/vlfi.git
+        path = .emacs.d/lib/vlfi
+        url = git@github.com:m00natic/vlfi.git
 [submodule ".emacs.d/lib/org-bullets"]
-	path = .emacs.d/lib/org-bullets
-	url = git@github.com:sabof/org-bullets.git
+        path = .emacs.d/lib/org-bullets
+        url = git@github.com:sabof/org-bullets.git
