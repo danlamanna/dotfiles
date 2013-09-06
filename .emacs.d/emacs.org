@@ -242,6 +242,18 @@
        (interactive)
        (insert (ido-read-file-name "File: ")))
    #+END_SRC
+* key-chord
+#+begin_src emacs-lisp
+  (require 'key-chord)
+
+  (key-chord-define-global "jj" 'ace-jump-word-mode)
+  (key-chord-define-global "jl" 'ace-jump-line-mode)
+  (key-chord-define-global "jk" 'ace-jump-char-mode)
+  (key-chord-define-global "uu" 'undo-tree-visualize)
+
+  (key-chord-mode +1)
+#+end_src
+
 * keymaps
 #+begin_src emacs-lisp
   (global-unset-key (kbd "C-z"))
