@@ -749,16 +749,18 @@
 
 ** python-mode
 #+begin_src emacs-lisp
-(autoload 'django-html-mumamo-mode "~/.emacs.d/lib/nxhtml/autostart.el")
-(setq auto-mode-alist
-      (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
-(setq mumamo-background-colors nil)
-(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
+  (autoload 'django-html-mumamo-mode "~/.emacs.d/lib/nxhtml/autostart.el")
+  (setq auto-mode-alist
+        (append '(("\\.djhtml?$" . django-html-mumamo-mode)) auto-mode-alist))
+  (setq mumamo-background-colors nil)
+  (add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
 
-(add-hook 'python-mode-hook '(lambda()
-                               (elpy-mode)
-                               (define-key elpy-mode-map (kbd "<M-down>") 'elpy-forward-definition)
-                               (define-key elpy-mode-map (kbd "<M-up>") 'elpy-backward-definition)))
+  (add-hook 'python-mode-hook '(lambda()
+                                 (elpy-mode)
+                                 (define-key elpy-mode-map (kbd "<M-down>") 'elpy-forward-definition)
+                                 (define-key elpy-mode-map (kbd "<M-up>") 'elpy-backward-definition)
+                                 (define-key elpy-mode-map (kbd "<C-down>") 'windmove-down)
+                                 (define-key elpy-mode-map (kbd "<C-up>")  'windmove-up)))
 #+end_src
 
 ** ruby-mode
