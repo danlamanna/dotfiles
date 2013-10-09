@@ -125,6 +125,16 @@
   (define-key dired-mode-map
     (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 #+end_src
+* emmet
+#+BEGIN_SRC emacs-lisp
+  (require 'emmet-mode)
+
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'web-mode-hook  'emmet-mode)
+
+#+END_SRC
 * tramp
 #+begin_src emacs-lisp
 (require 'tramp)
@@ -666,7 +676,8 @@
                                        rust-mode
                                        scheme-mode
                                        vbnet-mode
-                                       emacs-lisp-mode))
+                                       emacs-lisp-mode
+                                       web-mode))
                   (let ((mark-even-if-inactive transient-mark-mode))
                     (indent-region (region-beginning) (region-end) nil))))))
 #+end_src
