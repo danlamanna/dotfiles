@@ -939,3 +939,5 @@
 ** TODO Shell Command Output popup beneath
 ** TODO mark-next-like-this scroll
 ** TODO Implement git-gutter https://github.com/nonsequitur/git-gutter-plus
+** TODO Layout/Xmodmap on Startup
+** TODO Wireless Icon?
