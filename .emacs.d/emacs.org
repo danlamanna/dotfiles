@@ -125,6 +125,16 @@
   (define-key dired-mode-map
     (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 #+end_src
+* emmet
+#+BEGIN_SRC emacs-lisp
+  (require 'emmet-mode)
+
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'web-mode-hook  'emmet-mode)
+
+#+END_SRC
 * tramp
 #+begin_src emacs-lisp
 (require 'tramp)
@@ -666,7 +676,8 @@
                                        rust-mode
                                        scheme-mode
                                        vbnet-mode
-                                       emacs-lisp-mode))
+                                       emacs-lisp-mode
+                                       web-mode))
                   (let ((mark-even-if-inactive transient-mark-mode))
                     (indent-region (region-beginning) (region-end) nil))))))
 
@@ -788,6 +799,28 @@
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+end_src
 
+** web-mode
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "web-mode"
+    '(setq web-mode-engine-file-regexps
+           '(("asp"        . "\\.asp\\'")
+             ("aspx"       . "\\.as[cp]x\\'")
+             ("blade"      . "\\.blade")
+             ("django"     . "\\.\\(djhtml\\|tmpl\\|dtl\\)\\'")
+             ("django"     . "twig")
+             ("erb"        . "\\.\\(erb\\|rhtml\\)\\'")
+             ("freemarker" . "\\.ftl\\'")
+             ("go"         . "\\.go\\(html\\|tmpl\\)\\'")
+             ("handlebars" . "\\(handlebars\\|.\\hbs\\'\\)")
+             ("jsp"        . "\\.jsp\\'")
+             ("mustache"   . "\\.mustache\\'")
+             ("php"        . "\\.\\(php\\|ctp\\|psp\\|inc\\|phtml\\)\\'")
+             ("python"     . "\\.pml\\'")
+             ("razor"      . "play\\|\\.scala\\.\\|\\.cshtml\\'\\|\\.vbhtml\\'")
+             ("smarty"     . "\\.tpl\\'")
+             ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'"))))
+
+#+END_SRC
 * multiple cursors
 #+begin_src emacs-lisp
   (require 'multiple-cursors)
@@ -931,3 +964,4 @@
 ** TODO Shell Command Output popup beneath
 ** TODO mark-next-like-this scroll
 ** TODO Implement git-gutter https://github.com/nonsequitur/git-gutter-plus
+** TODO expand region with web-mode
