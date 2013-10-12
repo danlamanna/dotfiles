@@ -246,9 +246,9 @@
 #+begin_src emacs-lisp
   (require 'key-chord)
 
-  (key-chord-define-global "jj" 'ace-jump-word-mode)
-  (key-chord-define-global "jl" 'ace-jump-line-mode)
-  (key-chord-define-global "jk" 'ace-jump-char-mode)
+  (key-chord-define-global "ww" 'ace-jump-word-mode)
+;  (key-chord-define-global "ll" 'ace-jump-line-mode)
+  (key-chord-define-global "cc" 'ace-jump-char-mode)
   (key-chord-define-global "uu" 'undo-tree-visualize)
 
   (key-chord-mode +1)
@@ -669,6 +669,9 @@
                                        emacs-lisp-mode))
                   (let ((mark-even-if-inactive transient-mark-mode))
                     (indent-region (region-beginning) (region-end) nil))))))
+
+  ; before reverting a buffer - copy the contents to your kill ring "just in case"
+  (add-hook 'before-revert-hook  (lambda () (kill-ring-save (point-min) (point-max))))
 #+end_src
 
 ** saveplace
@@ -789,7 +792,7 @@
 #+begin_src emacs-lisp
   (require 'multiple-cursors)
 
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C-c SPC") 'set-rectangular-region-anchor)
 
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
