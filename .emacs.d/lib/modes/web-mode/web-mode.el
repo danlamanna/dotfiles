@@ -4220,7 +4220,7 @@ Must be used in conjunction with web-mode-enable-block-face."
 
      ((and (eq (get-text-property pos 'server-engine) 'php)
            (web-mode-block-beginning)
-           (looking-at-p "<\\?\\(php[ ]+\\|[ ]*\\)?\\(end\\)?\\(for\\|if\\|else\\|while\\)"))
+           (looking-at-p "<\\?\\(php[ ]+\\|[ ]*\\)?\\(end\\)?\\(for\\|if\\|else\\|elseif\\while\\)"))
       (web-mode-match-php-tag))
 
      ((and (eq (get-text-property pos 'server-engine) 'erb)
