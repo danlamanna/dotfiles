@@ -8,3 +8,4 @@
 (require 'ob-tangle)
 
 (org-babel-load-file (concat emacs-config-dir "/emacs.org"))
+(put 'downcase-region 'disabled nil)
