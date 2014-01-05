@@ -862,6 +862,29 @@
         (comment-or-uncomment-region (region-beginning) (region-end))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
   
+  (add-to-list 'load-path (expand-file-name "~/irony-mode/elisp/"))
+  
+  (require 'auto-complete)
+  (require 'yasnippet)
+  (require 'irony) ;Note: hit `C-c C-b' to open build menu
+  
+  ;; the ac plugin will be activated in each buffer using irony-mode
+  (irony-enable 'ac)             ; hit C-RET to trigger completion
+  
+  (defun my-c++-hooks ()
+    "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+    ;; if yas is not set before (auto-complete-mode 1), overlays may persist after
+    ;; an expansion.
+    (yas/minor-mode-on)
+    (auto-complete-mode 1)
+  
+    ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+    (when (member major-mode irony-known-modes)
+      (irony-mode 1)))
+  
+  (add-hook 'c++-mode-hook 'my-c++-hooks)
+  (add-hook 'c-mode-hook 'my-c++-hooks)
+  
   (add-hook 'c-mode-hook '(lambda()
                             (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)))
 #+end_src
