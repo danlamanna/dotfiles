@@ -1,0 +1,6 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : printf
+#key : pf
+# --
+printf("$1\n", $2);
+$0
