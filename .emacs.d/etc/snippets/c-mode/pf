@@ -1,6 +1,5 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : printf
-#key : pf
+# -*- mode: snippet -*-
+# name: pf
+# key: pf
 # --
-printf("$1\n", $2);
-$0
+printf("${1:format string}"${2: ,a0,a1});

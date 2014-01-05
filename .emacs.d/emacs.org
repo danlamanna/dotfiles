@@ -748,6 +748,18 @@
              ;; Display time, followed by dashes till the end
               '(:eval (propertize (format-time-string "%l:%M%p")))))
 #+end_src
+* yasnippet
+#+begin_src emacs-lisp
+  (require 'yasnippet)
+
+  (yas-global-mode 1)
+  (setq yas-trigger-key "TAB")
+
+  (setq yas-snippet-dirs
+        '("/home/dan/.emacs.d/etc/snippets"))
+
+  (yas/reload-all)
+#+end_src
 * modes
 ** go-mode
 #+BEGIN_SRC emacs-lisp
@@ -868,27 +880,21 @@
   (add-to-list 'load-path (expand-file-name "~/irony-mode/elisp/"))
   
   (require 'auto-complete)
-  (require 'yasnippet)
-  (require 'irony) ;Note: hit `C-c C-b' to open build menu
+  (require 'irony)
+  (irony-enable 'ac)
   
-  ;; the ac plugin will be activated in each buffer using irony-mode
-  (irony-enable 'ac)             ; hit C-RET to trigger completion
-  
-  (defun my-c++-hooks ()
+  (defun c-hooks()
     "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-    ;; if yas is not set before (auto-complete-mode 1), overlays may persist after
-    ;; an expansion.
     (yas/minor-mode-on)
     (auto-complete-mode 1)
-  
-    ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+      ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
     (when (member major-mode irony-known-modes)
       (irony-mode 1)))
   
-  (add-hook 'c++-mode-hook 'my-c++-hooks)
-  (add-hook 'c-mode-hook 'my-c++-hooks)
+  (add-hook 'c-mode-hook 'c-hooks)
   
   (add-hook 'c-mode-hook '(lambda()
+                            (global-flycheck-mode t)
                             (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)))
 #+end_src
 
@@ -1050,18 +1056,6 @@
     [simple-query "www.google.com" "www.google.com/search?q=" ""]))
 #+end_src
 
-* yasnippet
-#+begin_src emacs-lisp
-  (require 'yasnippet)
-
-  (yas-global-mode 1)
-  (setq yas-trigger-key "TAB")
-
-  (setq yas-snippet-dirs
-        '("/home/dan/.emacs.d/etc/snippets"))
-
-  (yas/reload-all)
-#+end_src
 * Tasks
 ** TODO Learn how to get Skewer working with D3 well
 ** TODO Learn about/implement speedbar
