@@ -272,14 +272,17 @@
    #+END_SRC
 * key-chord
 #+begin_src emacs-lisp
-  (require 'key-chord)
-
-  (key-chord-define-global "ww" 'ace-jump-word-mode)
-;  (key-chord-define-global "ll" 'ace-jump-line-mode)
-  (key-chord-define-global "jj" 'ace-jump-char-mode)
-  (key-chord-define-global "uu" 'undo-tree-visualize)
-
-  (key-chord-mode +1)
+    (require 'key-chord)
+  
+    (key-chord-define-global "ww" 'ace-jump-word-mode)
+  ;  (key-chord-define-global "ll" 'ace-jump-line-mode)
+    (key-chord-define-global "jj" 'ace-jump-char-mode)
+    (key-chord-define-global "uu" 'undo-tree-visualize)
+    (key-chord-define-global "cc" 'compile)
+    (key-chord-define-global "gg" 'gud-gdb)
+  
+  
+    (key-chord-mode +1)
 #+end_src
   
 * keymaps
