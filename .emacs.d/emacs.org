@@ -281,7 +281,7 @@
 
   (key-chord-mode +1)
 #+end_src
-
+  
 * keymaps
 #+begin_src emacs-lisp
   (global-unset-key (kbd "C-z"))
@@ -343,12 +343,12 @@
   (define-key global-map (kbd "C-c R") 'restclient-mode)
   
   (define-key global-map (kbd "C-c s") 'magit-status)
-  
-  (define-key global-map (kbd "C-c c") 'compile-or-recompile)
-  
+    
   (define-key global-map (kbd "C-c k") 'quick-copy-line)
   
   (define-key global-map (kbd "C-c C-s") 'shell)
+  
+  (define-key global-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)
   
   (global-set-key (kbd "C-x g") 'webjump)
   
@@ -855,11 +855,15 @@
 
 ** c-mode
 #+begin_src emacs-lisp
-(defun compile-or-recompile()
-  (interactive)
-  (if (get-buffer "*compilation*")
-      (recompile)
-    (compile compile-command)))
+  (defun comment-or-uncomment-line-or-region ()
+    "Comments or uncomments the current line or region."
+    (interactive)
+    (if (region-active-p)
+        (comment-or-uncomment-region (region-beginning) (region-end))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+  
+  (add-hook 'c-mode-hook '(lambda()
+                            (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)))
 #+end_src
 
 ** emacs-lisp-mode
@@ -1006,13 +1010,18 @@
 
 * webjump
 #+begin_src emacs-lisp
-(require 'webjump)
-
-(add-to-list 'webjump-sites
-             '("Stack Overflow" .
-               [simple-query "stackoverflow.com"
-                             "http://stackoverflow.com/search?q="
-                             ""]))
+  (require 'webjump)
+  
+  (setq webjump-sites nil)
+  
+  (add-to-list 'webjump-sites
+               '("Stack Overflow" .
+                 [simple-query "stackoverflow.com"
+                               "http://stackoverflow.com/search?q="
+                               ""]))
+  (add-to-list 'webjump-sites
+  '("Google" .
+    [simple-query "www.google.com" "www.google.com/search?q=" ""]))
 #+end_src
 
 * yasnippet
