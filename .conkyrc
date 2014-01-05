@@ -73,3 +73,6 @@ ${downspeedgraph eth0 32,120 278f4f ffffff} ${offset 50} ${upspeedgraph eth0 32,
 ${color #278f4f}IPs:$color ${addr eth0} ${offset 33} ${execi 7200 curl http://curlmyip.com/}
 $font${color #278f4f}$stippled_hr
 ${color lightgrey}hda:  ${fs_used /}/${fs_size /}  ${fs_bar /}
+
+${font sans-serif:bold:size=8}Virtual Machines ${hr 2}
+${exec VBoxManage list runningvms}
