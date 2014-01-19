@@ -112,3 +112,6 @@ PATH=$PATH:/usr/lib/jvm/java-6-openjdk/bin
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# ssh-agent-forwarding, sigh
+ssh-add ~/.ssh/id_rsa &> /dev/null
