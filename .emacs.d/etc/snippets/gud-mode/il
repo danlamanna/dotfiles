@@ -1,0 +1,4 @@
+#name : info locals
+# key: il
+# --
+info locals`(comint-send-input)`

@@ -1,0 +1,4 @@
+#name : dereference last result
+# key: pp
+# --
+p *$`(comint-send-input)`

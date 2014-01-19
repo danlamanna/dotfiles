@@ -1,0 +1,4 @@
+#name : info args
+# key: ia
+# --
+info args`(comint-send-input)`
