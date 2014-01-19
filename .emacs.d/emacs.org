@@ -862,12 +862,23 @@
   (setq mumamo-background-colors nil)
   (add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mumamo-mode))
 
-  (add-hook 'python-mode-hook '(lambda()
-                                 (elpy-mode)
-                                 (define-key elpy-mode-map (kbd "<M-down>") 'elpy-forward-definition)
-                                 (define-key elpy-mode-map (kbd "<M-up>") 'elpy-backward-definition)
-                                 (define-key elpy-mode-map (kbd "<C-down>") 'windmove-down)
-                                 (define-key elpy-mode-map (kbd "<C-up>")  'windmove-up)))
+  (setq py-install-directory "~/.emacs.d/lib/python-mode-6.1.2")
+  (add-to-list 'load-path py-install-directory)
+  (require 'python-mode)
+
+  (setq-default py-shell-name "ipython")
+  (setq-default py-which-bufname "IPython")
+                                          ; use the wx backend, for both mayavi and matplotlib
+  (setq py-python-command-args
+        '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+  (setq py-force-py-shell-name-p t)
+
+  (setq py-shell-switch-buffers-on-execute-p nil)
+  (setq py-switch-buffers-on-execute-p nil)
+                                          ; don't split windows
+  (setq py-split-windows-on-execute-p nil)
+                                          ; try to automagically figure out indentation
+  (setq py-smart-indentation t)
 #+end_src
 
 ** ruby-mode
