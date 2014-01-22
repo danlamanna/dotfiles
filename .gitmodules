@@ -1,63 +1,6 @@
-[submodule ".emacs.d/lib/restclient"]
-        path = .emacs.d/lib/restclient
-        url = git://github.com/pashky/restclient.el.git
-[submodule ".emacs.d/lib/yasnippet"]
-        path = .emacs.d/lib/yasnippet
-        url = git://github.com/capitaomorte/yasnippet.git
-[submodule ".emacs.d/lib/modes/php-mode"]
-        path = .emacs.d/lib/modes/php-mode
-        url = git://github.com/ejmr/php-mode.git
-[submodule ".emacs.d/lib/iy-go-to-char"]
-        path = .emacs.d/lib/iy-go-to-char
-        url = git://github.com/emacsmirror/iy-go-to-char.git
-[submodule ".emacs.d/lib/expand-region"]
-        path = .emacs.d/lib/expand-region
-        url = git://github.com/magnars/expand-region.el.git
-[submodule ".emacs.d/lib/ace-jump-mode"]
-        path = .emacs.d/lib/ace-jump-mode
-        url = git://github.com/winterTTr/ace-jump-mode.git
-[submodule ".emacs.d/lib/rinari"]
-        path = .emacs.d/lib/rinari
-        url = git://github.com/eschulte/rinari.git
-[submodule ".emacs.d/lib/spim-mode"]
-        path = .emacs.d/lib/spim-mode
-        url = git://github.com/matsu911/spim-mode.git
-[submodule ".emacs.d/lib/assembla-mode"]
-        path = .emacs.d/lib/assembla-mode
-        url = git@github.com:danlamanna/assembla-mode.git
-[submodule ".emacs.d/lib/wordpress-mode"]
-        path = .emacs.d/lib/wordpress-mode
-        url = git@github.com:danlamanna/wordpress-mode.git
-[submodule ".emacs.d/lib/w3m"]
-        path = .emacs.d/lib/w3m
-        url = git://github.com/doitian/emacs-w3m.git
-[submodule ".emacs.d/lib/mumamo-mode"]
-        path = .emacs.d/lib/mumamo-mode
-        url = git://github.com/purcell/mmm-mode.git
-[submodule ".emacs.d/lib/nxhtml-github"]
-        path = .emacs.d/lib/nxhtml-github
-        url = git://github.com/emacsmirror/nxhtml.git
 [submodule ".emacs.d/lib/coding-standards"]
         path = .emacs.d/lib/coding-standards
         url = git@github.com:burstmarketing/coding-standards.git
-[submodule ".emacs.d/lib/powerline"]
-        path = .emacs.d/lib/powerline
-        url = git://github.com/jonathanchu/emacs-powerline.git
 [submodule ".emacs.d/lib/magit"]
         path = .emacs.d/lib/magit
         url = git://github.com/magit/magit.git
-[submodule ".emacs.d/lib/php-eldoc"]
-        path = .emacs.d/lib/php-eldoc
-        url = git://github.com/zenozeng/php-eldoc.git
-[submodule ".emacs.d/lib/dizzee"]
-        path = .emacs.d/lib/dizzee
-        url = https://github.com/davidmiller/dizzee.git
-[submodule ".emacs.d/lib/noctilux-theme"]
-        path = .emacs.d/lib/noctilux-theme
-        url = git@github.com:stafu/noctilux-theme.git
-[submodule ".emacs.d/lib/vlfi"]
-        path = .emacs.d/lib/vlfi
-        url = git@github.com:m00natic/vlfi.git
-[submodule ".emacs.d/lib/org-bullets"]
-        path = .emacs.d/lib/org-bullets
-        url = git@github.com:sabof/org-bullets.git

@@ -8,6 +8,8 @@
 .emacs.d/elpa/archives/
 .emacs.d/thumbs
 *.elc
+/.emacs.d/.cask/*
+/.emacs.d/%backup%~
 /.emacs.d/ac-comphist.dat
 /.emacs.d/geben/.storage
 /.emacs.d/.mc-lists.el
