@@ -1,7 +1,6 @@
 * initialization
 #+begin_src emacs-lisp
   (let ((default-directory emacs-config-dir))
-    (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
 
   (require 'cask "~/.cask/cask.el")
@@ -366,12 +365,6 @@
     (interactive)
     (kill-buffer)
     (jump-to-register :magit-fullscreen))
-
-  ;; Hooks
-  (add-hook 'magit-mode-hook (lambda()
-                               (require 'magit-svn)
-                               (if (magit-svn-get-ref-info)
-                                   (magit-svn-mode))))
 
   (add-hook 'magit-mode-hook 'hl-line-mode)
 
@@ -833,9 +826,9 @@
 
   (add-to-list 'load-path (expand-file-name "~/irony-mode/elisp/"))
 
-  (require 'auto-complete)
-  (require 'irony)
-  (irony-enable 'ac)
+;  (require 'auto-complete)
+ ; (require 'irony)
+  ;(irony-enable 'ac)
 
   (defun c-hooks()
     "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
@@ -917,7 +910,7 @@
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cb" 'org-iswitchb)
 
-  (require 'org-latex)
+  ;(require 'org-latex)
   (require 'ob-sql)
 
   (org-babel-do-load-languages
