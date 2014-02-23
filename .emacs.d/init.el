@@ -350,18 +350,18 @@ and it's name isn't in no-cleanup-filenames."
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
 (require 'auto-complete)
-;; (require 'irony)
-;; (irony-enable 'ac)
+(require 'irony)
+(irony-enable 'ac)
 
-;; (defun c-hooks()
-;;   "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-;;   (yas/minor-mode-on)
-;;   (auto-complete-mode 1)
-;;   ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
-;;   (when (member major-mode irony-known-modes)
-;;     (irony-mode 1)))
+(defun c-hooks()
+  "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+  (yas/minor-mode-on)
+  (auto-complete-mode 1)
+  ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+  (when (member major-mode irony-known-modes)
+    (irony-mode 1)))
 
-;; (add-hook 'c-mode-hook 'c-hooks)
+(add-hook 'c-mode-hook 'c-hooks)
 
 (add-hook 'c-mode-hook '(lambda()
                           (global-flycheck-mode t)
@@ -427,9 +427,6 @@ and it's name isn't in no-cleanup-filenames."
 ;; winner-mode
 (require 'winner)
 (winner-mode t)
-
-
-
 
 ;; some better default keybindings
 (define-key global-map (kbd "C-z") 'quoted-insert)
