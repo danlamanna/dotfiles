@@ -402,9 +402,9 @@ and it's name isn't in no-cleanup-filenames."
      (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords)))
 
 ;; themes
-(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib"))
-(require 'color-theme-sanityinc-tomorrow)
-(color-theme-sanityinc-tomorrow-night)
+;;(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib"))
+;;(require 'color-theme-sanityinc-tomorrow)
+;;(color-theme-sanityinc-tomorrow-night)
 
 ;; uniquify
 (require 'uniquify)
