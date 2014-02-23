@@ -127,6 +127,10 @@ and it's name isn't in no-cleanup-filenames."
      (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
+;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require 'el-get)
+
 ;; expand-region
 (autoload 'er/expand-region "expand-region" t)
 (define-key global-map (kbd "C-q") 'er/expand-region)

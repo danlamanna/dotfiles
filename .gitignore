@@ -7,7 +7,6 @@
 .emacs.d/var
 .emacs.d/elpa/archives/
 .emacs.d/thumbs
-.emacs.d/el-get
 *.elc
 /.emacs.d/ac-comphist.dat
 /.emacs.d/geben/.storage
