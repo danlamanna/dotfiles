@@ -325,21 +325,21 @@ and it's name isn't in no-cleanup-filenames."
            ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'"))))
 
 ;; python-mode
-(require 'python-mode)
+;; (require 'python-mode)
 
-(setq-default py-shell-name "ipython")
-(setq-default py-which-bufname "IPython")
-                                        ; use the wx backend, for both mayavi and matplotlib
-(setq py-python-command-args
-      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-(setq py-force-py-shell-name-p t)
+;; (setq-default py-shell-name "ipython")
+;; (setq-default py-which-bufname "IPython")
+;;                                         ; use the wx backend, for both mayavi and matplotlib
+;; (setq py-python-command-args
+;;       '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+;; (setq py-force-py-shell-name-p t)
 
-(setq py-shell-switch-buffers-on-execute-p nil)
-(setq py-switch-buffers-on-execute-p nil)
-                                        ; don't split windows
-(setq py-split-windows-on-execute-p nil)
-                                        ; try to automagically figure out indentation
-(setq py-smart-indentation t)
+;; (setq py-shell-switch-buffers-on-execute-p nil)
+;; (setq py-switch-buffers-on-execute-p nil)
+;;                                         ; don't split windows
+;; (setq py-split-windows-on-execute-p nil)
+;;                                         ; try to automagically figure out indentation
+;; (setq py-smart-indentation t)
 
 ;; ruby-mode
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
@@ -350,18 +350,18 @@ and it's name isn't in no-cleanup-filenames."
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
 (require 'auto-complete)
-(require 'irony)
-(irony-enable 'ac)
+;; (require 'irony)
+;; (irony-enable 'ac)
 
-(defun c-hooks()
-  "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-  (yas/minor-mode-on)
-  (auto-complete-mode 1)
-  ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
-  (when (member major-mode irony-known-modes)
-    (irony-mode 1)))
+;; (defun c-hooks()
+;;   "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+;;   (yas/minor-mode-on)
+;;   (auto-complete-mode 1)
+;;   ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+;;   (when (member major-mode irony-known-modes)
+;;     (irony-mode 1)))
 
-(add-hook 'c-mode-hook 'c-hooks)
+;; (add-hook 'c-mode-hook 'c-hooks)
 
 (add-hook 'c-mode-hook '(lambda()
                           (global-flycheck-mode t)
@@ -402,9 +402,7 @@ and it's name isn't in no-cleanup-filenames."
      (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords)))
 
 ;; themes
-;;(add-to-list 'custom-theme-load-path (concat emacs-config-dir "/lib"))
-;;(require 'color-theme-sanityinc-tomorrow)
-;;(color-theme-sanityinc-tomorrow-night)
+(color-theme-sanityinc-tomorrow-night)
 
 ;; uniquify
 (require 'uniquify)
@@ -415,7 +413,7 @@ and it's name isn't in no-cleanup-filenames."
  uniquify-after-kill-buffer-p t
  uniquify-ignore-buffers-re "^\\*")
 
-(require 'vlfi)
+;;(require 'vlfi)
 
 ;; webjump
 (require 'webjump)
