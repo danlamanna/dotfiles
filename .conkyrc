@@ -72,7 +72,9 @@ ${color lightgrey}Down:$color ${downspeed eth0} ${color lightgrey} ${offset 80}U
 ${downspeedgraph eth0 32,120 278f4f ffffff} ${offset 50} ${upspeedgraph eth0 32,120 278f4f ffffff}
 ${color #278f4f}IPs:$color ${addr eth0} ${offset 33} ${execi 7200 curl http://curlmyip.com/}
 $font${color #278f4f}$stippled_hr
-${color lightgrey}hda:  ${fs_used /}/${fs_size /}  ${fs_bar /}
+${color lightgrey}root:  ${fs_used /} / ${fs_size /}  ${fs_bar /}
+${color lightgrey}home:  ${fs_used /home} / ${fs_size /home}  ${fs_bar /home}
+${color lightgrey}ronon:  ${fs_used /media/ronon} / ${fs_size /media/ronon}  ${fs_bar /media/ronon}
 
-${font sans-serif:bold:size=8}Virtual Machines ${hr 2}
-${exec VBoxManage list runningvms}
+${font sans-serif:bold:size=8}Virtual Machines ${hr 2}$font$
+${exec /home/dan/src/vms.sh}

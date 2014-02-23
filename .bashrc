@@ -1,4 +1,8 @@
-# virtualenvwrapper stuff
+if [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+fi
+
+# virtualenvwrapper stuffa
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     export WORKON_HOME=~/.envs
     source /usr/local/bin/virtualenvwrapper.sh
@@ -115,3 +119,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # ssh-agent-forwarding, sigh
 ssh-add ~/.ssh/id_rsa &> /dev/null
+
+export PATH="$HOME/.cask/bin:$PATH"
