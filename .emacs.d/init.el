@@ -5,6 +5,9 @@
 (let ((default-directory emacs-config-dir))
   (normal-top-level-add-subdirs-to-load-path))
 
+(let ((default-directory "~/dotfiles/deps"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;; must-have libraries/utilities
 (require 's)
 (require 'dash)
@@ -126,10 +129,6 @@ and it's name isn't in no-cleanup-filenames."
   '(progn
      (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
-
-;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
 
 ;; expand-region
 (autoload 'er/expand-region "expand-region" t)
