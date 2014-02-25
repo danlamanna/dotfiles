@@ -95,8 +95,8 @@
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
 and it's name isn't in no-cleanup-filenames."
   (and (buffer-file-name)
-       (not (-contains? no-cleanup-extensions (downcase (file-name-extension (buffer-file-name)))))
-       (not (-contains? no-cleanup-filenames (downcase (file-name-nondirectory (buffer-file-name)))))))
+       (not (-contains? no-cleanup-filenames (downcase (file-name-nondirectory (buffer-file-name)))))
+       (not (-contains? no-cleanup-extensions (downcase (file-name-extension (buffer-file-name)))))))
 
 (defun buffer-cleanup()
   "A less safe buffer cleanup, indents everything."
@@ -115,13 +115,12 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "C-c n") 'buffer-cleanup)
 
 ;; comint
-(eval-after-load "comint-mode"
-  (add-hook 'comint-mode-hook
-            (lambda()
-              (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-              (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-              (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
-              (define-key comint-mode-map (kbd "C-<down>") 'windmove-down))))
+(eval-after-load "comint"
+  '(progn
+     (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+     (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+     (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
+     (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
 
 ;; dired
 (defun dired-back-to-top ()
@@ -336,18 +335,10 @@ and it's name isn't in no-cleanup-filenames."
            ("smarty"     . "\\.tpl\\'")
            ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'"))))
 
-;; python-mode
-(require 'python-mode)
-
-(setq-default py-shell-name "ipython")
-(setq-default py-which-bufname "IPython")
-(setq py-python-command-args
-      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-(setq py-force-py-shell-name-p t)
-(setq py-shell-switch-buffers-on-execute-p nil)
-(setq py-switch-buffers-on-execute-p nil)
-(setq py-split-windows-on-execute-p nil)
-(setq py-smart-indentation t)
+;; python
+(require 'python)
+(setq python-shell-interpreter "ipython")
+(setq python-shell-interpreter-args "--pylab")
 
 ;; ruby-mode
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
@@ -393,11 +384,11 @@ and it's name isn't in no-cleanup-filenames."
                            (org-bullets-mode 1)))
 
 ;; package.el
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
 (require 'package)
-
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-
 (package-initialize)
 
 ;; restclient
