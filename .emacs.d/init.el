@@ -68,6 +68,15 @@
 (autoload 'ace-jump-char-mode "ace-jump-mode" t)
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
+;; ack
+(require 'ack-and-a-half)
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+
+(setq ack-and-a-half-use-ido t)
+
+(define-key global-map (kbd "C-c a") 'ack)
+
 ;; autopair
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
