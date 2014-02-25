@@ -1,0 +1,5 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : writer = csv.writer(file, delimiter=',', quotechar='"')
+#key : csvw
+# --
+writer = csv.writer(${1:file}, delimiter='${2:,}', quotechar='${3:\"}')$0

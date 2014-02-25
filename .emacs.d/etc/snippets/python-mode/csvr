@@ -1,0 +1,6 @@
+#contributor : danlamanna <dan.lamanna@gmail.com>
+#name : reader = csv.reader(file, delimiter=',', quotechar='""')
+#key : csvr
+# --
+reader = csv.reader(${1:file}, delimiter='${2:,}', quotechar='${3:\"}')
+$0
