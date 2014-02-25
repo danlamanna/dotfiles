@@ -383,9 +383,9 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; org-mode
-;(eval-after-load "org-mode"
-;  (require 'org-bullets)
-;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+(add-hook 'org-mode-hook (lambda ()
+                           (require 'org-bullets)
+                           (org-bullets-mode 1)))
 
 ;; package.el
 (require 'package)
