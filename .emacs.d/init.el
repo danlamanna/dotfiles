@@ -328,21 +328,17 @@ and it's name isn't in no-cleanup-filenames."
            ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'"))))
 
 ;; python-mode
-;; (require 'python-mode)
+(require 'python-mode)
 
-;; (setq-default py-shell-name "ipython")
-;; (setq-default py-which-bufname "IPython")
-;;                                         ; use the wx backend, for both mayavi and matplotlib
-;; (setq py-python-command-args
-;;       '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-;; (setq py-force-py-shell-name-p t)
-
-;; (setq py-shell-switch-buffers-on-execute-p nil)
-;; (setq py-switch-buffers-on-execute-p nil)
-;;                                         ; don't split windows
-;; (setq py-split-windows-on-execute-p nil)
-;;                                         ; try to automagically figure out indentation
-;; (setq py-smart-indentation t)
+(setq-default py-shell-name "ipython")
+(setq-default py-which-bufname "IPython")
+(setq py-python-command-args
+      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+(setq py-force-py-shell-name-p t)
+(setq py-shell-switch-buffers-on-execute-p nil)
+(setq py-switch-buffers-on-execute-p nil)
+(setq py-split-windows-on-execute-p nil)
+(setq py-smart-indentation t)
 
 ;; ruby-mode
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
