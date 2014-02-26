@@ -340,6 +340,25 @@ and it's name isn't in no-cleanup-filenames."
 (setq python-shell-interpreter "ipython")
 (setq python-shell-interpreter-args "--pylab")
 
+;(require 'jedi)
+
+;(add-hook 'python-mode-hook 'jedi:setup)
+;(setq jedi:setup-keys t)                      ; optional
+;(setq jedi:complete-on-dot t)                 ; optional
+
+;(setq jedi:server-command
+ ;     '("python" "/home/dan/dotfiles/.emacs.d/elpa/jedi-20140223.1054/jediepcserver.py"))
+
+;; (defun pp:custom-jedi-setup ()
+;;   (jedi:setup)
+;; ;  (jedi:ac-setup)
+;;                                         ; (custom-jedi-server-setup)
+;;   (local-set-key "\C-cd" 'jedi:show-doc)
+;;   (local-set-key (kbd "M-SPC") 'jedi:complete)
+;;   (local-set-key (kbd "M-.") 'jedi:goto-definition))
+
+;; (add-hook 'python-mode-hook 'pp:custom-jedi-setup)
+
 ;; ruby-mode
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
@@ -382,6 +401,11 @@ and it's name isn't in no-cleanup-filenames."
 (add-hook 'org-mode-hook (lambda ()
                            (require 'org-bullets)
                            (org-bullets-mode 1)))
+
+(setq org-agenda-files '("/home/dan/Dropbox/notes.org"))
+
+; global map
+(define-key global-map (kbd "C-c A") 'org-todo-list)
 
 ;; package.el
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -628,3 +652,17 @@ and it's name isn't in no-cleanup-filenames."
 ;; remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
+
+
+;; (defun first-n-lines(file lines)
+;;   (with-temp-buffer
+;;     (setq n-lines "")
+;;     (setq read-bytes 0)
+;;     (while (< (s-count-matches "\n" n-lines) lines)
+;;       (goto-char (point-max))
+;;       (insert-file-contents file nil read-bytes (+ read-bytes 1) t)
+;;       (setq n-lines (concat n-lines (buffer-substring-no-properties (point-min) (point-max))))
+;;       (setq read-bytes (+ read-bytes 1))))
+;;   (butlast (split-string n-lines "\n") (- (length (split-string n-lines "\n")) lines)))
+
+;; (first-n-lines test-file 10)
