@@ -8,6 +8,39 @@
 (let ((default-directory "~/dotfiles/deps"))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; package.el
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(require 'package)
+(package-initialize)
+
+(defvar elpa-required-packages '(ace-jump-mode
+                                 ack-and-a-half
+                                 auto-complete
+                                 autopair
+                                 dash
+                                 expand-region
+                                 guide-key
+                                 ido-ubiquitous
+                                 key-chord
+                                 magit
+                                 multiple-cursors
+                                 php-eldoc
+                                 php-mode
+                                 s
+                                 saveplace
+                                 smart-tab
+                                 undo-tree
+                                 web-mode
+                                 yasnippet)
+  "Default Packages")
+
+(dolist (pkg elpa-required-packages)
+  (if (not (package-installed-p pkg))
+    (package-install pkg)))
+
 ;; must-have libraries/utilities
 (require 's)
 (require 'dash)
@@ -407,13 +440,6 @@ and it's name isn't in no-cleanup-filenames."
 ; global map
 (define-key global-map (kbd "C-c A") 'org-todo-list)
 
-;; package.el
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(require 'package)
-(package-initialize)
 
 ;; restclient
 (autoload 'restclient-mode "restclient" t)
