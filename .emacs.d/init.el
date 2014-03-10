@@ -168,6 +168,7 @@ and it's name isn't in no-cleanup-filenames."
 
 (eval-after-load "dired"
   '(progn
+     (require 'gist)
      (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
