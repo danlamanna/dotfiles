@@ -22,11 +22,13 @@
                                  autopair
                                  dash
                                  expand-region
+                                 gist
                                  guide-key
                                  ido-ubiquitous
                                  key-chord
                                  magit
                                  multiple-cursors
+                                 multi-term
                                  php-eldoc
                                  php-mode
                                  s
@@ -129,7 +131,8 @@
 and it's name isn't in no-cleanup-filenames."
   (and (buffer-file-name)
        (not (-contains? no-cleanup-filenames (downcase (file-name-nondirectory (buffer-file-name)))))
-       (not (-contains? no-cleanup-extensions (downcase (file-name-extension (buffer-file-name)))))))
+       (not (and (file-name-extension (buffer-file-name)) ;has a file extension
+                 (-contains? no-cleanup-extensions (downcase (file-name-extension (buffer-file-name))))))))
 
 (defun buffer-cleanup()
   "A less safe buffer cleanup, indents everything."
@@ -214,7 +217,7 @@ and it's name isn't in no-cleanup-filenames."
 
 ;; guide key
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x r" "C-x n"))
+(setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c"))
 (guide-key-mode 1)
 
 ;; ido
@@ -261,12 +264,6 @@ and it's name isn't in no-cleanup-filenames."
 (key-chord-define-global "ww" 'ace-jump-word-mode)
 (key-chord-define-global "jj" 'ace-jump-char-mode)
 (key-chord-define-global "hh" '(lambda() (interactive) (insert "_")))
-(key-chord-define-global "99" '(lambda() (interactive) (insert "(")))
-(key-chord-define-global "00" '(lambda() (interactive) (insert ")")))
-(key-chord-define-global "77" '(lambda() (interactive) (insert "&")))
-(key-chord-define-global "==" '(lambda() (interactive) (insert "+")))
-(key-chord-define-global "[[" '(lambda() (interactive) (insert "{")))
-(key-chord-define-global "]]" '(lambda() (interactive) (insert "}")))
 (key-chord-define-global "uu" 'undo-tree-visualize)
 
 (key-chord-mode +1)
@@ -692,4 +689,28 @@ and it's name isn't in no-cleanup-filenames."
 ;;       (setq read-bytes (+ read-bytes 1))))
 ;;   (butlast (split-string n-lines "\n") (- (length (split-string n-lines "\n")) lines)))
 
+;; (setq test-file "/home/dan/.emacs.d/init.el")
 ;; (first-n-lines test-file 10)
+;; ("(defvar emacs-config-dir (expand-file-name \"~/.emacs.d\"))"
+;;  "(defvar emacs-tmp-dir    (expand-file-name (concat emacs-config-dir \"/\" \"tmp\")))"
+;;  ""
+;;  ";; add all of the everythings to the load path, cause, performance."
+;;  "(let ((default-directory emacs-config-dir))"
+;;  "  (normal-top-level-add-subdirs-to-load-path))"
+;;  ""
+;;  "(let ((default-directory \"~/dotfiles/deps\"))"
+;;  "  (normal-top-level-add-subdirs-to-load-path))"
+;;  "")
+
+
+
+;; (defun dired-head-file()
+;;   (interactive)
+;;   (let ((file (dired-get-file-for-visit))
+;;         (tmpfile (concat emacs-tmp-dir "/" (s-replace "/" "_" file))))
+;;     (with-temp-file tmpfile
+;;       (insert (s-join "\n" (first-n-lines file 10))))
+;;     (view-buffer (find-file-noselect tmpfile) (lambda(buf)
+;;                                                 (progn
+;;                                                   (delete-file tmpfile)
+;;                                                   (kill-buffer buf))))))
