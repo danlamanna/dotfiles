@@ -50,6 +50,7 @@
 ;; custom variables
 (custom-set-variables
  '(asl/cache-enabled t)
+ '(auto-save-interval 60)
  '(browse-url-browser-function (quote browse-url-chromium))
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
@@ -93,6 +94,8 @@
 (pending-delete-mode t)
 (prefer-coding-system 'utf-8)
 
+(define-key global-map (kbd "C-c b") 'browse-url-at-point)
+
 ;; custom faces
 (custom-set-faces
  '(flymake-errline ((t (:background "brightblack"))))
@@ -116,8 +119,19 @@
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
-;; autosaves
-(setq backup-directory-alist
+;; autosaves/backups
+(setq emacs-autosave-dir (concat emacs-tmp-dir "/autosaves/"))
+(setq auto-save-list-file-prefix emacs-autosave-dir)
+(setq auto-save-file-name-transforms `((".*" ,emacs-autosave-dir t)))
+
+(setq
+ vc-make-backup-files t ; backup version controlled files, too
+ backup-by-copying t ; no symlinks
+ delete-old-versions t ; no confirm
+ kept-new-versions 10
+ kept-old-versions 0
+ version-control t ; number backups
+ backup-directory-alist
       `(("." . ,(expand-file-name
                  (concat emacs-tmp-dir "/backups")))))
 
