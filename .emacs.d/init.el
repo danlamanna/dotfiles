@@ -731,3 +731,14 @@ and it's name isn't in no-cleanup-filenames."
 ;;                                                 (progn
 ;;                                                   (delete-file tmpfile)
 ;;                                                   (kill-buffer buf))))))
+
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+
+;; hslint on the command line only likes this indentation mode;
+;; alternatives commented out below.
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+
+(fset 'remove-xml-tags
+      [?\C-s ?< return left ?\M-z ?> delete ?\C-s ?< return left ?\M-z ?> delete])
