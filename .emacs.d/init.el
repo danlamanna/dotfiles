@@ -41,7 +41,7 @@
 
 (dolist (pkg elpa-required-packages)
   (if (not (package-installed-p pkg))
-    (package-install pkg)))
+      (package-install pkg)))
 
 ;; must-have libraries/utilities
 (require 's)
@@ -132,8 +132,11 @@
  kept-old-versions 0
  version-control t ; number backups
  backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat emacs-tmp-dir "/backups")))))
+ `(("." . ,(expand-file-name
+            (concat emacs-tmp-dir "/backups")))))
+
+;; bookmarks
+(setq bookmark-save-flag 1) ;; save after a bookmark is added once
 
 ;; coding standards
 ;; both these lists should be lowercased
@@ -385,14 +388,14 @@ and it's name isn't in no-cleanup-filenames."
 (setq python-shell-interpreter "ipython")
 (setq python-shell-interpreter-args "--pylab")
 
-;(require 'jedi)
+                                        ;(require 'jedi)
 
-;(add-hook 'python-mode-hook 'jedi:setup)
-;(setq jedi:setup-keys t)                      ; optional
-;(setq jedi:complete-on-dot t)                 ; optional
+                                        ;(add-hook 'python-mode-hook 'jedi:setup)
+                                        ;(setq jedi:setup-keys t)                      ; optional
+                                        ;(setq jedi:complete-on-dot t)                 ; optional
 
-;(setq jedi:server-command
- ;     '("python" "/home/dan/dotfiles/.emacs.d/elpa/jedi-20140223.1054/jediepcserver.py"))
+                                        ;(setq jedi:server-command
+                                        ;     '("python" "/home/dan/dotfiles/.emacs.d/elpa/jedi-20140223.1054/jediepcserver.py"))
 
 ;; (defun pp:custom-jedi-setup ()
 ;;   (jedi:setup)
@@ -449,7 +452,7 @@ and it's name isn't in no-cleanup-filenames."
 
 (setq org-agenda-files '("/home/dan/Dropbox/notes.org"))
 
-; global map
+;; global map
 (define-key global-map (kbd "C-c A") 'org-todo-list)
 
 

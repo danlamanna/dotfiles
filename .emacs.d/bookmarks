@@ -1,0 +1,20 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("notes.org"
+ (filename . "~/Dropbox/notes.org")
+ (front-context-string . "* Burst\n** scrip")
+ (rear-context-string)
+ (position . 1))
+(".zshrc"
+ (filename . "~/.zshrc")
+ (front-context-string . "\"\n\n\n\nHISTFILE=\"$")
+ (rear-context-string . " '[2-9]' *.c *.h")
+ (position . 2572))
+("init.el"
+ (filename . "~/dotfiles/.emacs.d/init.el")
+ (front-context-string . "(defvar emacs-co")
+ (rear-context-string)
+ (position . 1))
+)
