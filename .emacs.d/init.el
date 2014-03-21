@@ -142,7 +142,7 @@
 ;; coding standards
 ;; both these lists should be lowercased
 (setq no-cleanup-filenames '("makefile"))
-(setq no-cleanup-extensions '("md"))
+(setq no-cleanup-extensions '("md" "org"))
 
 (defun should-cleanup-buffer?()
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
@@ -192,6 +192,8 @@ and it's name isn't in no-cleanup-filenames."
      (require 'gist)
      (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
+
+(setq wdired-allow-to-change-permissions t)
 
 ;; expand-region
 (autoload 'er/expand-region "expand-region" t)
@@ -430,6 +432,8 @@ and it's name isn't in no-cleanup-filenames."
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
+
+
 ;; multiple-cursors
 (autoload 'multiple-cursors "mc/mark-next-like-this" t)
 (global-set-key (kbd "C-c SPC") 'set-rectangular-region-anchor)
@@ -440,13 +444,23 @@ and it's name isn't in no-cleanup-filenames."
 ;; org-mode
 (add-hook 'org-mode-hook (lambda ()
                            (require 'org-bullets)
-                           (org-bullets-mode 1)))
+                           (org-bullets-mode 1)
+                           (toggle-truncate-lines -1)))
 
 (setq org-agenda-files '("/home/dan/Dropbox/notes.org"))
+(setq org-show-siblings '((default . nil) (isearch t) (bookmark-jump t) (agenda t)))
+
+(setq org-default-notes-file "/home/dan/Dropbox/notes.org")
+(setq
+ org-refile-use-outline-path 'file
+ org-completion-use-ido t
+ org-outline-path-complete-in-steps nil
+ org-refile-allow-creating-parent-nodes 'confirm)
+
+(define-key global-map "\C-cc" 'org-capture)
 
 ;; global map
 (define-key global-map (kbd "C-c A") 'org-todo-list)
-
 
 ;; restclient
 (autoload 'restclient-mode "restclient" t)
@@ -644,6 +658,11 @@ and it's name isn't in no-cleanup-filenames."
   (indent-for-tab-command))
 
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
+
+(global-set-key "\C-c\C-i" '(lambda()
+                              (interactive)
+                              (if (buffer-file-name)
+                                  (insert (buffer-file-name)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
