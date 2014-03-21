@@ -34,6 +34,7 @@
                                  s
                                  saveplace
                                  smart-tab
+                                 smex
                                  undo-tree
                                  web-mode
                                  yasnippet)
@@ -263,18 +264,6 @@ and it's name isn't in no-cleanup-filenames."
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
-;; Fix ido-ubiquitous for newer packages
-(defmacro ido-ubiquitous-use-new-completing-read (cmd package)
-  `(eval-after-load ,package
-     '(defadvice ,cmd (around ido-ubiquitous-new activate)
-        (let ((ido-ubiquitous-enable-compatibility nil))
-          ad-do-it))))
-
-(ido-ubiquitous-use-new-completing-read geben-find-file 'geben)
-(ido-ubiquitous-use-new-completing-read webjump 'webjump)
-(ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
-(ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
-
 ;; key-chord
 (require 'key-chord)
 
@@ -349,6 +338,9 @@ and it's name isn't in no-cleanup-filenames."
         try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
+
+;; smex
+(global-set-key (kbd "M-x") 'smex)
 
 ;; php-eldoc
 (eval-after-load "php-mode"
