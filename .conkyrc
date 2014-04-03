@@ -77,4 +77,4 @@ ${color lightgrey}home:  ${fs_used /home} / ${fs_size /home}  ${fs_bar /home}
 ${color lightgrey}ronon:  ${fs_used /media/ronon} / ${fs_size /media/ronon}  ${fs_bar /media/ronon}
 
 ${font sans-serif:bold:size=8}Virtual Machines ${hr 2}$font$
-${exec /home/dan/src/vms.sh}
+${execi 300 /home/dan/src/vms.sh}

@@ -90,3 +90,5 @@ xmodmap /home/dan/.Xmodmap
 (sleep 10s && pidgin) &
 
 (sleep 10s && artha) &
+
+(sleep 10s && redshift-gtk -l40.6:73.9 &)

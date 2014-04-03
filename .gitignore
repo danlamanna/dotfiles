@@ -8,6 +8,7 @@
 .emacs.d/elpa/archives/
 .emacs.d/thumbs
 .emacs.d/ido.last
+/.emacs.d/recentf
 *.elc
 /.emacs.d/ac-comphist.dat
 /.emacs.d/geben/.storage

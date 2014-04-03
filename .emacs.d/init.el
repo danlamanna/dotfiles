@@ -195,6 +195,31 @@ and it's name isn't in no-cleanup-filenames."
 
 (setq wdired-allow-to-change-permissions t)
 
+;; add zip functionality to dired
+(eval-after-load "dired"
+  '(define-key dired-mode-map "z" 'dired-zip-files))
+(defun dired-zip-files (zip-file)
+  "Create an archive containing the marked files."
+  (interactive "sEnter name of zip file: ")
+
+  ;; create the zip file
+  (let ((zip-file (if (string-match ".zip$" zip-file) zip-file (concat zip-file ".zip"))))
+    (shell-command
+     (concat "zip "
+             zip-file
+             " "
+             (concat-string-list
+              (mapcar
+               '(lambda (filename)
+                  (file-name-nondirectory filename))
+               (dired-get-marked-files))))))
+
+  (revert-buffer))
+
+(defun concat-string-list (list)
+  "Return a string which is a concatenation of all elements of the list separated by spaces"
+  (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
+
 ;; expand-region
 (autoload 'er/expand-region "expand-region" t)
 (define-key global-map (kbd "C-q") 'er/expand-region)
@@ -337,9 +362,11 @@ and it's name isn't in no-cleanup-filenames."
         try-expand-all-abbrevs
         try-expand-dabbrev
         try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol))
+        try-expand-dabbrev-from-kill))
+
+(eval-after-load "completion-ui-sources"
+  (global-set-key (kbd "<C-tab>") 'complete-etags))
+
 
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
@@ -407,7 +434,7 @@ and it's name isn't in no-cleanup-filenames."
 ;; c-mode
 (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
 (load "c-eldoc")
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+(add-hook 'irony-mode-hook 'c-turn-on-eldoc-mode)
 
 (require 'auto-complete)
 (require 'irony)
@@ -512,6 +539,9 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "C-<down>") 'windmove-down)
 (global-set-key (kbd "C-<left>") 'windmove-left)
 (global-set-key (kbd "C-<right>") 'windmove-right)
+
+(setq completion-popup-frame-map (make-sparse-keymap))
+
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-\"") 'insert-pair)
 (define-key global-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)
@@ -753,3 +783,7 @@ and it's name isn't in no-cleanup-filenames."
 
 (fset 'remove-xml-tags
       [?\C-s ?< return left ?\M-z ?> delete ?\C-s ?< return left ?\M-z ?> delete])
+
+(add-hook 'php-mode-hook (lambda(&rest args)
+                           (require 'wordpress)
+                           (enable-wordpress-mode)))
