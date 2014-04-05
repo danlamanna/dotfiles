@@ -474,10 +474,10 @@ and it's name isn't in no-cleanup-filenames."
                            (org-bullets-mode 1)
                            (toggle-truncate-lines -1)))
 
-(setq org-agenda-files '("/home/dan/Dropbox/notes.org"))
+(setq org-agenda-files '("/home/dan/files/notes.org"))
 (setq org-show-siblings '((default . nil) (isearch t) (bookmark-jump t) (agenda t)))
 
-(setq org-default-notes-file "/home/dan/Dropbox/notes.org")
+(setq org-default-notes-file "/home/dan/files/notes.org")
 (setq
  org-refile-use-outline-path 'file
  org-completion-use-ido t
