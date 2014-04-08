@@ -499,6 +499,35 @@ and it's name isn't in no-cleanup-filenames."
 (autoload 'restclient-mode "restclient" t)
 (define-key global-map (kbd "C-c R") 'restclient-mode)
 
+;; sensitive-mode http://anirudhsasikumar.net/blog/2005.01.21.html
+(define-minor-mode sensitive-mode
+  "For sensitive files like password lists.
+It disables backup creation and auto saving.
+
+With no argument, this command toggles the mode.
+Non-null prefix argument turns on the mode.
+Null prefix argument turns off the mode."
+  ;; The initial value.
+  nil
+  ;; The indicator for the mode line.
+  " Sensitive"
+  ;; The minor mode bindings.
+  nil
+  (if (symbol-value sensitive-mode)
+      (progn
+        ;; disable backups
+        (set (make-local-variable 'backup-inhibited) t)
+        ;; disable auto-save
+        (if auto-save-default
+            (auto-save-mode -1)))
+                                        ;resort to default value of backup-inhibited
+    (kill-local-variable 'backup-inhibited)
+                                        ;resort to default auto save setting
+    (if auto-save-default
+        (auto-save-mode 1))))
+
+(setq auto-mode-alist (append '(("\\.gpg$" . sensitive-mode)) auto-mode-alist))
+
 ;; sql-mode
 (eval-after-load "sql-mode"
   '(progn
@@ -785,7 +814,6 @@ and it's name isn't in no-cleanup-filenames."
 ;; hslint on the command line only likes this indentation mode;
 ;; alternatives commented out below.
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
 
 (fset 'remove-xml-tags
       [?\C-s ?< return left ?\M-z ?> delete ?\C-s ?< return left ?\M-z ?> delete])
