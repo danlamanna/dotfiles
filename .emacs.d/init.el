@@ -442,11 +442,17 @@ and it's name isn't in no-cleanup-filenames."
 
 (defun c-hooks()
   "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
+  (require 'google-c-style)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
   (yas/minor-mode-on)
   (auto-complete-mode 1)
   ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
   (when (member major-mode irony-known-modes)
     (irony-mode 1)))
+
+;; iedit and flycheck
 
 (add-hook 'c-mode-hook 'c-hooks)
 
