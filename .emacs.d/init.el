@@ -237,6 +237,11 @@ and it's name isn't in no-cleanup-filenames."
       (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))
       (goto-char pos))))
 
+;; framemove
+(require 'framemove)
+(windmove-default-keybindings)
+(setq framemove-hook-into-windmove t)
+
 ;; geben
 (defun geben-safely-end-proxy()
   "Tries to call `dbgp-proxy-unregister', but silently
