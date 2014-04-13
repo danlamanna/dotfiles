@@ -16,28 +16,58 @@
 (require 'package)
 (package-initialize)
 
-(defvar elpa-required-packages '(ace-jump-mode
+(defvar elpa-required-packages '(ac-etags
+                                 ace-jump-mode
                                  ack-and-a-half
-                                 auto-complete
+                                 auto-complete-exuberant-ctags
                                  autopair
-                                 dash
+                                 browse-kill-ring
+                                 c-eldoc
+                                 company-go
+                                 elpy
+                                 emmet-mode
+                                 etags-select
+                                 etags-table
                                  expand-region
+                                 flycheck-haskell
+                                 flymake-python-pyflakes
+                                 framemove
+                                 geben
                                  gist
+                                 gitconfig-mode
+                                 gitignore-mode
+                                 go-eldoc
+                                 go-errcheck
+                                 google-c-style
+                                 gtags
                                  guide-key
                                  ido-ubiquitous
+                                 ipython
+                                 jedi
                                  key-chord
+                                 mag-menu
                                  magit
-                                 multiple-cursors
+                                 makey
+                                 markdown-mode
                                  multi-term
+                                 multiple-cursors
+                                 org-bullets
                                  php-eldoc
                                  php-mode
+                                 puppet-mode
+                                 pyvirtualenv
+                                 request
+                                 restclient
                                  s
-                                 saveplace
+                                 skewer-mode
                                  smart-tab
                                  smex
+                                 twittering-mode
                                  undo-tree
+                                 virtualenv
+                                 vlf
                                  web-mode
-                                 yasnippet)
+                                 websocket)
   "Default Packages")
 
 (dolist (pkg elpa-required-packages)
