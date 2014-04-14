@@ -67,7 +67,8 @@
                                  virtualenv
                                  vlf
                                  web-mode
-                                 websocket)
+                                 websocket
+                                 xcscope)
   "Default Packages")
 
 (dolist (pkg elpa-required-packages)
@@ -297,7 +298,7 @@ and it's name isn't in no-cleanup-filenames."
 
 ;; guide key
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c"))
+(setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c" "C-c s"))
 (guide-key-mode 1)
 
 ;; ido
@@ -353,7 +354,7 @@ and it's name isn't in no-cleanup-filenames."
      (add-hook 'magit-mode-hook 'hl-line-mode)
      (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)))
 
-(define-key global-map (kbd "C-c s") 'magit-status)
+(define-key global-map (kbd "C-x s") 'magit-status)
 
 (autoload 'magit-status "magit" t)
 
@@ -481,6 +482,9 @@ and it's name isn't in no-cleanup-filenames."
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
+  (require 'xcscope)
+  (cscope-minor-mode)
+
   (yas/minor-mode-on)
   (auto-complete-mode 1)
   ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
@@ -569,7 +573,7 @@ Null prefix argument turns off the mode."
      (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords)))
 
 ;; themes
-(color-theme-sanityinc-tomorrow-night)
+(load-theme 'deeper-blue)
 
 ;; uniquify
 (require 'uniquify)
