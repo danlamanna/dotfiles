@@ -91,4 +91,9 @@ xmodmap /home/dan/.Xmodmap
 
 (sleep 10s && artha) &
 
-(sleep 10s && redshift-gtk -l40.6:73.9 &)
+(sleep 10s && redshift -l40.6:73.9 &)
+
+# setup dual monitors
+if [ "$(hostname)" == "lantea" ]; then
+   /home/dan/src/normal.sh
+fi
