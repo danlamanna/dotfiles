@@ -322,6 +322,8 @@ and it's name isn't in no-cleanup-filenames."
  ido-create-new-buffer 'always
  ido-confirm-unique-completion nil)
 
+(fset 'read-directory-name 'ido-read-directory-name)
+
 (setq confirm-nonexistent-file-or-buffer nil)
 
 (require 'ido-ubiquitous)
