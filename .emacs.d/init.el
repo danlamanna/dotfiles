@@ -369,6 +369,25 @@ and it's name isn't in no-cleanup-filenames."
 (define-key global-map (kbd "C-c o") 'occur)
 (define-key global-map (kbd "C-c O") 'multi-occur-in-matching-buffers)
 
+;; prodigy
+(prodigy-define-service
+  :name "MAT Web"
+  :command "./MATWeb"
+  :args '()
+  :cwd "/media/ronon/research/MIST_2_0/src/MAT/bin"
+  :tags '(research)
+  :kill-signal 'sigkill
+  :kill-process-buffer-on-stop t)
+
+(prodigy-define-service
+  :name "Research Notebook"
+  :command "ipython"
+  :args '("notebook" "--pylab=inline" "--no-browser")
+  :cwd "/media/ronon/research"
+  :tags '(research)
+  :kill-signal 'sigkill
+  :kill-process-buffer-on-stop t)
+
 ;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
