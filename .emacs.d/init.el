@@ -81,13 +81,17 @@
 
 ;; custom variables
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(auto-save-interval 60)
  '(browse-url-browser-function (quote browse-url-chromium))
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(dired-listing-switches "-alh")
  '(enable-recursive-minibuffers t)
  '(geben-dbgp-default-proxy (quote ("127.0.0.1" 9001 "dan" nil t)))
@@ -130,6 +134,10 @@
 
 ;; custom faces
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(flymake-errline ((t (:background "brightblack"))))
  '(magit-item-highlight ((t (:inherit default)))))
 
@@ -169,6 +177,14 @@
 
 ;; bookmarks
 (setq bookmark-save-flag 1) ;; save after a bookmark is added once
+
+;; clojure
+(add-hook 'clojure-mode-hook (lambda()
+                               (require 'cider-mode)))
+
+(add-hook 'cider-mode-hook (lambda()
+                             (require 'cider-eldoc)
+                             (cider-turn-on-eldoc-mode)))
 
 ;; coding standards
 ;; both these lists should be lowercased
@@ -594,7 +610,7 @@ Null prefix argument turns off the mode."
      (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords)))
 
 ;; themes
-(load-theme 'deeper-blue)
+(load-theme 'obsidian)
 
 ;; uniquify
 (require 'uniquify)
