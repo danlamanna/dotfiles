@@ -24,6 +24,7 @@
                                  browse-kill-ring
                                  c-eldoc
                                  company-go
+                                 eldoc-eval
                                  elpy
                                  emmet-mode
                                  etags-select
@@ -189,7 +190,7 @@
 ;; coding standards
 ;; both these lists should be lowercased
 (setq no-cleanup-filenames '("makefile"))
-(setq no-cleanup-extensions '("md" "org"))
+(setq no-cleanup-extensions '("md" "org" "xml"))
 
 (defun should-cleanup-buffer?()
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
@@ -266,6 +267,10 @@ and it's name isn't in no-cleanup-filenames."
 (defun concat-string-list (list)
   "Return a string which is a concatenation of all elements of the list separated by spaces"
   (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
+
+;; eldoc-eval
+;; add eldoc to minibuffer commands
+(require 'eldoc-eval)
 
 ;; expand-region
 (autoload 'er/expand-region "expand-region" t)
@@ -388,9 +393,10 @@ and it's name isn't in no-cleanup-filenames."
 ;; prodigy
 (prodigy-define-service
   :name "MAT Web"
-  :command "./MATWeb"
+  :command "MATWeb"
   :args '()
-  :cwd "/media/ronon/research/MIST_2_0/src/MAT/bin"
+  :cwd "/media/ronon/research/MIST_2_0/src/MAT"
+  :path "/media/ronon/research/MIST_2_0/src/MAT/bin"
   :tags '(research)
   :kill-signal 'sigkill
   :kill-process-buffer-on-stop t)
@@ -403,6 +409,14 @@ and it's name isn't in no-cleanup-filenames."
   :tags '(research)
   :kill-signal 'sigkill
   :kill-process-buffer-on-stop t)
+
+(defun prodigy-confirm-exit()
+  (if (and (get-buffer prodigy-buffer-name)
+           (-any? 'prodigy-service-started-p (prodigy-services)))
+      (y-or-n-p "There are prodigy services still running, are you sure you want to exit emacs?")))
+
+;; (eval-after-load "prodigy"
+;;   (add-to-list kill-emacs-query-functions 'prodigy-confirm-exit))
 
 ;; undo-tree
 (require 'undo-tree)
