@@ -107,6 +107,7 @@
  '(go-command "/home/dan/src/go/bin/go")
  '(grep-command "grep -rin")
  '(indent-tabs-mode nil)
+ '(large-file-warning-threshold 100000000) ;; 100MB
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(org-file-apps
    (quote
