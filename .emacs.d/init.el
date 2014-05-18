@@ -9,11 +9,11 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; package.el
+(require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 
-(require 'package)
 (package-initialize)
 
 (defvar elpa-required-packages '(ac-etags
@@ -79,6 +79,7 @@
 ;; must-have libraries/utilities
 (require 's)
 (require 'dash)
+(require 'use-package)
 
 ;; custom variables
 (custom-set-variables
@@ -88,7 +89,7 @@
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(auto-save-interval 60)
- '(browse-url-browser-function (quote browse-url-chromium))
+ '(browse-url-browser-function (quote browse-url-firefox))
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
@@ -125,6 +126,7 @@
  '(save-interprogram-paste-before-kill t)
  '(vc-follow-symlinks t)
  '(virtualenv-root "~/.envs/")
+ '(wdired-allow-to-change-permissions t)
  '(yank-pop-change-selection t))
 
 (put 'upcase-region 'disabled nil)
@@ -144,22 +146,22 @@
  '(magit-item-highlight ((t (:inherit default)))))
 
 ;; ace-jump-mode
-(autoload 'ace-jump-word-mode "ace-jump-mode" t)
-(autoload 'ace-jump-char-mode "ace-jump-mode" t)
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+(use-package ace-jump-mode
+  :bind ("C-x SPC" . ace-jump-mode-pop-mark)
+  :commands (ace-jump-word-mode
+             ace-jump-char-mode)) ;; autoload on either of these
 
 ;; ack
-(require 'ack-and-a-half)
-(defalias 'ack 'ack-and-a-half)
-(defalias 'ack-same 'ack-and-a-half-same)
-
-(setq ack-and-a-half-use-ido t)
-
-(define-key global-map (kbd "C-c a") 'ack)
+(use-package ack-and-a-half
+  :bind ("C-c a" . ack)
+  :init (progn
+          (defalias 'ack 'ack-and-a-half)
+          (defalias 'ack-same 'ack-and-a-half-same))
+  :config (setq ack-and-a-half-use-ido t))
 
 ;; autopair
-(require 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
+(use-package autopair
+  :init (autopair-global-mode))
 
 ;; autosaves/backups
 (setq emacs-autosave-dir (concat emacs-tmp-dir "/autosaves/"))
@@ -218,71 +220,63 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "C-c n") 'buffer-cleanup)
 
 ;; comint
-(eval-after-load "comint"
-  '(progn
-     (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-     (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-     (define-key comint-mode-map (kbd "C-<up>") 'windmove-up)
-     (define-key comint-mode-map (kbd "C-<down>") 'windmove-down)))
+(use-package comint
+  :config (progn
+            (bind-key "<up>"     'comint-previous-input comint-mode-map)
+            (bind-key "<down>"   'comint-next-input comint-mode-map)
+            (bind-key "C-<up>"   'windmove-up comint-mode-map)
+            (bind-key "C-<down>" 'windmove-down comint-mode-map)))
 
-;; dired
-(defun dired-back-to-top ()
-  (interactive)
-  (beginning-of-buffer)
-  (dired-next-line 4))
+(use-package dired
+  :ensure gist
+  :config (progn
+            (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+            (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (end-of-buffer)
-  (dired-next-line -1))
+            (defun dired-back-to-top ()
+              (interactive)
+              (beginning-of-buffer)
+              (dired-next-line 4))
 
-(eval-after-load "dired"
-  '(progn
-     (require 'gist)
-     (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-     (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
+            (defun dired-jump-to-bottom ()
+              (interactive)
+              (end-of-buffer)
+              (dired-next-line -1))
 
-(setq wdired-allow-to-change-permissions t)
+            (defun dired-zip-files (zip-file)
+              "Create an archive containing the marked files."
+              (interactive "sEnter name of zip file: ")
+              ;; create the zip file
+              (let ((zip-file (if (string-match ".zip$" zip-file) zip-file (concat zip-file ".zip"))))
+                (shell-command
+                 (concat "zip "
+                         zip-file
+                         " "
+                         (concat-string-list
+                          (mapcar
+                           '(lambda (filename)
+                              (file-name-nondirectory filename))
+                           (dired-get-marked-files))))))
 
-;; add zip functionality to dired
-(eval-after-load "dired"
-  '(define-key dired-mode-map "z" 'dired-zip-files))
-(defun dired-zip-files (zip-file)
-  "Create an archive containing the marked files."
-  (interactive "sEnter name of zip file: ")
+              (revert-buffer))
 
-  ;; create the zip file
-  (let ((zip-file (if (string-match ".zip$" zip-file) zip-file (concat zip-file ".zip"))))
-    (shell-command
-     (concat "zip "
-             zip-file
-             " "
-             (concat-string-list
-              (mapcar
-               '(lambda (filename)
-                  (file-name-nondirectory filename))
-               (dired-get-marked-files))))))
+            (defun concat-string-list (list)
+              "Return a string which is a concatenation of all elements of the list separated by spaces"
+              (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
 
-  (revert-buffer))
-
-(defun concat-string-list (list)
-  "Return a string which is a concatenation of all elements of the list separated by spaces"
-  (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
+            (bind-key "z" 'dired-zip-files dired-mode-map)))
 
 ;; eldoc-eval
-;; add eldoc to minibuffer commands
-(require 'eldoc-eval)
+(use-package eldoc-eval)
 
 ;; expand-region
-(autoload 'er/expand-region "expand-region" t)
-(define-key global-map (kbd "C-q") 'er/expand-region)
+(use-package expand-region
+  :bind ("C-q" . er/expand-region))
+
+(use-package god-mode
+  :bind ("<escape>" . god-mode-all))
 
 ;; tramp
-(require 'tramp)
-
-(setq tramp-default-method "ssh")
-(setq tramp-auto-save-directory (concat emacs-tmp-dir "/backups"))
-
 (defun sudo-tramp-current-file()
   (interactive)
   (when buffer-file-name
@@ -290,10 +284,16 @@ and it's name isn't in no-cleanup-filenames."
       (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))
       (goto-char pos))))
 
+(use-package tramp
+  :config (progn
+            (setq tramp-default-method "ssh")
+            (setq tramp-auto-save-directory (concat emacs-tmp-dir "/backups"))))
+
 ;; framemove
-(require 'framemove)
-(windmove-default-keybindings)
-(setq framemove-hook-into-windmove t)
+(use-package framemove
+  :config (progn
+            (windmove-default-keybindings)
+            (setq framemove-hook-into-windmove t)))
 
 ;; geben
 (defun geben-safely-end-proxy()
@@ -313,74 +313,76 @@ and it's name isn't in no-cleanup-filenames."
       (geben)
     (error (geben-proxy "127.0.0.1" 9001 "dan"))))
 
-(defadvice geben-display-context(before clear-windows-for-vars activate)
-  (delete-other-windows))
+(use-package geben
+  :defer t
+  :config (progn
+            (defadvice geben-display-context(before clear-windows-for-vars activate)
+              (delete-other-windows))
 
-(add-hook 'kill-emacs-hook 'geben-safely-end-proxy)
+            (add-hook 'kill-emacs-hook 'geben-safely-end-proxy)))
 
 ;; guide key
-(require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c" "C-c s"))
-(guide-key-mode 1)
+(use-package guide-key
+  :init (progn
+          (setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c" "C-c s"))
+          (guide-key-mode 1)))
 
 ;; ido
-(require 'ido)
-(ido-mode 'both)
+(use-package ido
+  :config (progn
+            (ido-mode 'both)
+            (setq
+             ido-save-directory-list-file (format "%s/ido.last" emacs-tmp-dir)
+             ido-ignore-buffers '(".*Completion"
+                                  "\\*")
+             ido-work-directory-list '("~/" "~/projects")
+             ido-enable-flex-matching t
+             ido-case-fold t
+             ido-enable-last-directory-history t
+             ido-max-directory-size 500000
+             ido-max-work-directory-list 10
+             ido-max-work-file-list 20
+             ido-use-filename-at-point nil
+             ido-use-url-at-point nil
+             ido-max-prospects 7
+             ido-create-new-buffer 'always
+             ido-confirm-unique-completion nil)
 
-(setq
- ido-save-directory-list-file (format "%s/ido.last" emacs-tmp-dir)
- ido-ignore-buffers '(".*Completion"
-                      "\\*")
- ido-work-directory-list '("~/" "~/projects")
- ido-enable-flex-matching t
- ido-case-fold t
- ido-enable-last-directory-history t
- ido-max-directory-size 500000
- ido-max-work-directory-list 10
- ido-max-work-file-list 20
- ido-use-filename-at-point nil
- ido-use-url-at-point nil
- ido-max-prospects 7
- ido-create-new-buffer 'always
- ido-confirm-unique-completion nil)
+            (fset 'read-directory-name 'ido-read-directory-name)
 
-(fset 'read-directory-name 'ido-read-directory-name)
+            (setq confirm-nonexistent-file-or-buffer nil)))
 
-(setq confirm-nonexistent-file-or-buffer nil)
-
-(require 'ido-ubiquitous)
-(ido-ubiquitous-mode 1)
+(use-package ido-ubiquitous
+  :init (ido-ubiquitous-mode 1))
 
 ;; key-chord
-(require 'key-chord)
-
-(key-chord-define-global "ww" 'ace-jump-word-mode)
-(key-chord-define-global "jj" 'ace-jump-char-mode)
-(key-chord-define-global "hh" '(lambda() (interactive) (insert "_")))
-(key-chord-define-global "uu" 'undo-tree-visualize)
-
-(key-chord-mode +1)
+(use-package key-chord
+  :init (key-chord-mode +1)
+  :config (progn
+            (key-chord-define-global "ww" 'ace-jump-word-mode)
+            (key-chord-define-global "jj" 'ace-jump-char-mode)
+            (key-chord-define-global "hh" '(lambda() (interactive) (insert "_")))
+            (key-chord-define-global "uu" 'undo-tree-visualize)))
 
 ;; magit
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
-
 (defun magit-quit-session ()
   "Restores the previous window configuration and kills the magit buffer"
   (interactive)
   (kill-buffer)
   (jump-to-register :magit-fullscreen))
 
-(eval-after-load "magit"
-  '(progn
-     (add-hook 'magit-mode-hook 'hl-line-mode)
-     (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)))
+(use-package magit
+  :bind ("C-x s" . magit-status)
+  :config (progn
+            (defadvice magit-status (around magit-fullscreen activate)
+              (window-configuration-to-register :magit-fullscreen)
+              ad-do-it
+              (delete-other-windows))
 
-(define-key global-map (kbd "C-x s") 'magit-status)
+            (add-hook 'magit-mode-hook 'hl-line-mode)
 
-(autoload 'magit-status "magit" t)
+            (bind-key "q" 'magit-quit-session magit-status-mode-map)))
+
 
 ;; occur
 (defun multi-occur-in-all-buffers (regexp &optional allbufs)
@@ -388,268 +390,211 @@ and it's name isn't in no-cleanup-filenames."
   (interactive (occur-read-primary-args))
   (multi-occur-in-matching-buffers ".*" regexp))
 
-(define-key global-map (kbd "C-c o") 'occur)
-(define-key global-map (kbd "C-c O") 'multi-occur-in-matching-buffers)
+(use-package occur
+  :bind (("C-c o" . occur)
+         ("C-c O" . multi-occur-in-matching-buffers)))
 
 ;; prodigy
-(prodigy-define-service
-  :name "MAT Web"
-  :command "MATWeb"
-  :args '()
-  :cwd "/media/ronon/research/MIST_2_0/src/MAT"
-  :path "/media/ronon/research/MIST_2_0/src/MAT/bin"
-  :tags '(research)
-  :kill-signal 'sigkill
-  :kill-process-buffer-on-stop t)
+(use-package prodigy
+  :config (progn
+            (prodigy-define-service
+              :name "MAT Web"
+              :command "MATWeb"
+              :args '()
+              :cwd "/media/ronon/research/MIST_2_0/src/MAT"
+              :path "/media/ronon/research/MIST_2_0/src/MAT/bin"
+              :tags '(research)
+              :kill-signal 'sigkill
+              :kill-process-buffer-on-stop t)
 
-(prodigy-define-service
-  :name "Research Notebook"
-  :command "ipython"
-  :args '("notebook" "--pylab=inline" "--no-browser")
-  :cwd "/media/ronon/research"
-  :tags '(research)
-  :kill-signal 'sigkill
-  :kill-process-buffer-on-stop t)
-
-(defun prodigy-confirm-exit()
-  (if (and (get-buffer prodigy-buffer-name)
-           (-any? 'prodigy-service-started-p (prodigy-services)))
-      (y-or-n-p "There are prodigy services still running, are you sure you want to exit emacs?")))
-
-;; (eval-after-load "prodigy"
-;;   (add-to-list kill-emacs-query-functions 'prodigy-confirm-exit))
+            (prodigy-define-service
+              :name "Research Notebook"
+              :command "ipython"
+              :args '("notebook" "--pylab=inline" "--no-browser")
+              :cwd "/media/ronon/research"
+              :tags '(research)
+              :kill-signal 'sigkill
+              :kill-process-buffer-on-stop t)))
 
 ;; undo-tree
-(require 'undo-tree)
-(global-undo-tree-mode)
+(use-package undo-tree
+  :init (global-undo-tree-mode))
 
 ;; saveplace
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))
+(use-package saveplace
+  :init (progn
+          (setq-default save-place t)
+          (setq save-place-file (expand-file-name ".saveplace" emacs-tmp-dir))))
 
 ;; yasnippet
-(require 'yasnippet)
+(use-package yasnippet
+  :config (progn
+            (yas-global-mode 1)
+            (setq yas-trigger-key "TAB")
 
-(yas-global-mode 1)
-(setq yas-trigger-key "TAB")
+            (setq yas-snippet-dirs
+                  '("~/.emacs.d/etc/snippets"))
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/etc/snippets"))
-
-(yas/reload-all)
+            (yas/reload-all)))
 
 ;; smart-tab
-(require 'smart-tab)
-(global-smart-tab-mode 1)
-(setq smart-tab-using-hippie-expand t)
+(use-package smart-tab
+  :init (global-smart-tab-mode 1)
+  :config (progn
+            (setq smart-tab-using-hippie-expand t)
 
-(setq hippie-expand-try-functions-list
-      '(yas/hippie-try-expand
-        try-complete-file-name-partially
-        try-expand-all-abbrevs
-        try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill))
-
-(eval-after-load "completion-ui-sources"
-  (global-set-key (kbd "<C-tab>") 'complete-etags))
-
+            (setq hippie-expand-try-functions-list
+                  '(yas/hippie-try-expand
+                    try-complete-file-name-partially
+                    try-expand-all-abbrevs
+                    try-expand-dabbrev
+                    try-expand-dabbrev-all-buffers
+                    try-expand-dabbrev-from-kill))))
 
 ;; smex
-(global-set-key (kbd "M-x") 'smex)
+(use-package smex
+  :bind ("M-x" . smex))
 
-;; php-eldoc
-(eval-after-load "php-mode"
-  '(progn
-     (require 'php-eldoc)
-     (define-key php-mode-map (kbd "C-c C-f") 'php-search-local-documentation)
-     (define-key php-mode-map (kbd "<backtab>") 'php-complete-function)))
+(use-package php-mode
+  :ensure php-eldoc
+  :config (progn
+            (require 'php-eldoc)
+            (bind-key "C-c C-f" 'php-search-local-documentation php-mode-map)
+            (bind-key "<backtab>" 'php-complete-function php-mode-map)))
 
 ;; web-mode
-(eval-after-load "php-mode"
-  '(progn
-     (require 'web-mode)
-     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-     (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))))
-
-(eval-after-load "web-mode"
-  '(setq web-mode-engine-file-regexps
-         '(("asp"        . "\\.asp\\'")
-           ("aspx"       . "\\.as[cp]x\\'")
-           ("blade"      . "\\.blade")
-           ("django"     . "\\.\\(djhtml\\|tmpl\\|dtl\\)\\'")
-           ("django"     . "twig")
-           ("erb"        . "\\.\\(erb\\|rhtml\\)\\'")
-           ("freemarker" . "\\.ftl\\'")
-           ("go"         . "\\.go\\(html\\|tmpl\\)\\'")
-           ("handlebars" . "\\(handlebars\\|.\\hbs\\'\\)")
-           ("jsp"        . "\\.jsp\\'")
-           ("mustache"   . "\\.mustache\\'")
-           ("php"        . "\\.\\(php\\|ctp\\|psp\\|inc\\|phtml\\)\\'")
-           ("python"     . "\\.pml\\'")
-           ("razor"      . "play\\|\\.scala\\.\\|\\.cshtml\\'\\|\\.vbhtml\\'")
-           ("smarty"     . "\\.tpl\\'")
-           ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'"))))
-
-;; python
-(require 'python)
-(setq python-shell-interpreter "ipython")
-(setq python-shell-interpreter-args "--pylab")
-
-                                        ;(require 'jedi)
-
-                                        ;(add-hook 'python-mode-hook 'jedi:setup)
-                                        ;(setq jedi:setup-keys t)                      ; optional
-                                        ;(setq jedi:complete-on-dot t)                 ; optional
-
-                                        ;(setq jedi:server-command
-                                        ;     '("python" "/home/dan/dotfiles/.emacs.d/elpa/jedi-20140223.1054/jediepcserver.py"))
-
-;; (defun pp:custom-jedi-setup ()
-;;   (jedi:setup)
-;; ;  (jedi:ac-setup)
-;;                                         ; (custom-jedi-server-setup)
-;;   (local-set-key "\C-cd" 'jedi:show-doc)
-;;   (local-set-key (kbd "M-SPC") 'jedi:complete)
-;;   (local-set-key (kbd "M-.") 'jedi:goto-definition))
-
-;; (add-hook 'python-mode-hook 'pp:custom-jedi-setup)
-
-;; ruby-mode
-(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+(use-package web-mode
+  :mode (("\\.phtml\\'" . web-mode)
+         ("\\.tpl\\.php\\'" . web-mode))
+  :config (progn
+            '(setq web-mode-engine-file-regexps
+                   '(("asp"        . "\\.asp\\'")
+                     ("aspx"       . "\\.as[cp]x\\'")
+                     ("blade"      . "\\.blade")
+                     ("django"     . "\\.\\(djhtml\\|tmpl\\|dtl\\)\\'")
+                     ("django"     . "twig")
+                     ("erb"        . "\\.\\(erb\\|rhtml\\)\\'")
+                     ("freemarker" . "\\.ftl\\'")
+                     ("go"         . "\\.go\\(html\\|tmpl\\)\\'")
+                     ("handlebars" . "\\(handlebars\\|.\\hbs\\'\\)")
+                     ("jsp"        . "\\.jsp\\'")
+                     ("mustache"   . "\\.mustache\\'")
+                     ("php"        . "\\.\\(php\\|ctp\\|psp\\|inc\\|phtml\\)\\'")
+                     ("python"     . "\\.pml\\'")
+                     ("razor"      . "play\\|\\.scala\\.\\|\\.cshtml\\'\\|\\.vbhtml\\'")
+                     ("smarty"     . "\\.tpl\\'")
+                     ("velocity"   . "\\.\\(vsl\\|vtl\\|vm\\)\\'")))))
 
 ;; c-mode
-(setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
-(load "c-eldoc")
-(add-hook 'irony-mode-hook 'c-turn-on-eldoc-mode)
+(use-package cc-mode
+  :config (progn
+            (require 'auto-complete)
+            (require 'c-eldoc)
+            (require 'flycheck)
+            (require 'google-c-style)
+            (require 'irony)
+            (require 'xcscope)
 
-(require 'auto-complete)
-(require 'irony)
-(irony-enable 'ac)
+            (cscope-minor-mode)
 
-(defun c-hooks()
-  "Enable the hooks in the preferred order: 'yas -> auto-complete -> irony'."
-  (require 'google-c-style)
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+            (yas/minor-mode-on)
+            (auto-complete-mode 1)
 
-  (require 'xcscope)
-  (cscope-minor-mode)
+            ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
+            (when (member major-mode irony-known-modes)
+              (irony-mode 1))
 
-  (yas/minor-mode-on)
-  (auto-complete-mode 1)
-  ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
-  (when (member major-mode irony-known-modes)
-    (irony-mode 1)))
+            (global-flycheck-mode t)
 
-;; iedit and flycheck
+            (bind-key "C-c C-c" 'comment-or-uncomment-line-or-region c-mode-map)))
 
-(add-hook 'c-mode-hook 'c-hooks)
+(use-package c-eldoc
+  :config (progn
+            (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
 
-(add-hook 'c-mode-hook '(lambda()
-                          (global-flycheck-mode t)
-                          (define-key c-mode-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)))
+            (add-hook 'irony-mode-hook 'c-turn-on-eldoc-mode)))
+
+(use-package google-c-style
+  :config (progn
+            (add-hook 'c-mode-common-hook 'google-set-c-style)
+            (add-hook 'c-mode-common-hook 'google-make-newline-indent)))
+
+(use-package irony
+  :ensure auto-complete
+  :config (irony-enable 'ac))
 
 ;; emacs-lisp-mode
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-
-
+(use-package lisp-mode
+  :init (progn
+          (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+          (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+          (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
 
 ;; multiple-cursors
-(autoload 'multiple-cursors "mc/mark-next-like-this" t)
-(global-set-key (kbd "C-c SPC") 'set-rectangular-region-anchor)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :bind (("C-c SPC" . set-rectangular-region-anchor)
+         ("C->"     . mc/mark-next-like-this)
+         ("C-<"     . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)))
 
 ;; org-mode
-(add-hook 'org-mode-hook (lambda ()
-                           (require 'org-bullets)
-                           (org-bullets-mode 1)
-                           (toggle-truncate-lines -1)))
+(use-package org
+  :defer t
+  :ensure org-bullets
+  :config (progn
+            (setq
+             org-agenda-files '("/home/dan/files/notes.org")
+             org-show-siblings '((default . nil)
+                                 (isearch t)
+                                 (bookmark-jump t)
+                                 (agenda t))
+             org-default-notes-file "/home/dan/files/notes.org"
+             org-refile-use-outline-path 'file
+             org-completion-use-ido t
+             org-outline-path-complete-in-steps nil
+             org-refile-allow-creating-parent-nodes 'confirm)
 
-(setq org-agenda-files '("/home/dan/files/notes.org"))
-(setq org-show-siblings '((default . nil) (isearch t) (bookmark-jump t) (agenda t)))
+            (toggle-truncate-lines -1)
 
-(setq org-default-notes-file "/home/dan/files/notes.org")
-(setq
- org-refile-use-outline-path 'file
- org-completion-use-ido t
- org-outline-path-complete-in-steps nil
- org-refile-allow-creating-parent-nodes 'confirm)
+            (add-hook 'org-mode-hook 'org-bullets-mode)))
 
-(define-key global-map "\C-cc" 'org-capture)
+(use-package org-agenda
+  :bind ("C-c A" . org-todo-list))
 
-;; global map
-(define-key global-map (kbd "C-c A") 'org-todo-list)
+(use-package org-capture
+  :bind ("C-c c" . org-capture))
 
 ;; restclient
-(autoload 'restclient-mode "restclient" t)
-(define-key global-map (kbd "C-c R") 'restclient-mode)
+(use-package restclient
+  :bind ("C-c R" . restclient-mode))
 
-;; sensitive-mode http://anirudhsasikumar.net/blog/2005.01.21.html
-(define-minor-mode sensitive-mode
-  "For sensitive files like password lists.
-It disables backup creation and auto saving.
-
-With no argument, this command toggles the mode.
-Non-null prefix argument turns on the mode.
-Null prefix argument turns off the mode."
-  ;; The initial value.
-  nil
-  ;; The indicator for the mode line.
-  " Sensitive"
-  ;; The minor mode bindings.
-  nil
-  (if (symbol-value sensitive-mode)
-      (progn
-        ;; disable backups
-        (set (make-local-variable 'backup-inhibited) t)
-        ;; disable auto-save
-        (if auto-save-default
-            (auto-save-mode -1)))
-                                        ;resort to default value of backup-inhibited
-    (kill-local-variable 'backup-inhibited)
-                                        ;resort to default auto save setting
-    (if auto-save-default
-        (auto-save-mode 1))))
-
-(setq auto-mode-alist (append '(("\\.gpg$" . sensitive-mode)) auto-mode-alist))
-
-;; sql-mode
-(eval-after-load "sql-mode"
-  '(progn
-     (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords)))
+;; sql
+(use-package sql
+  :init (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords))
 
 ;; themes
 (load-theme 'obsidian)
 
 ;; uniquify
-(require 'uniquify)
-
-(setq
- uniquify-buffer-name-style 'reverse
- uniquify-separator " - "
- uniquify-after-kill-buffer-p t
- uniquify-ignore-buffers-re "^\\*")
-
-;;(require 'vlfi)
+(use-package uniquify
+  :init (progn
+          (setq
+           uniquify-buffer-name-style 'reverse
+           uniquify-separator " - "
+           uniquify-after-kill-buffer-p t
+           uniquify-ignore-buffers-re "^\\*")))
 
 ;; webjump
-(require 'webjump)
-
-(setq webjump-sites
-      '(("stackoverflow" . [simple-query "stack overflow" "http://stackoverflow.com/search?q=" ""])
-        ("google"        . [simple-query "google" "www.google.com/search?q=" ""])))
-
-(global-set-key (kbd "C-x g") 'webjump)
+(use-package webjump
+  :bind ("C-x g" . webjump)
+  :init (progn
+          (setq webjump-sites
+                '(("stackoverflow" . [simple-query "stack overflow" "http://stackoverflow.com/search?q=" ""])
+                  ("google"        . [simple-query "google" "www.google.com/search?q=" ""])))))
 
 ;; winner-mode
-(require 'winner)
-(winner-mode t)
+(use-package winner
+  :init (winner-mode t))
 
 ;; some better default keybindings
 (define-key global-map (kbd "C-z") 'quoted-insert)
@@ -860,55 +805,3 @@ Null prefix argument turns off the mode."
 ;; remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
-
-
-;; (defun first-n-lines(file lines)
-;;   (with-temp-buffer
-;;     (setq n-lines "")
-;;     (setq read-bytes 0)
-;;     (while (< (s-count-matches "\n" n-lines) lines)
-;;       (goto-char (point-max))
-;;       (insert-file-contents file nil read-bytes (+ read-bytes 1) t)
-;;       (setq n-lines (concat n-lines (buffer-substring-no-properties (point-min) (point-max))))
-;;       (setq read-bytes (+ read-bytes 1))))
-;;   (butlast (split-string n-lines "\n") (- (length (split-string n-lines "\n")) lines)))
-
-;; (setq test-file "/home/dan/.emacs.d/init.el")
-;; (first-n-lines test-file 10)
-;; ("(defvar emacs-config-dir (expand-file-name \"~/.emacs.d\"))"
-;;  "(defvar emacs-tmp-dir    (expand-file-name (concat emacs-config-dir \"/\" \"tmp\")))"
-;;  ""
-;;  ";; add all of the everythings to the load path, cause, performance."
-;;  "(let ((default-directory emacs-config-dir))"
-;;  "  (normal-top-level-add-subdirs-to-load-path))"
-;;  ""
-;;  "(let ((default-directory \"~/dotfiles/deps\"))"
-;;  "  (normal-top-level-add-subdirs-to-load-path))"
-;;  "")
-
-
-
-;; (defun dired-head-file()
-;;   (interactive)
-;;   (let ((file (dired-get-file-for-visit))
-;;         (tmpfile (concat emacs-tmp-dir "/" (s-replace "/" "_" file))))
-;;     (with-temp-file tmpfile
-;;       (insert (s-join "\n" (first-n-lines file 10))))
-;;     (view-buffer (find-file-noselect tmpfile) (lambda(buf)
-;;                                                 (progn
-;;                                                   (delete-file tmpfile)
-;;                                                   (kill-buffer buf))))))
-
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-
-;; hslint on the command line only likes this indentation mode;
-;; alternatives commented out below.
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
-(fset 'remove-xml-tags
-      [?\C-s ?< return left ?\M-z ?> delete ?\C-s ?< return left ?\M-z ?> delete])
-
-(add-hook 'php-mode-hook (lambda(&rest args)
-                           (require 'wordpress)
-                           (enable-wordpress-mode)))
