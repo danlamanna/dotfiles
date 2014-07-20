@@ -10,9 +10,7 @@
 
 ;; package.el
 (require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (package-initialize)
 
@@ -355,6 +353,29 @@ and it's name isn't in no-cleanup-filenames."
 (use-package ido-ubiquitous
   :init (ido-ubiquitous-mode 1))
 
+;; jedi
+(use-package jedi
+  :defer t
+  :bind (("C-c d" . jedi:show-doc)
+         ("M-SPC" . jedi:complete)
+         ("M-." . jedi:goto-definition))
+
+  :init (progn
+          (defun pp:custom-jedi-setup ()
+            (jedi:setup)
+            (jedi:ac-setup)))
+
+  :config (progn
+            (setq jedi:server-command
+                  `("python" ,(concat jedi:source-dir "jediepcserver.py")))
+
+            (setq jedi:setup-keys t
+                  jedi:tooltip-method nil
+                  jedi:get-in-function-call-delay 300
+                  jedi:complete-on-dot t)))
+
+
+
 ;; key-chord
 (use-package key-chord
   :init (key-chord-mode +1)
@@ -563,6 +584,35 @@ and it's name isn't in no-cleanup-filenames."
 
 (use-package org-capture
   :bind ("C-c c" . org-capture))
+
+;; python
+(use-package python
+  :commands python-mode
+  :config (progn
+            (setq pylint:epylint-executable "epylint"
+                  python-shell-interpreter "ipython"
+                  python-shell-interpreter-args "-i"
+                  python-shell-buffer-name "Python"
+                  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+                  python-shell-prompt-block-regexp ":"
+                  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: ")
+
+                                        ; auto pair
+            (use-package autopair)
+
+                                        ; adding hooks
+            (add-hook 'python-mode-hook (lambda ()
+                                          (unless (tramp-tramp-file-p (buffer-file-name))
+                                            (flycheck-mode))))
+
+                                        ; hooks
+            (add-hook 'python-mode-hook 'auto-complete-mode)
+            (add-hook 'python-mode-hook 'autopair-mode)
+            (add-hook 'python-mode-hook 'pp:custom-jedi-setup)))
+
+(add-hook 'inferior-python-mode-hook 'auto-complete-mode)
+(add-hook 'inferior-python-mode-hook 'autopair-mode)
+(add-hook 'inferior-python-mode-hook 'pp:custom-jedi-setup)
 
 ;; restclient
 (use-package restclient
