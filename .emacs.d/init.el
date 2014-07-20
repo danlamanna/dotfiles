@@ -228,6 +228,8 @@ and it's name isn't in no-cleanup-filenames."
 (use-package dired
   :ensure gist
   :config (progn
+            (setq dired-dwim-target t)
+
             (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
             (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
@@ -270,9 +272,6 @@ and it's name isn't in no-cleanup-filenames."
 ;; expand-region
 (use-package expand-region
   :bind ("C-q" . er/expand-region))
-
-(use-package god-mode
-  :bind ("<escape>" . god-mode-all))
 
 ;; tramp
 (defun sudo-tramp-current-file()
