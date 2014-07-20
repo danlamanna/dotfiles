@@ -56,9 +56,6 @@ fi
 ## Start xscreensaver
 xscreensaver -no-splash &
 
-## Start Clipboard manager
-(sleep 3s && clipit) &
-
 ## Set keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
 ## Adjust the values according to your preferances.
 xset r rate 250 25 &
@@ -94,6 +91,6 @@ xmodmap /home/dan/.Xmodmap
 (sleep 10s && redshift -l40.6:73.9 &)
 
 # setup dual monitors
-if [ "$(hostname)" == "lantea" ]; then
+if [ "$(hostname)" = "lantea" ]; then
    /home/dan/src/normal.sh
 fi

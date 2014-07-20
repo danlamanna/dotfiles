@@ -18,6 +18,7 @@
     color_scheme = custom
     font = Monospace 10
     background_color = "#2e3436"
+    audible_bell = True
     scrollback_infinite = True
 [layouts]
   [[default]]
