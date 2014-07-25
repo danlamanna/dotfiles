@@ -90,7 +90,7 @@
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("454dc6f3a1e9e062f34c0f988bcef5d898146edc5df4aa666bf5c30bed2ada2e" "9bcb8ee9ea34ec21272bb6a2044016902ad18646bd09fdd65abae1264d258d89" "b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(dired-listing-switches "-alh")
  '(enable-recursive-minibuffers t)
  '(geben-dbgp-default-proxy (quote ("127.0.0.1" 9001 "dan" nil t)))
@@ -633,7 +633,7 @@ and it's name isn't in no-cleanup-filenames."
   :init (add-hook 'sql-mode-hook 'sql-highlight-mysql-keywords))
 
 ;; themes
-(load-theme 'obsidian)
+(load-theme 'gruvbox)
 
 ;; uniquify
 (use-package uniquify
