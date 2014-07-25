@@ -23,7 +23,6 @@
                                  c-eldoc
                                  company-go
                                  eldoc-eval
-                                 elpy
                                  emmet-mode
                                  etags-select
                                  etags-table
@@ -229,6 +228,8 @@ and it's name isn't in no-cleanup-filenames."
   :ensure gist
   :config (progn
             (setq dired-dwim-target t)
+            (setq dired-recursive-deletes 'always)
+
 
             (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
             (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
@@ -351,6 +352,9 @@ and it's name isn't in no-cleanup-filenames."
 
 (use-package ido-ubiquitous
   :init (ido-ubiquitous-mode 1))
+
+;; javascript
+(add-to-list 'auto-mode-alist '("\\.conkerorrc\\'" . js2-mode))
 
 ;; jedi
 (use-package jedi
@@ -538,6 +542,13 @@ and it's name isn't in no-cleanup-filenames."
   :config (progn
             (add-hook 'c-mode-common-hook 'google-set-c-style)
             (add-hook 'c-mode-common-hook 'google-make-newline-indent)))
+
+(add-hook 'nxml-mode-hook (lambda(&rest args)
+                            (require 'i2b2-mode)
+                            (if (i2b2-buffer-p)
+                                (i2b2-mode 1))))
+
+(add-hook 'i2b2-mode-hook 'whitespace-mode)
 
 (use-package irony
   :ensure auto-complete
@@ -854,3 +865,10 @@ and it's name isn't in no-cleanup-filenames."
 ;; remove prompt of killing a buffer with a running process
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
+
+(setq org-capture-templates
+      '(("o"
+         "Optimization"
+         entry
+         (file+headline "~/files/notes.org" "Optimizations")
+         "* %?\n [[file:%F]] %^g\n")))
