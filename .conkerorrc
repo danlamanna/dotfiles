@@ -59,7 +59,7 @@ url_remoting_fn = load_url_in_new_buffer;
 
 define_webjump("g", "http://www.google.com/search?q=%s&ie=utf-8&oe=utf-8&aq=t");
 define_webjump("d", "https://duckduckgo.com/?q=%s");
-
+define_webjump("w", "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go");
 
 define_variable("firebug_url",
     "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
