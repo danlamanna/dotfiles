@@ -17,6 +17,7 @@
 (defvar elpa-required-packages '(ac-etags
                                  ace-jump-mode
                                  ack-and-a-half
+                                 async
                                  auto-complete-exuberant-ctags
                                  autopair
                                  browse-kill-ring
@@ -105,6 +106,7 @@
  '(go-command "/home/dan/src/go/bin/go")
  '(grep-command "grep -rin")
  '(indent-tabs-mode nil)
+ '(initial-scratch-message nil)
  '(large-file-warning-threshold 100000000) ;; 100MB
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(org-file-apps
@@ -227,6 +229,8 @@ and it's name isn't in no-cleanup-filenames."
 (use-package dired
   :ensure gist
   :config (progn
+            (require 'dired-async)
+
             (setq dired-dwim-target t)
             (setq dired-recursive-deletes 'always)
 
