@@ -82,8 +82,6 @@ xmodmap /home/dan/.Xmodmap
 
 /home/dan/src/setlayout 0 3 2 0
 
-(sleep 10s && ~/.dropbox-dist/dropboxd) &
-
 (sleep 10s && pidgin) &
 
 (sleep 10s && artha) &
