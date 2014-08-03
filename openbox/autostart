@@ -23,6 +23,9 @@ eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 ## Set root window colour
 hsetroot -solid "#2E3436" &
 
+# setup dual monitors
+source /home/dan/src/normal.sh
+
 ## Group start:
 ## 1. nitrogen - restores wallpaper
 ## 2. compositor - start
@@ -44,9 +47,6 @@ xfce4-volumed &
 ## Enable power management
 xfce4-power-manager &
 
-## Start Thunar Daemon
-thunar --daemon &
-
 ## Detect and configure touchpad. See 'man synclient' for more info.
 if egrep -iq 'touchpad' /proc/bus/input/devices; then
     synclient VertEdgeScroll=1 &
@@ -63,20 +63,6 @@ xset r rate 250 25 &
 ## Turn on/off system beep
 xset b off &
 
-## The following command runs hacks and fixes for #! LiveCD sessions.
-## Safe to delete after installation.
-cb-cowpowers &
-
-## cb-welcome - post-installation script, will not run in a live session and
-## only runs once. Safe to remove.
-(sleep 10s && cb-welcome --firstrun) &
-
-## cb-fortune - have Waldorf say a little adage
-#(sleep 120s && cb-fortune) &
-
-## Run the conky
-conky -q &
-
 # Custom
 xmodmap /home/dan/.Xmodmap
 
@@ -86,9 +72,4 @@ xmodmap /home/dan/.Xmodmap
 
 (sleep 10s && artha) &
 
-(sleep 10s && redshift -l40.6:73.9 &)
-
-# setup dual monitors
-if [ "$(hostname)" = "lantea" ]; then
-   /home/dan/src/normal.sh
-fi
+(sleep 10s && gtk-redshift -l42.6181:73.8367 -t 5800:3500 &)
