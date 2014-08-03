@@ -107,6 +107,7 @@
  '(grep-command "grep -rin")
  '(indent-tabs-mode nil)
  '(initial-scratch-message nil)
+ '(interprogram-paste-function 'x-cut-buffer-or-selection-value)
  '(large-file-warning-threshold 100000000) ;; 100MB
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(org-file-apps
@@ -126,6 +127,7 @@
  '(vc-follow-symlinks t)
  '(virtualenv-root "~/.envs/")
  '(wdired-allow-to-change-permissions t)
+ '(x-select-enable-clipboard t)
  '(yank-pop-change-selection t))
 
 (put 'upcase-region 'disabled nil)
