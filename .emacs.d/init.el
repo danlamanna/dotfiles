@@ -229,7 +229,13 @@ and it's name isn't in no-cleanup-filenames."
 (use-package dired
   :ensure gist
   :config (progn
+            (put 'dired-do-copy 'ido 'find-file)
+            (put 'dired-do-rename 'ido 'find-file)
+
             (require 'dired-async)
+            (require 'dired-x)
+
+            (dired-omit-mode)
 
             (setq dired-dwim-target t)
             (setq dired-recursive-deletes 'always)
