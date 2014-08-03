@@ -134,6 +134,7 @@
 (prefer-coding-system 'utf-8)
 
 (define-key global-map (kbd "C-c b") 'browse-url-at-point)
+(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
 ;; custom faces
 (custom-set-faces
@@ -653,6 +654,12 @@ and it's name isn't in no-cleanup-filenames."
            uniquify-separator " - "
            uniquify-after-kill-buffer-p t
            uniquify-ignore-buffers-re "^\\*")))
+
+;; ;; viper, just for forward-word and backward-word
+;; (use-package viper
+;;   :commands (viper-forward-word viper-backward-word)
+;;   :bind (("M-f" . 'viper-forward-word)
+;;          ("M-b" . 'viper-backward-word)))
 
 ;; webjump
 (use-package webjump
