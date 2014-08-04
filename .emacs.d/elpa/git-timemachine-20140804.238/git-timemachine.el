@@ -3,7 +3,7 @@
 ;; Copyright (C) 2014 Peter Stiernström
 
 ;; Author: Peter Stiernström <peter@stiernstrom.se>
-;; Version: 20140729.1019
+;; Version: 20140804.238
 ;; X-Original-Version: 1.5
 ;; URL: https://github.com/pidu/git-timemachine
 ;; Package-Requires: ((cl-lib "0.5"))
@@ -29,14 +29,17 @@
 ;;; Use git-timemachine to browse historic versions of a file with p
 ;;; (previous) and n (next).
 
-(require 'cl-lib)
-
 ;;; Code:
+
+(require 'cl-lib)
+(require 'vc-git)
 
 (defvar git-timemachine-directory nil)
 (make-variable-buffer-local 'git-timemachine-directory)
+
 (defvar git-timemachine-file nil)
 (make-variable-buffer-local 'git-timemachine-file)
+
 (defvar git-timemachine-revision nil)
 (make-variable-buffer-local 'git-timemachine-revision)
 
@@ -99,19 +102,19 @@
  :group 'git-timemachine)
 
 (defun git-timemachine-validate (file)
- "Validate that there is a FILE and that it belongs to a git repository. Call with the value of 'buffer-file-name."
+ "Validate that there is a FILE and that it belongs to a git repository.
+Call with the value of 'buffer-file-name."
  (unless file
-  (error "This buffer is not related to file"))
- (with-temp-buffer
-  (unless (zerop (call-process "git" nil nil nil "ls-files" "--error-unmatch" file))
-   (error "This file is not git tracked"))))
+  (error "This buffer is not visiting a file"))
+ (unless (vc-git-registered file)
+  (error "This file is not git tracked")))
 
 ;;;###autoload
 (defun git-timemachine ()
  "Enable git timemachine for file of current buffer."
  (interactive)
  (git-timemachine-validate (buffer-file-name))
- (let ((git-directory (file-name-as-directory (car (process-lines "git" "rev-parse" "--show-toplevel"))))
+ (let ((git-directory (expand-file-name (vc-git-root (buffer-file-name))))
        (file-name (buffer-file-name))
        (timemachine-buffer (format "timemachine:%s" (buffer-name)))
        (mode major-mode))

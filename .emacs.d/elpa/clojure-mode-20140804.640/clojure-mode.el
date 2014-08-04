@@ -8,7 +8,7 @@
 ;;       Phil Hagelberg <technomancy@gmail.com>
 ;;       Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://github.com/clojure-emacs/clojure-mode
-;; Version: 20140727.517
+;; Version: 20140804.640
 ;; X-Original-Version: 3.0.0-cvs
 ;; Keywords: languages, lisp
 
@@ -330,7 +330,8 @@ This only takes care of filling docstring correctly."
                                    "\\|\\s-*\\([(;:\"[]\\|`(\\|#'(\\)"))
           (paragraph-separate
            (concat paragraph-separate "\\|\\s-*\".*[,\\.[]$")))
-      (fill-paragraph justify)
+      (or (fill-comment-paragraph justify)
+          (fill-paragraph justify))
       ;; Always return `t'
       t)))
 
@@ -343,7 +344,7 @@ This only takes care of filling docstring correctly."
                              clojure-docstring-fill-column
                            fill-column))
             (fill-prefix (clojure-adaptive-fill-function)))
-        (when fill-prefix (do-auto-fill))))))
+        (do-auto-fill)))))
 
 (defun clojure-display-inferior-lisp-buffer ()
   "Display a buffer bound to `inferior-lisp-buffer'."
@@ -486,6 +487,7 @@ Called by `imenu--generic-function'."
          "\\>")
        0 font-lock-constant-face)
       ;; Character literals - \1, \a, \newline, \u0000
+      ;; FIXME: handle properly punctuations characters (commas after a character are problematic)
       ("\\\\[a-z0-9]+\\>" 0 'clojure-character-face)
       ;; Constant values (keywords), including as metadata e.g. ^:static
       ("\\<^?:\\(\\sw\\|\\s_\\)+\\(\\>\\|\\_>\\)" 0 'clojure-keyword-face)
@@ -501,7 +503,7 @@ Called by `imenu--generic-function'."
       ;; .foo .barBaz .qux01 .-flibble .-flibbleWobble
       ("\\<\\.-?[a-z][a-zA-Z0-9]*\\>" 0 'clojure-interop-method-face)
       ;; Foo Bar$Baz Qux_ World_OpenUDP Foo. Babylon15.
-      ("\\(?:\\<\\|\\.\\)\\([A-Z][a-zA-Z0-9_]*[a-zA-Z0-9$_]+\\.?\\>\\)" 1 font-lock-type-face)
+      ("\\(?:\\<\\|\\.\\|/\\)\\([A-Z][a-zA-Z0-9_]*[a-zA-Z0-9$_]+\\.?\\>\\)" 1 font-lock-type-face)
       ;; foo.bar.baz
       ("\\<[a-z][a-z0-9_-]+\\.\\([a-z][a-z0-9_-]+\\.?\\)+" 0 font-lock-type-face)
       ;; foo/ Foo/
