@@ -238,11 +238,18 @@ and it's name isn't in no-cleanup-filenames."
             (require 'dired-async)
             (require 'dired-x)
 
+            (defadvice dired-do-rename (around prefix-arg-dwim activate)
+              "If rename is passed a prefix argument, set dired-dwim-target to non-nil."
+              (let ((dired-dwim-target (ad-get-arg 0)))
+                ad-do-it))
+
+            (defadvice dired-do-copy (around prefix-arg-dwim activate)
+              (let ((dired-dwim-target (ad-get-arg 0)))
+                ad-do-it))
+
             (dired-omit-mode)
 
-            (setq dired-dwim-target t)
             (setq dired-recursive-deletes 'always)
-
 
             (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
             (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
