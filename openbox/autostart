@@ -72,4 +72,4 @@ xmodmap /home/dan/.Xmodmap
 
 (sleep 10s && artha) &
 
-(sleep 10s && gtk-redshift -l42.6181:73.8367 -t 5800:3500 &)
+(sleep 10s && gtk-redshift -l42.6181:73.8367 -t 4400:5800 &)
