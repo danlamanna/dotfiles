@@ -107,8 +107,8 @@
  '(grep-command "grep -rin")
  '(indent-tabs-mode nil)
  '(initial-scratch-message nil)
- '(interprogram-paste-function 'x-cut-buffer-or-selection-value)
- '(large-file-warning-threshold 100000000) ;; 100MB
+ '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
+ '(large-file-warning-threshold 100000000)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(org-file-apps
    (quote
@@ -139,13 +139,15 @@
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
 ;; custom faces
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flymake-errline ((t (:background "brightblack"))))
- '(magit-item-highlight ((t (:inherit default)))))
+(when (member "Source Code Pro" (font-family-list))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :stipple nil :background "#282828" :foreground "#fdf4c1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "unknown" :family "Source Code Pro"))))
+   '(flymake-errline ((t (:background "brightblack"))))
+   '(magit-item-highlight ((t (:inherit default))))))
 
 ;; ace-jump-mode
 (use-package ace-jump-mode
@@ -405,7 +407,6 @@ and it's name isn't in no-cleanup-filenames."
   :config (progn
             (key-chord-define-global "ww" 'ace-jump-word-mode)
             (key-chord-define-global "jj" 'ace-jump-char-mode)
-            (key-chord-define-global "hh" '(lambda() (interactive) (insert "_")))
             (key-chord-define-global "uu" 'undo-tree-visualize)))
 
 ;; magit
@@ -447,6 +448,15 @@ and it's name isn't in no-cleanup-filenames."
               :args '()
               :cwd "/media/ronon/research/MIST_2_0/src/MAT"
               :path "/media/ronon/research/MIST_2_0/src/MAT/bin"
+              :tags '(research)
+              :kill-signal 'sigkill
+              :kill-process-buffer-on-stop t)
+
+            (prodigy-define-service
+              :name "WTP Notebook"
+              :command "ipython"
+              :args '("notebook" "--pylab=inline" "--no-browser")
+              :cwd "/home/dan/files/research/wtp/ipython"
               :tags '(research)
               :kill-signal 'sigkill
               :kill-process-buffer-on-stop t)
@@ -609,9 +619,20 @@ and it's name isn't in no-cleanup-filenames."
 
             (add-hook 'org-mode-hook 'org-bullets-mode)))
 
+;; org-agenda
 (use-package org-agenda
   :bind ("C-c A" . org-todo-list))
 
+;; org-babel
+(use-package ob-core
+  :config (progn
+            (org-babel-do-load-languages
+             'org-babel-load-languages
+             '((C . t)
+               (ruby . t)
+               (emacs-lisp . t)))))
+
+;; org-capture
 (use-package org-capture
   :bind ("C-c c" . org-capture))
 
