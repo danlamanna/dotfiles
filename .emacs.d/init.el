@@ -20,44 +20,51 @@
                                  async
                                  auto-complete-exuberant-ctags
                                  autopair
+                                 bind-key
                                  browse-kill-ring
                                  c-eldoc
+                                 cache
+                                 cider
                                  company-go
+                                 edbi
+                                 ein
                                  eldoc-eval
                                  emmet-mode
-                                 etags-select
                                  etags-table
                                  expand-region
                                  flycheck-haskell
                                  flymake-python-pyflakes
                                  framemove
+                                 fuzzy
                                  geben
                                  gist
+                                 git-timemachine
                                  gitconfig-mode
                                  gitignore-mode
                                  go-eldoc
                                  go-errcheck
                                  google-c-style
-                                 gtags
-                                 guide-key
+                                 gruvbox-theme
+                                 highlight-indentation
+                                 i2b2-mode
                                  ido-ubiquitous
-                                 ipython
+                                 idomenu
                                  jedi
+                                 jinja2-mode
                                  key-chord
-                                 mag-menu
                                  magit
-                                 makey
                                  markdown-mode
                                  multi-term
                                  multiple-cursors
+                                 nose
                                  org-bullets
+                                 paredit
                                  php-eldoc
                                  php-mode
+                                 prodigy
                                  puppet-mode
-                                 pyvirtualenv
-                                 request
+                                 pyvenv
                                  restclient
-                                 s
                                  skewer-mode
                                  smart-tab
                                  smex
@@ -66,8 +73,8 @@
                                  virtualenv
                                  vlf
                                  web-mode
-                                 websocket
-                                 xcscope)
+                                 xcscope
+                                 yasnippet)
   "Default Packages")
 
 (dolist (pkg elpa-required-packages)
@@ -198,7 +205,7 @@
 ;; coding standards
 ;; both these lists should be lowercased
 (setq no-cleanup-filenames '("makefile"))
-(setq no-cleanup-extensions '("md" "org" "xml"))
+(setq no-cleanup-extensions '("md" "org" "xml" "tsv"))
 
 (defun should-cleanup-buffer?()
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
@@ -232,6 +239,7 @@ and it's name isn't in no-cleanup-filenames."
             (bind-key "C-<up>"   'windmove-up comint-mode-map)
             (bind-key "C-<down>" 'windmove-down comint-mode-map)))
 
+;; dired
 (use-package dired
   :ensure gist
   :config (progn
@@ -400,8 +408,6 @@ and it's name isn't in no-cleanup-filenames."
                   jedi:get-in-function-call-delay 300
                   jedi:complete-on-dot t)))
 
-
-
 ;; key-chord
 (use-package key-chord
   :init (key-chord-mode +1)
@@ -411,12 +417,6 @@ and it's name isn't in no-cleanup-filenames."
             (key-chord-define-global "uu" 'undo-tree-visualize)))
 
 ;; magit
-(defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
-  (interactive)
-  (kill-buffer)
-  (jump-to-register :magit-fullscreen))
-
 (use-package magit
   :bind ("C-x s" . magit-status)
   :config (progn
@@ -424,6 +424,12 @@ and it's name isn't in no-cleanup-filenames."
               (window-configuration-to-register :magit-fullscreen)
               ad-do-it
               (delete-other-windows))
+
+            (defun magit-quit-session ()
+              "Restores the previous window configuration and kills the magit buffer"
+              (interactive)
+              (kill-buffer)
+              (jump-to-register :magit-fullscreen))
 
             (add-hook 'magit-mode-hook 'hl-line-mode)
 
