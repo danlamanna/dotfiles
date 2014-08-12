@@ -94,8 +94,7 @@
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(auto-save-interval 60)
- '(browse-url-browser-function (quote browse-url-firefox))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(browse-url-browser-function (quote browse-url-chromium))
  '(custom-safe-themes
    (quote
     ("454dc6f3a1e9e062f34c0f988bcef5d898146edc5df4aa666bf5c30bed2ada2e" "9bcb8ee9ea34ec21272bb6a2044016902ad18646bd09fdd65abae1264d258d89" "b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
@@ -143,7 +142,6 @@
 (pending-delete-mode t)
 (prefer-coding-system 'utf-8)
 
-(define-key global-map (kbd "C-c b") 'browse-url-at-point)
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
 ;; custom faces
