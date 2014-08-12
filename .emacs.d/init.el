@@ -309,6 +309,16 @@ and it's name isn't in no-cleanup-filenames."
 (use-package expand-region
   :bind ("C-q" . er/expand-region))
 
+;; gist
+(use-package gist
+  :bind ("C-c h" . actual-gist-region-or-buffer)
+  :config (progn
+            (defun actual-gist-region-or-buffer(arg)
+              (interactive "P")
+              (if (region-active-p)
+                  (gist-region (region-beginning) (region-end) arg)
+                (gist-buffer arg)))))
+
 ;; tramp
 (defun sudo-tramp-current-file()
   (interactive)
