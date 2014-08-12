@@ -163,10 +163,16 @@
 
 ;; ack
 (use-package ack-and-a-half
-  :bind ("C-c a" . ack)
+  :bind ("C-c a" . ack-maybe-same)
   :init (progn
           (defalias 'ack 'ack-and-a-half)
-          (defalias 'ack-same 'ack-and-a-half-same))
+          (defalias 'ack-same 'ack-and-a-half-same)
+
+          (defun ack-maybe-same(arg)
+            (interactive "P")
+            (if arg
+                (call-interactively 'ack-same)
+              (call-interactively 'ack))))
   :config (setq ack-and-a-half-use-ido t))
 
 ;; autopair
