@@ -726,8 +726,6 @@ and it's name isn't in no-cleanup-filenames."
 
 ;; some better default keybindings
 (define-key global-map (kbd "C-z") 'quoted-insert)
-(define-key global-map (kbd "C-b") 'revert-buffer)
-(define-key global-map (kbd "C-B") 'revert-all-buffers)
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "C-c g") 'grep)
 (define-key global-map (kbd "C-c r") 'replace-string)
@@ -739,7 +737,7 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "C-<left>") 'windmove-left)
 (global-set-key (kbd "C-<right>") 'windmove-right)
 
-(setq completion-popup-frame-map (make-sparse-keymap))
+;;(setq completion-popup-frame-map (make-sparse-keymap))
 
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-\"") 'insert-pair)
