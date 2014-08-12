@@ -854,18 +854,27 @@ and it's name isn't in no-cleanup-filenames."
 
 (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
 
-(defun revert-all-buffers()
+;; taken from http://www.emacswiki.org/emacs/RevertBuffer
+(defun revert-all-buffers ()
   "Refreshes all open buffers from their respective files."
   (interactive)
-  (let* ((list (buffer-list))
-         (buffer (car list)))
-    (while buffer
-      (when (buffer-file-name buffer)
-        (set-buffer buffer)
-        (revert-buffer t t t))
-      (setq list (cdr list))
-      (setq buffer (car list))))
-  (message "done."))
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and (buffer-file-name)
+                 (file-exists-p (buffer-file-name))
+                 (not (buffer-modified-p)))
+        (revert-buffer t t t))))
+  (message "Refreshed open files."))
+
+(defun prefixed-revert-buffer-all-buffers(arg)
+  "Reverts buffer normally, calls revert-all-buffers if prefix argument
+   is present."
+  (interactive "P")
+  (if arg
+      (revert-all-buffers)
+    (revert-buffer t t)))
+
+(define-key global-map (kbd "C-c z") 'prefixed-revert-buffer-all-buffers)
 
 (defun open-line-below ()
   (interactive)
