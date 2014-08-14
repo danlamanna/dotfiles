@@ -319,6 +319,11 @@ and it's name isn't in no-cleanup-filenames."
                   (gist-region (region-beginning) (region-end) arg)
                 (gist-buffer arg)))))
 
+;; god-mode
+(use-package god-mode
+  :config
+  (global-set-key (kbd "<escape>") 'god-mode-all))
+
 ;; ibuffer
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
