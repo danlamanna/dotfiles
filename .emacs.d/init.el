@@ -319,6 +319,21 @@ and it's name isn't in no-cleanup-filenames."
                   (gist-region (region-beginning) (region-end) arg)
                 (gist-buffer arg)))))
 
+;; ibuffer
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :config (progn
+            (setq ibuffer-saved-filter-groups
+                  (quote (("default"
+                           ("dired" (mode . dired-mode))
+                           ("org" (mode . org-mode))
+                           ("misc" (or
+                                    (name . "^\\*scratch\\*$")
+                                    (name . "^\\*Messages\\*$")))))))))
+
+(add-hook 'ibuffer-mode-hook (lambda()
+                               (ibuffer-switch-to-saved-filter-groups "default")))
+
 ;; tramp
 (defun sudo-tramp-current-file()
   (interactive)
