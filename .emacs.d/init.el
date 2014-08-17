@@ -806,9 +806,13 @@ and it's name isn't in no-cleanup-filenames."
                    "  %p (L%l,C%c)"))
        '(:eval (if mark-active (format " [%s]" (length (buffer-substring-no-properties (mark) (point))))))
        ;; Major mode in brackets
-       " [%m] "
-       ;; Display time, followed by dashes till the end
-       '(:eval (propertize (format-time-string "%l:%M%p")))))
+       " [%m] "))
+
+(add-hook 'god-mode-enabled-hook (lambda()
+                                   (set-face-background 'default "#363535")))
+
+(add-hook 'god-mode-disabled-hook (lambda()
+                                   (set-face-background 'default "#282828")))
 
 (toggle-fullscreen)
 
