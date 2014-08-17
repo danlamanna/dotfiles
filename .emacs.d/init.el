@@ -209,7 +209,7 @@
 ;; coding standards
 ;; both these lists should be lowercased
 (setq no-cleanup-filenames '("makefile"))
-(setq no-cleanup-extensions '("md" "org" "xml" "tsv"))
+(setq no-cleanup-extensions '("md" "org" "xml" "tsv" "config"))
 
 (defun should-cleanup-buffer?()
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
@@ -740,6 +740,13 @@ and it's name isn't in no-cleanup-filenames."
                 '(("stackoverflow" . [simple-query "stack overflow" "http://stackoverflow.com/search?q=" ""])
                   ("google"        . [simple-query "google" "www.google.com/search?q=" ""])))))
 
+;; windmove
+(use-package windmove
+  :bind (("C-<up>" . windmove-up)
+         ("C-<down>" . windmove-down)
+         ("C-<left>" . windmove-left)
+         ("C-<right>" . windmove-right)))
+
 ;; winner-mode
 (use-package winner
   :init (winner-mode t))
@@ -748,16 +755,11 @@ and it's name isn't in no-cleanup-filenames."
 (define-key global-map (kbd "C-z") 'quoted-insert)
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "C-c g") 'grep)
-(define-key global-map (kbd "C-c r") 'replace-string)
-(define-key global-map (kbd "<f3>") 'start-kbd-macro)
-(define-key global-map (kbd "ESC <f3>") 'end-kbd-macro)
-(define-key global-map (kbd "<f4>") 'call-last-kbd-macro)
-(global-set-key (kbd "C-<up>") 'windmove-up)
-(global-set-key (kbd "C-<down>") 'windmove-down)
-(global-set-key (kbd "C-<left>") 'windmove-left)
-(global-set-key (kbd "C-<right>") 'windmove-right)
 
-;;(setq completion-popup-frame-map (make-sparse-keymap))
+(define-key global-map (kbd "C-x k") 'kill-this-buffer)
+(define-key global-map (kbd "C-c r") 'replace-string)
+(define-key global-map (kbd "C-x (") 'start-kbd-macro)
+(define-key global-map (kbd "C-x )") 'end-kbd-macro)
 
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-\"") 'insert-pair)
