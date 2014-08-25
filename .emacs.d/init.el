@@ -10,6 +10,7 @@
 
 ;; package.el
 (require 'package)
+
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (package-initialize)
@@ -497,7 +498,7 @@ and it's name isn't in no-cleanup-filenames."
               :name "WTP Notebook"
               :command "ipython"
               :args '("notebook" "--pylab=inline" "--no-browser")
-              :cwd "/home/dan/files/research/wtp/ipython"
+              :cwd "/home/dan/files/research/wtp/social_informatics_2014/notebooks"
               :tags '(research)
               :kill-signal 'sigkill
               :kill-process-buffer-on-stop t)
