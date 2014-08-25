@@ -24,7 +24,9 @@ eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 hsetroot -solid "#2E3436" &
 
 # setup dual monitors
-source /home/dan/src/normal.sh
+if [[ `hostname` = "lantea" ]]; then
+   /home/dan/.screenlayout/normal.sh
+fi
 
 ## Group start:
 ## 1. nitrogen - restores wallpaper
