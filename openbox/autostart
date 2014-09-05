@@ -1,21 +1,4 @@
-## Openbox autostart.sh
-## ====================
-## When you login to your CrunchBang Openbox session, this autostart script
-## will be executed to set-up your environment and launch any applications
-## you want to run at startup.
-##
-## Note*: some programs, such as 'nm-applet' are run via XDG autostart.
-## Run '/usr/lib/openbox/openbox-xdg-autostart --list' to list any
-## XDG autostarted programs.
-##
-## More information about this can be found at:
-## http://openbox.org/wiki/Help:Autostart
-##
-## If you do something cool with your autostart script and you think others
-## could benefit from your hack, please consider sharing it at:
-## http://crunchbang.org/forums/
-##
-## Have fun & happy CrunchBangin'! :)
+export PATH=$PATH:/home/dan/bin
 
 ## GNOME PolicyKit and Keyring
 eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
@@ -25,20 +8,10 @@ hsetroot -solid "#2E3436" &
 
 # setup dual monitors
 if [[ `hostname` = "lantea" ]]; then
-   /home/dan/.screenlayout/normal.sh
+   /home/dan/.screenlayout/normal.sh &
 fi
 
-## Group start:
-## 1. nitrogen - restores wallpaper
-## 2. compositor - start
-## 3. sleep - give compositor time to start
-## 4. tint2 panel
-(\
-nitrogen --restore && \
-cb-compositor --start && \
-sleep 2s && \
-tint2 \
-) &
+tint2 &
 
 ## Volume control for systray
 (sleep 2s && pnmixer) &
@@ -48,6 +21,10 @@ xfce4-volumed &
 
 ## Enable power management
 xfce4-power-manager &
+
+if [ `which nm-applet` -eq 0 ]; then
+   sudo nm-applet &
+fi
 
 ## Detect and configure touchpad. See 'man synclient' for more info.
 if egrep -iq 'touchpad' /proc/bus/input/devices; then
