@@ -44,7 +44,7 @@ symbols=no
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=C0111, C0103, C0301, E1103, C0303
+disable=C0111, C0103, C0301, E1103, C0303, W0141, W0622
 
 
 [REPORTS]
