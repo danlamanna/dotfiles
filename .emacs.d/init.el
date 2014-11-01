@@ -11,7 +11,7 @@
 ;; package.el
 (require 'package)
 
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 
 (package-initialize)
 
@@ -209,8 +209,8 @@
 
 ;; coding standards
 ;; both these lists should be lowercased
-(setq no-cleanup-filenames '("makefile"))
-(setq no-cleanup-extensions '("md" "org" "xml" "tsv" "config"))
+(setq no-cleanup-filenames '("makefile" "rules"))
+(setq no-cleanup-extensions '("md" "org" "xml" "tsv" "csv" "config"))
 
 (defun should-cleanup-buffer?()
   "Returns t if the buffer is an actual file, the files extension isn't in no-cleanup-extensions,
@@ -756,6 +756,7 @@ and it's name isn't in no-cleanup-filenames."
 (define-key global-map (kbd "C-z") 'quoted-insert)
 (define-key global-map (kbd "M-g") 'goto-line)
 (define-key global-map (kbd "C-c g") 'grep)
+(define-key global-map (kbd "C-c w") 'whitespace-mode)
 
 (define-key global-map (kbd "C-x k") 'kill-this-buffer)
 (define-key global-map (kbd "C-c r") 'replace-string)
@@ -809,13 +810,17 @@ and it's name isn't in no-cleanup-filenames."
                    "  %p (L%l,C%c)"))
        '(:eval (if mark-active (format " [%s]" (length (buffer-substring-no-properties (mark) (point))))))
        ;; Major mode in brackets
-       " [%m] "))
+       " [%m] "
+       '(:eval (if (equal major-mode 'dired-mode)
+                   (save-excursion
+                     (goto-char (point-max))
+                     (format "(%d files)" (- (line-number-at-pos) 5)))))))
 
 (add-hook 'god-mode-enabled-hook (lambda()
                                    (set-face-background 'default "#363535")))
 
 (add-hook 'god-mode-disabled-hook (lambda()
-                                   (set-face-background 'default "#282828")))
+                                    (set-face-background 'default "#282828")))
 
 (toggle-fullscreen)
 
