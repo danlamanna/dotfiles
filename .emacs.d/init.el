@@ -11,7 +11,8 @@
 ;; package.el
 (require 'package)
 
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -360,30 +361,11 @@ and it's name isn't in no-cleanup-filenames."
             (setq framemove-hook-into-windmove t)))
 
 ;; geben
-(defun geben-safely-end-proxy()
-  "Tries to call `dbgp-proxy-unregister', but silently
-   returns `nil' if it throws an error."
-  (interactive)
-  (condition-case nil
-      (dbgp-proxy-unregister "dan")
-    (error nil)))
-
-(defun geben-single-or-proxy()
-  "Tries calling geben, if it throws an error because it needs to use
-   `geben-proxy', it tries that.
-   TODO: make it toggle.."
-  (interactive)
-  (condition-case nil
-      (geben)
-    (error (geben-proxy "127.0.0.1" 9001 "dan"))))
-
 (use-package geben
   :defer t
   :config (progn
             (defadvice geben-display-context(before clear-windows-for-vars activate)
-              (delete-other-windows))
-
-            (add-hook 'kill-emacs-hook 'geben-safely-end-proxy)))
+              (delete-other-windows))))
 
 ;; guide key
 (use-package guide-key
@@ -556,7 +538,14 @@ and it's name isn't in no-cleanup-filenames."
   :config (progn
             (require 'php-eldoc)
             (bind-key "C-c C-f" 'php-search-local-documentation php-mode-map)
-            (bind-key "<backtab>" 'php-complete-function php-mode-map)))
+            (bind-key "<backtab>" 'php-complete-function php-mode-map)
+
+            (defun php-completion-function(&rest args)
+              (php-complete-function)
+              t)
+
+            (setq hippie-expand-try-functions-list
+                  (append hippie-expand-try-functions-list '(php-completion-function)))))
 
 ;; web-mode
 (use-package web-mode
