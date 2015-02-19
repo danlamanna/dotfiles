@@ -9,14 +9,7 @@ hsetroot -solid "#2E3436" &
 # setup dual monitors
 /home/dan/.screenlayout/normal.sh &
 
-## Volume control for systray
-#(sleep 2s && pnmixer) &
-
-## Volume keys daemon
-#xfce4-volumed &
-
-## Enable power management
-#xfce4-power-manager &
+# pnmixer &
 
 if [ `which nm-applet` -eq 0 ]; then
    sudo nm-applet &
@@ -33,6 +26,8 @@ xset b off &
 xmodmap /home/dan/.Xmodmap &
 
 setlayout 0 3 2 0 &
+
+claws-mail &
 
 pidgin &
 
