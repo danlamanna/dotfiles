@@ -18,7 +18,6 @@
 
 (defvar elpa-required-packages '(ac-etags
                                  ace-jump-mode
-                                 ack-and-a-half
                                  async
                                  auto-complete-exuberant-ctags
                                  autopair
@@ -96,10 +95,10 @@
  ;; If there is more than one, they won't work right.
  '(asl/cache-enabled t)
  '(auto-save-interval 60)
- '(browse-url-browser-function (quote browse-url-chromium))
+ '(browse-url-browser-function (quote browse-url-firefox))
  '(custom-safe-themes
    (quote
-    ("454dc6f3a1e9e062f34c0f988bcef5d898146edc5df4aa666bf5c30bed2ada2e" "9bcb8ee9ea34ec21272bb6a2044016902ad18646bd09fdd65abae1264d258d89" "b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("75d807376ac43e6ac6ae3892f1f377a4a3ad2eb70b14223b4ed0355e62116814" "806d8c827b214f5f60348114bd27c6dcb5d19047f7ac482ad61e8077a6c5ea60" "454dc6f3a1e9e062f34c0f988bcef5d898146edc5df4aa666bf5c30bed2ada2e" "9bcb8ee9ea34ec21272bb6a2044016902ad18646bd09fdd65abae1264d258d89" "b1ec9b3c5dbd26abea9df6181a2cd149c9f48602ded9bc0e87ce130387456ab3" "1f70ca6096c886ca2a587bc10e2e8299ab835a1b95394a5f4e4d41bb76359633" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(dired-listing-switches "-alh")
  '(enable-recursive-minibuffers t)
  '(geben-dbgp-default-proxy (quote ("127.0.0.1" 9001 "dan" nil t)))
@@ -118,6 +117,7 @@
  '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
  '(large-file-warning-threshold 100000000)
  '(magit-completing-read-function (quote magit-ido-completing-read))
+ '(org-confirm-babel-evaluate nil)
  '(org-file-apps
    (quote
     ((auto-mode . emacs)
@@ -131,6 +131,7 @@
    (expand-file-name
     (format "%s/etc/php-manual" emacs-config-dir)))
  '(php-template-compatibility nil)
+ '(reb-re-syntax (quote string))
  '(save-interprogram-paste-before-kill t)
  '(vc-follow-symlinks t)
  '(virtualenv-root "~/.envs/")
@@ -162,20 +163,6 @@
   :bind ("C-x SPC" . ace-jump-mode-pop-mark)
   :commands (ace-jump-word-mode
              ace-jump-char-mode)) ;; autoload on either of these
-
-;; ack
-(use-package ack-and-a-half
-  :bind ("C-c a" . ack-maybe-same)
-  :init (progn
-          (defalias 'ack 'ack-and-a-half)
-          (defalias 'ack-same 'ack-and-a-half-same)
-
-          (defun ack-maybe-same(arg)
-            (interactive "P")
-            (if arg
-                (call-interactively 'ack-same)
-              (call-interactively 'ack))))
-  :config (setq ack-and-a-half-use-ido t))
 
 ;; autopair
 (use-package autopair
@@ -307,6 +294,22 @@ and it's name isn't in no-cleanup-filenames."
 ;; eldoc-eval
 (use-package eldoc-eval)
 
+;; elfeed
+(use-package elfeed
+  :bind ("C-x w" . elfeed)
+  :init (setq-default elfeed-search-filter "@1-week-ago +unread ")
+  :config (progn
+            (require 'elfeed-org)
+            (elfeed-org)
+
+            (add-hook 'elfeed-new-entry-hook
+                      (elfeed-make-tagger :feed-url "fivethirtyeight\\.com"
+                                        :entry-title '(not "NFC\\|AFC\\|NBA\\|Football\\|Quarterback\\|Super Bowl")
+                                        :add 'junk
+                                        :remove 'unread
+                                        :callback '(lambda(entry)
+                                                     (message "Discarding %s" (elfeed-entry-title entry)))))))
+
 ;; expand-region
 (use-package expand-region
   :bind ("C-q" . er/expand-region))
@@ -372,6 +375,10 @@ and it's name isn't in no-cleanup-filenames."
   :init (progn
           (setq guide-key/guide-key-sequence '("C-x r" "C-x n" "C-c" "C-c s"))
           (guide-key-mode 1)))
+
+
+
+
 
 ;; ido
 (use-package ido
@@ -629,13 +636,27 @@ and it's name isn't in no-cleanup-filenames."
          ("C-<"     . mc/mark-previous-like-this)
          ("C-c C-<" . mc/mark-all-like-this)))
 
+(setq org-agenda-custom-commands
+      '(("z" "Agenda and all not DONE's" ((agenda "")
+                                          (todo "TODO|BUY|CONTACT|GOAL")))))
+
+(defun my-org-agenda()
+  (interactive)
+  (org-agenda nil "z"))
+
+(setq org-agenda-window-setup 'current-window)
+
 ;; org-mode
 (use-package org
+  :commands (org-mode org-agenda my-org-agenda org-capture)
+  :bind (("C-c a" . my-org-agenda)
+         ("C-c c" . org-capture))
   :defer t
   :ensure org-bullets
   :config (progn
             (setq
-             org-agenda-files '("/home/dan/files/notes.org")
+             org-agenda-files '("/home/dan/files/notes.org"
+                                "/home/dan/files/todo.org")
              org-show-siblings '((default . nil)
                                  (isearch t)
                                  (bookmark-jump t)
@@ -646,13 +667,29 @@ and it's name isn't in no-cleanup-filenames."
              org-outline-path-complete-in-steps nil
              org-refile-allow-creating-parent-nodes 'confirm)
 
-            (toggle-truncate-lines -1)
+            (setq org-todo-keywords '("TODO" "DONE" "BUY" "CONTACT" "GOAL" "OBSOLETE"))
 
-            (add-hook 'org-mode-hook 'org-bullets-mode)))
+            ;; capture
+            (setq org-capture-templates
+                  '(("t" "TODO" entry
+                     (file+headline "~/files/todo.org" "Tasks")
+                     "* TODO %? :current:\n %i")
+                    ("b" "BUY" entry
+                     (file+headline "~/files/todo.org" "To Buy")
+                     "* BUY %? :current:\n %i")
+                    ("c" "Contact" entry
+                     (file+headline "~/files/todo.org" "Contact")
+                     "* CONTACT %? :current:\n %i")
+                    ("g" "Goal" entry
+                     (file+headline "~/files/todo.org" "Goals")
+                     "* GOAL %? :current:\n %i")))
+
+            (add-hook 'org-mode-hook 'org-bullets-mode)
+            (add-hook 'org-mode-hook 'toggle-truncate-lines)))
 
 ;; org-agenda
 (use-package org-agenda
-  :bind ("C-c A" . org-todo-list))
+  :bind ("C-c a" . org-todo-list))
 
 ;; org-babel
 (use-package ob-core
@@ -661,7 +698,7 @@ and it's name isn't in no-cleanup-filenames."
              'org-babel-load-languages
              '((C . t)
                (ruby . t)
-               (emacs-lisp . t)))))
+               (sh . t)))))
 
 ;; org-capture
 (use-package org-capture
@@ -756,10 +793,6 @@ and it's name isn't in no-cleanup-filenames."
 (global-set-key (kbd "M-\"") 'insert-pair)
 (define-key global-map (kbd "C-c C-c") 'comment-or-uncomment-line-or-region)
 
-(global-set-key (kbd "C-<backspace>") (lambda ()
-                                        (interactive)
-                                        (kill-line 0)
-                                        (indent-according-to-mode)))
 ;; remove clutter...
 (menu-bar-mode -1)
 (show-paren-mode t)
@@ -962,9 +995,51 @@ and it's name isn't in no-cleanup-filenames."
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
 
-(setq org-capture-templates
-      '(("o"
-         "Optimization"
-         entry
-         (file+headline "~/files/notes.org" "Optimizations")
-         "* %?\n [[file:%F]] %^g\n")))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:inherit nil :stipple nil :background "#282828" :foreground "#fdf4c1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "unknown" :family "Source Code Pro"))))
+;;  '(flymake-errline ((t (:background "brightblack"))))
+;;  '(magit-item-highlight ((t (:inherit default)))))
+
+
+
+
+
+
+
+(require 'openwith)
+(setq openwith-associations '(
+                              ("\\.mp4\\'" "vlc" (file))
+                              ("\\.avi\\'" "vlc" (file))
+                              ("\\.mpg\\'" "vlc" (file))
+                              ("\\.mkv\\'" "vlc" (file))
+                              ("\\.wmv\\'" "vlc" (file))
+                              ))
+(openwith-mode t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("75d807376ac43e6ac6ae3892f1f377a4a3ad2eb70b14223b4ed0355e62116814" default))))
+
+
+(add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.install\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.module\\'" . php-mode))
+
+(add-to-list 'auto-mode-alist '("\\.info\\'" . conf-mode))
+
+
+(setq exec-path (append exec-path '("/home/dan/.local/bin")))
+
+
+(setq diary-file "~/files/diary")
+(setq org-agenda-include-diary t)
+
+(setq holidays-in-diary-buffer nil)
