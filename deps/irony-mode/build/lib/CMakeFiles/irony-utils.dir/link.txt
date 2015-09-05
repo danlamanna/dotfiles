@@ -1,2 +1,0 @@
-/usr/bin/ar cr libirony-utils.a  CMakeFiles/irony-utils.dir/util/JSONObjectWrapper.cpp.o CMakeFiles/irony-utils.dir/SimpleJSON/src/JSON.cpp.o CMakeFiles/irony-utils.dir/SimpleJSON/src/JSONValue.cpp.o CMakeFiles/irony-utils.dir/str/wstring_to_string.cpp.o
-/usr/bin/ranlib libirony-utils.a

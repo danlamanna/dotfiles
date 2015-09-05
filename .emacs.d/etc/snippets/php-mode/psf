@@ -1,7 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : public static function foo() {}
-#key : psf
-# --
-public static function $1($2) {
-    $0  
-}

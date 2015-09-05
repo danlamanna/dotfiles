@@ -1,1 +1,0 @@
-/home/dan/src/irony-mode/bin/irony-server

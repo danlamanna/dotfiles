@@ -1,5 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : println
-#key : pl
-# --
-fmt.Println($1);

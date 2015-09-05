@@ -1,6 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : with open(file, "r") as f:
-#key : wo
-# --
-with open(${1:file}, "${2:r}") as ${3:f}:
-     $0

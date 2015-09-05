@@ -1,5 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : printf
-#key : pf
-# --
-fmt.Printf("$1\n", $2);

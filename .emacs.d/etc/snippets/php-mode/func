@@ -1,7 +1,0 @@
-#contributor : danlamanna <dan.lamanna@gmail.com>
-#name : func foo($bar) {}
-#key : func
-# --
-function $1($2) {
-   $0
-}

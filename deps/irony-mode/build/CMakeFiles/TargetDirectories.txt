@@ -1,2 +1,0 @@
-/home/dan/src/irony-mode/build/server/CMakeFiles/irony-server.dir
-/home/dan/src/irony-mode/build/lib/CMakeFiles/irony-utils.dir
