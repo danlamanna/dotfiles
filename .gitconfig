@@ -1,0 +1,9 @@
+[user]
+	name = Dan LaManna
+	email = me@danlamanna.com
+[rerere]
+	enabled = true
+[merge]
+	conflictstyle = diff3
+[core]
+	excludesfile = /home/dan/.gitignore_global
