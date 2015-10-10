@@ -12,6 +12,10 @@ if ! systemctl is-enabled --user emacs; then
     systemctl enable --user emacs
 fi
 
+# openbox/tint2
+ln -s ~/dotfiles/.config/openbox/ ~/.config/
+ln -s ~/dotfiles/.config/tint2/ ~/.config/
+
 # rest
 ln -s ~/dotfiles/.gitignore_global   ~/.gitignore_global
 ln -s ~/dotfiles/.gitconfig          ~/.gitconfig
