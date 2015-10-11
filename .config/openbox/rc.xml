@@ -396,7 +396,15 @@ and back in -->
         <command>terminator --command=&quot;htop&quot;</command>
       </action>
     </keybind>
-
+    <keybind key="W-i">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>ipython</name>
+        </startupnotify>
+        <command>terminator --command=&quot;ipython&quot;</command>
+      </action>
+    </keybind>
   </keyboard>
 
   <mouse>
