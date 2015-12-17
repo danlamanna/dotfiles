@@ -8,6 +8,10 @@ ln -s ~/dotfiles/.config/htop/htoprc ~/.config/htop/htoprc
 mkdir -p ~/.config/systemd/user
 ln -s ~/dotfiles/.config/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
 
+# beets
+mkdir -p ~/.config/beets
+ln -s ~/dotfiles/.config/beets/config.yaml ~/.config/beets/config.yaml
+
 # mpv
 mkdir -p ~/.config/mpv
 ln -s ~/dotfiles/.config/mpv/mpv.conf ~/.config/mpv/mpv.conf

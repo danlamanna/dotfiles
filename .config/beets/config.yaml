@@ -1,0 +1,5 @@
+directory: ~/etc/beets/music-dir
+library: ~/etc/beets/music-db
+plugins: fetchart play info lyrics
+play:
+  command: mpv --no-audio-display
