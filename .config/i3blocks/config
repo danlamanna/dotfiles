@@ -1,0 +1,11 @@
+full_text=
+align=center
+color=#586e75
+separator=false
+separator_block_width=7
+markup=pango
+
+[time]
+command=date +'%b %d %I:%M'
+markup=pango
+interval=10
