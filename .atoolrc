@@ -1,0 +1,3 @@
+# Disables -z option for tar, reverts to piping through gzip
+use_tar_z_option 0
+use_pigz 1
