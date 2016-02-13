@@ -49,7 +49,7 @@ plugins=(git aws docker)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/dan/.local/bin:/home/dan/bin"
+export PATH="/home/dan/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/dan/.local/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,3 +88,11 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 export EDITOR="emacsclient -c"
+export PATH="/home/dan/.cask/bin:$PATH"
+
+export NVM_DIR="/home/dan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
