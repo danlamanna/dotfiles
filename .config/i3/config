@@ -157,3 +157,6 @@ bindsym $mod+Control+w [title=".*(Google Chrome|Chromium|Firefox).*"] focus
 bindsym $mod+Control+c [title=".*Claws Mail.*"] focus
 bindsym $mod+Control+a [title=".*Org Agenda.*"] focus
 bindsym $mod+Control+p [class="Pidgin"] focus
+
+
+bindsym $mod+l exec "/usr/bin/i3lock --color=000000"
