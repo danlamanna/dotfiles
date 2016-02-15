@@ -1,11 +1,9 @@
-full_text=
-align=center
-color=#586e75
-separator=false
-separator_block_width=7
+[mail_counts]
+command=echo "<span font_desc='Source Code Pro' font_size='large'>🖂" `/home/dan/bin/mail-counts` "</span>"
 markup=pango
+interval=10
 
 [time]
-command=date +'%b %d %I:%M'
+command=echo "<span font_desc='Source Code Pro' font_size='large'>" `date +'%b %d %I:%M'` "</span>"
 markup=pango
 interval=10
