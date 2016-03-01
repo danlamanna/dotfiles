@@ -81,18 +81,10 @@ source $ZSH/oh-my-zsh.sh
 zstyle ':completion:*' hosts off
 
 export WORKON_HOME=~/.virtualenvs
-source ~/.local/bin/virtualenvwrapper.sh
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+source /usr/bin/virtualenvwrapper.sh
 
 export EDITOR="emacsclient -c"
 export PATH="/home/dan/.cask/bin:$PATH"
 
 export NVM_DIR="/home/dan/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
