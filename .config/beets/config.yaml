@@ -1,5 +1,7 @@
 directory: ~/etc/beets/music-dir
 library: ~/etc/beets/music-db
-plugins: fetchart play info lyrics
+plugins: fetchart play info lyrics types
 play:
   command: mpv --no-audio-display
+types:
+  rating: int
