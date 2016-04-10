@@ -6,12 +6,12 @@ floating_modifier $mod
 bindsym $mod+Return exec terminator
 
 # XBMC
-bindsym Control+Mod1+p exec "xbmc-cmd play-pause"
-bindsym Control+Mod1+Return exec "xbmc-cmd select"
-bindsym Control+Mod1+Up exec "xbmc-cmd up"
-bindsym Control+Mod1+Down exec "xbmc-cmd down"
-bindsym Control+Mod1+Left exec "xbmc-cmd left"
-bindsym Control+Mod1+Right exec "xbmc-cmd right"
+bindsym Control+Mod1+p exec "xbmc-client --playpause"
+bindsym Control+Mod1+Return exec "xbmc-client --select"
+bindsym Control+Mod1+Up exec "xbmc-client --up"
+bindsym Control+Mod1+Down exec "xbmc-client --down"
+bindsym Control+Mod1+Left exec "xbmc-client --left"
+bindsym Control+Mod1+Right exec "xbmc-client --right"
 
 # kill focused window
 bindsym $mod+Shift+q kill
