@@ -1,2 +1,3 @@
+.dir-locals.el
 *.tern-port
 .python-version
