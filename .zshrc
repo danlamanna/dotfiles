@@ -88,3 +88,6 @@ export PATH="/home/dan/.cask/bin:$PATH"
 
 export NVM_DIR="/home/dan/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Thanks ls
+export QUOTING_STYLE=literal
