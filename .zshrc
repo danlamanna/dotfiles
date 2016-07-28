@@ -15,3 +15,8 @@ export QUOTING_STYLE=literal
 
 alias l="ls -Alh"
 alias ll="ls -lh"
+# NVM
+if [ -d "$HOME/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
