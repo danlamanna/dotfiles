@@ -1,3 +1,6 @@
+# Handle dumb terminals well, for tramp
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
 autoload -Uz compinit promptinit
 compinit
 promptinit
