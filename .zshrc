@@ -15,6 +15,15 @@ export QUOTING_STYLE=literal
 
 alias l="ls -Alh"
 alias ll="ls -lh"
+
+setopt autocd
+setopt autopushd
+
+setopt appendhistory
+setopt extendedhistory
+setopt histignoredups
+setopt histignorespace
+
 # NVM
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
