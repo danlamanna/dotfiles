@@ -1,10 +1,12 @@
 # lines of code to run at IPython startup.
 c.InteractiveShellApp.exec_lines = [
     'import csv',
+    'import hashlib',
     'import json',
     'import os',
     'import re',
     'import requests',
+    'import shutil',
     'import sys',
     'from collections import Counter, defaultdict'
 ]
