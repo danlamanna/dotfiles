@@ -38,3 +38,6 @@ URxvt*letterSpace: -1
 ! Scrollbar
 URxvt.scrollStyle:          rxvt
 URxvt.scrollBar:            false
+
+! Show underscores
+URxvt.lineSpace: 1
