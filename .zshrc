@@ -19,6 +19,10 @@ alias ll="ls -lh"
 setopt autocd
 setopt autopushd
 
+
+HISTFILE=$HOME/.local/share/zsh/history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 setopt appendhistory
 setopt extendedhistory
 setopt histignoredups
