@@ -15,6 +15,9 @@ export QUOTING_STYLE=literal
 
 alias l="ls -Alh"
 alias ll="ls -lh"
+alias rsynca="rsync -avhP --append"
+alias gruntl="./node_modules/.bin/grunt"
+alias gruntld="gruntl --debug-js"
 
 setopt autocd
 setopt autopushd
