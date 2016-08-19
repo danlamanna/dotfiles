@@ -41,3 +41,7 @@ fi
 export WORKON_HOME=~/.virtualenvs
 mkdir -p $WORKON_HOME
 source /usr/bin/virtualenvwrapper.sh
+
+# Prepend ~/bin to PATH
+# This was mostly done to correct for poorly behaving packages (vagrant on Fedora)
+export PATH="$HOME/bin:$PATH"
