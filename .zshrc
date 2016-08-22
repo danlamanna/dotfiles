@@ -31,6 +31,10 @@ setopt extendedhistory
 setopt histignoredups
 setopt histignorespace
 
+for filename in "$HOME"/.config/zsh/*.zsh; do
+    source "$filename";
+done
+
 # NVM
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
