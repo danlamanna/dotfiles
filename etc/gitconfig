@@ -2,3 +2,7 @@
         enabled = true
 [merge]
         conflictstyle = diff3
+[pull]
+        rebase = true
+[rebase]
+        autoStash = true
