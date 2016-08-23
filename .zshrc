@@ -19,6 +19,7 @@ alias rsynca="rsync -avhP --append"
 alias gruntl="./node_modules/.bin/grunt"
 alias gruntld="gruntl --debug-js"
 alias splitsane="split --numeric-suffixes --additional-suffix=.part"
+alias mkvirtualenv3="mkvirtualenv --python=$(which python3)"
 
 setopt autocd
 setopt autopushd
