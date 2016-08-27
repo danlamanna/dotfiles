@@ -33,6 +33,10 @@ setopt extendedhistory
 setopt histignoredups
 setopt histignorespace
 
+# Stop trying to complete from my hosts file
+zstyle ':completion:*' hosts off
+
+
 for filename in "$HOME"/.config/zsh/*.zsh; do
     source "$filename";
 done
