@@ -1,3 +1,4 @@
 .dir-locals.el
 *.tern-port
 .python-version
+.tramp_history
