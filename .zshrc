@@ -14,7 +14,9 @@ zstyle ':completion:*' rehash true
 export QUOTING_STYLE=literal
 
 alias l="ls -Alh"
+alias lr="l -tr"
 alias ll="ls -lh"
+alias llr="ll -tr"
 alias rsynca="rsync -avhP --append"
 alias gruntl="./node_modules/.bin/grunt"
 alias gruntlw="gruntl watch"
