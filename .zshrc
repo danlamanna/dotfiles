@@ -24,6 +24,10 @@ alias gruntlwd="gruntlw --debug-js"
 alias gruntld="gruntl --debug-js"
 alias splitsane="split --numeric-suffixes --additional-suffix=.part"
 alias mkvirtualenv3="mkvirtualenv --python=$(which python3)"
+alias vup="vagrant up"
+alias vprov="vagrant provision"
+alias vdest="vagrant destroy -f"
+alias vssh="vagrant ssh"
 
 setopt autocd
 setopt autopushd
