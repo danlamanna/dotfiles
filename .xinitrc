@@ -11,5 +11,7 @@ if [ -d "$XINITRC_HOST_SCRIPT_DIR" ]; then
     done;
 fi;
 
+dunst &
+
 # Launch i3
 i3
