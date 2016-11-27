@@ -10,6 +10,8 @@ prompt walters
 # Always rehash
 zstyle ':completion:*' rehash true
 
+autoload -U compinit && compinit
+
 # Tell ls to stop adding quotes
 export QUOTING_STYLE=literal
 
