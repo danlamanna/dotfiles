@@ -15,6 +15,7 @@ autoload -U compinit && compinit
 # Tell ls to stop adding quotes
 export QUOTING_STYLE=literal
 
+alias ls="ls --color"
 alias l="ls -Alh"
 alias lr="l -tr"
 alias ll="ls -lh"
