@@ -59,6 +59,7 @@ if [ -d "$HOME/.nvm" ]; then
 fi
 
 # Virtualenvwrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 export WORKON_HOME=~/.virtualenvs
 mkdir -p $WORKON_HOME
 source /usr/bin/virtualenvwrapper.sh
