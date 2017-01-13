@@ -31,6 +31,8 @@ alias vup="vagrant up"
 alias vprov="vagrant provision"
 alias vdest="vagrant destroy -f"
 alias vssh="vagrant ssh"
+alias jn="jupyter notebook --no-browser"
+alias jnb="jupyter notebook"
 
 setopt autocd
 setopt autopushd
@@ -65,3 +67,4 @@ mkdir -p $WORKON_HOME
 source /usr/bin/virtualenvwrapper.sh
 
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export EDITOR="/usr/bin/emacsclient -c"
