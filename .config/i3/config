@@ -162,3 +162,4 @@ bindsym $mod+i exec "emacsclient -a '' -c"
 focus_on_window_activation urgent
 
 bindsym $mod+k exec "rofi-man"
+for_window [class="^.*"] border pixel 1
