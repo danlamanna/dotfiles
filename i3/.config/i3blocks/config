@@ -7,3 +7,8 @@ interval=10
 command=echo "<span font_desc='Source Code Pro' font_size='large'>" `date +'%b %d %I:%M'` "</span>"
 markup=pango
 interval=10
+
+[battery]
+command=~/bin/blocks/battery
+markup=pango
+interval=10
