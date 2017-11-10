@@ -1,8 +1,3 @@
-[mail_counts]
-command=echo "<span font_desc='Source Code Pro' font_size='large'>🖂" `/home/dan/bin/mail-counts` "</span>"
-markup=pango
-interval=10
-
 [time]
 command=echo "<span font_desc='Source Code Pro' font_size='large'>" `date +'%b %d %I:%M'` "</span>"
 markup=pango
@@ -10,5 +5,11 @@ interval=10
 
 [battery]
 command=~/bin/blocks/battery
+[mail]
+command=~/.config/i3blocks/blocks/mail
+interval=30  # marking emails as read doesn't signal, so an interval is needed
+signal=1  # mbsync service triggers this signal
+min_width=msg: 99
+
 markup=pango
 interval=10

@@ -5,5 +5,6 @@ Description=Mailbox synchronization service
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va
 ExecStartPost=/usr/bin/notmuch new
+ExecStartPost=/usr/bin/pkill -RTMIN+1 i3blocks
 StandardOutput=syslog
 StandardError=syslog

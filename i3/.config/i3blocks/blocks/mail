@@ -1,0 +1,9 @@
+#!/bin/bash
+
+MSG_QUERY="tag:unread -tag:ignore"
+
+echo "msg: $(notmuch count $MSG_QUERY)"
+
+if [ ! -z "$BLOCK_BUTTON" ]; then
+    emacsclient --create-frame --eval "(notmuch-search \"$MSG_QUERY\")"
+fi
