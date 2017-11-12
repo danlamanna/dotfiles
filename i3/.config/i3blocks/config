@@ -1,6 +1,5 @@
 [time]
-command=echo "<span font_desc='Source Code Pro' font_size='large'>" `date +'%b %d %I:%M'` "</span>"
-markup=pango
+command=date +'%b %d %I:%M'
 interval=10
 
 [mail]
