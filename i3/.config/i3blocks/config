@@ -3,13 +3,16 @@ command=echo "<span font_desc='Source Code Pro' font_size='large'>" `date +'%b %
 markup=pango
 interval=10
 
-[battery]
-command=~/bin/blocks/battery
 [mail]
 command=~/.config/i3blocks/blocks/mail
 interval=30  # marking emails as read doesn't signal, so an interval is needed
 signal=1  # mbsync service triggers this signal
 min_width=msg: 99
 
+[batterybar]
+command=~/.config/i3blocks/blocks/batterybar
+label=bat:
+interval=30
 markup=pango
-interval=10
+min_width=bat: ■■■■■
+separator=true
