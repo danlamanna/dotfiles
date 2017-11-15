@@ -156,7 +156,7 @@ bindsym $mod+Control+a [title=".*Org Agenda.*"] focus
 
 bindsym $mod+l exec "/usr/bin/i3lock --color=000000"
 
-bindsym $mod+i exec "emacsclient -a '' -c"
+bindsym $mod+i exec "emacsclient -c"
 
 # Windows shouldn't steal focus, just alert they want it
 focus_on_window_activation urgent
