@@ -2,6 +2,9 @@ set $mod Mod4
 font pango:monospace 8
 floating_modifier $mod
 
+# default windows in a tabbed layout
+workspace_layout tabbed
+
 # start a terminal
 bindsym $mod+Return exec urxvt
 
@@ -54,6 +57,9 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+# toggle floating on all workspace
+bindsym $mod+j sticky toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
