@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MSG_QUERY="tag:unread -tag:ignore -tag:draft"
+MSG_QUERY="tag:unread -tag:flagged -tag:draft"
 
 echo "msg: $(notmuch count $MSG_QUERY)"
 
