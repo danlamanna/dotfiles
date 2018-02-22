@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : with open
+# --
+with open('$1', '${2:r}') as ${3:infile}:
+     $0

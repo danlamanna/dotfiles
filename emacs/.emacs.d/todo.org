@@ -1,0 +1,108 @@
+* DONE Look into ansible-mode documentation
+  CLOSED: [2017-08-26 Sat 09:46]
+  - State "DONE"       from "TODO"       [2017-08-26 Sat 09:46]
+    For now, this doesn't offer anything especially useful over the deprecated ansible-doc.el.
+  https://github.com/k1LoW/emacs-ansible/issues/14
+* TODO Use dired as a file manager                                    :dired:
+* TODO Look into scheduled organization of TODOs                        :org:
+* TODO Magit ediff all files in selection                             :magit:
+* TODO Stop opening things in opposite buffers
+  Use display-buffer-alist for this, see example:
+  https://github.com/syl20bnr/spacemacs/pull/1421/files
+* TODO Copy from magit diff without +/-                               :magit:
+* TODO Integrate google calendar into znc/irc                 :calendar:chat:
+  http://pragmaticemacs.com/emacs/how-i-view-my-google-calendar-agenda-in-emacs/
+  https://github.com/insanum/gcalcli
+  https://www.reddit.com/r/emacs/comments/5qd8co/best_method_for_orgmode_google_calendar/
+* TODO Org mode sorting from Chris's gist                               :org:
+  https://gist.github.com/kotfic/78ff3a0b93f6b10b5d68e641d3e75e99
+* TODO Look into using Indium                                    :javascript:
+  https://github.com/NicolasPetton/Indium
+* TODO Emacs dbus integration with rpdb                    :debugging:python:
+* TODO Figure out why puglintrc is not working                          :pug:
+* TODO Look into anaconda-mode                                       :python:
+* TODO Look into prelude for packages
+* TODO Look into dired narrow                                         :dired:
+  http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
+* TODO Setup bug reference mode
+  http://www.lunaryorn.com/posts/bug-reference-mode.html
+* TODO Look through wasamasa emacs config
+  https://github.com/wasamasa/dotemacs/blob/master/init.org
+* TODO Look into storing bookmarks in emacs
+* TODO Investigate magit-gh-pulls                                     :magit:
+* TODO Incorporate geonotebook.el                               :geonotebook:
+  https://gist.github.com/kotfic/05f4ebd611ddc02254b16de0565e4bcc
+* TODO Better return for org mode                                       :org:
+  http://irreal.org/blog/?p=6131
+* TODO Look into beginend
+  https://github.com/DamienCassou/beginend
+
+  Ideally I could use this for dired, notmuch-show, message-mode.
+* Look into smart-shift
+  https://github.com/hbin/smart-shift
+  Particularly with regards to indenting/de-indenting yaml.
+* flyspell-prog-mode
+  Is this worth it, how would syncing dictionaries of valid non-english "words" work?
+* magithub                                                            :magit:
+  https://github.com/vermiculus/magithub
+* shrink-whitespace
+  https://github.com/jcpetkovich/shrink-whitespace.el
+  Unify this and just-one-space.
+* locate over tramp
+* helpful
+  https://github.com/Wilfred/helpful
+* TODO Look into dired-hacks                                          :dired:
+  https://github.com/Fuco1/dired-hacks
+* TODO Consider using projectile cache
+  One issue would be invalidating when magit changes branches.
+* ivy/counsel :ivy:counsel:
+** TODO Limit counsel-{a,r}g to certain file extensions
+** TODO Switch buffer should show project name
+** TODO Setup push/pop views
+** TODO Get counsel-locate working over tramp
+* mail integration :mail:
+** TODO Expand html view by default for notifications from github
+** TODO Setup org-capture to correctly link from notmuch emails :org:
+** TODO Prune recipients
+   Look at `message-dont-reply-to-names` and `message-prune-recipient-rules` to remove
+   *@noreply.github.com.
+** TODO Limit max emails/threads to a certain threshold
+** TODO Setup highlighting for name/usernames
+** TODO Put point in correct place on notmuch reply
+** TODO org-agenda should show mail when a notmuch link is in a task :org:
+** TODO Backlinking view in notmuch
+** TODO notmuch "w" show attachments and dired-target-dwim :dired:
+** TODO Look into ViewAction support in notmuch
+   http://schema.org/ViewAction
+* New 26.1 features
+  - wdired-create-parent-directories variable
+  - browse-url-of-dired-file
+  - New tramp connection method "gdrive"
+* TODO Disable swiper while recording a macro
+* TODO Look into lpy :python:
+  https://github.com/abo-abo/lpy
+* TODO Look into use-package-ensure-system-package
+  https://github.com/waymondo/use-package-ensure-system-package
+
+  Might be useful for pip installing epc/jedi etc.
+* TODO Setup magit-imerge :magit:
+  https://github.com/magit/magit-imerge
+* TODO Allow for @nick autocompletion in Circe
+  Random notes:
+  - Replacing `circe--completion-at-point' in `completion-at-point-functions'
+  - Look into lui-complete-function
+  - Advise `circe--completion-candidates'
+* TODO Add visual-regexp-steroids
+* TODO Setup org-notify                                                 :org:
+  http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-notify.el;hb=HEAD
+* TODO Setup auto-archival of DONE items > some time period             :org:
+* TODO Better resource integration with org                             :org:
+  Using keychords to open relevant resources (email, PRs, etc)
+* TODO Implement org-protocol for capturing from other windows          :org:
+  http://orgmode.org/worg/org-contrib/org-protocol.html
+* TODO Look into perspective.el
+  https://github.com/nex3/perspective-el
+* TODO Investigate company-shell
+  https://github.com/Alexander-Miller/company-shell
+* TODO http://endlessparentheses.com/use-org-mode-links-for-absolutely-anything.html :org:
+* TODO Look into auto-indenting pasted code

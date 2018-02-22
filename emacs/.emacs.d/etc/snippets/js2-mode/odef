@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : function as object member
+# --
+${1:this}.$2 = function($3) {
+  $0
+};
