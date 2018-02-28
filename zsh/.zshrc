@@ -32,7 +32,7 @@ alias jnb="jupyter notebook"
 
 setopt autocd
 setopt autopushd
-
+setopt globdots
 
 HISTFILE=$HOME/.local/share/zsh/history
 HISTSIZE=999999999
