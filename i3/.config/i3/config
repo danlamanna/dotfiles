@@ -141,8 +141,8 @@ bar {
 exec --no-startup-id nm-applet
 exec --no-startup-id artha
 exec --no-startup-id keepassx ~/etc/passwords.kdb
-exec --no-startup-id pasystray --notify=none
 exec --no-startup-id xautolock -time 30 -locker "/usr/bin/i3lock --color=000000"
+exec --no-startup-id pasystray --no-notify
 
 for_window [class="Artha"] floating enable
 
